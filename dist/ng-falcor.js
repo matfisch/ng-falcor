@@ -1,10 +1,26 @@
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ngFalcor = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ngFalcor = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _keys = require('babel-runtime/core-js/object/keys');
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _getIterator2 = require('babel-runtime/core-js/get-iterator');
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+var _promise = require('babel-runtime/core-js/promise');
+
+var _promise2 = _interopRequireDefault(_promise);
+
 exports.default = detach;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // See mit-license.txt for license info
 
 function detach(model, inTemplate) {
@@ -24,7 +40,7 @@ function detach(model, inTemplate) {
       }));
     };
 
-    for (var _iterator = Object.keys(inTemplate)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = (0, _getIterator3.default)((0, _keys2.default)(inTemplate)), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       _loop();
     }
   } catch (err) {
@@ -42,7 +58,7 @@ function detach(model, inTemplate) {
     }
   }
 
-  return Promise.all(ops).then(function () {
+  return _promise2.default.all(ops).then(function () {
     Object.defineProperty(outTemplate, '_save', {
       enumerable: false,
       value: function value() {
@@ -52,7 +68,7 @@ function detach(model, inTemplate) {
         var _iteratorError2 = undefined;
 
         try {
-          for (var _iterator2 = Object.keys(inTemplate)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          for (var _iterator2 = (0, _getIterator3.default)((0, _keys2.default)(inTemplate)), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
             var prop = _step2.value;
 
             var path = inTemplate[prop];
@@ -80,13 +96,21 @@ function detach(model, inTemplate) {
     return outTemplate;
   });
 }
-},{}],2:[function(require,module,exports){
+},{"babel-runtime/core-js/get-iterator":8,"babel-runtime/core-js/object/keys":12,"babel-runtime/core-js/promise":13}],2:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _freeze = require("babel-runtime/core-js/object/freeze");
+
+var _freeze2 = _interopRequireDefault(_freeze);
+
 exports.default = increasingPager;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  * Utility for paging by appending more to the end of a list.
  */
@@ -94,7 +118,7 @@ function increasingPager(stepSize) {
 
   var upperBound = stepSize;
 
-  return Object.freeze({
+  return (0, _freeze2.default)({
     more: function more() {
       upperBound += stepSize;
     },
@@ -113,10 +137,12 @@ function increasingPager(stepSize) {
     }
   });
 }
-},{}],3:[function(require,module,exports){
+},{"babel-runtime/core-js/object/freeze":11}],3:[function(require,module,exports){
 'use strict';
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }(); // See mit-license.txt for license info
+var _slicedToArray2 = require('babel-runtime/helpers/slicedToArray');
+
+var _slicedToArray3 = _interopRequireDefault(_slicedToArray2);
 
 var _falcorSyncModel = require('falcor-sync-model');
 
@@ -151,6 +177,8 @@ var _objectAssign = require('object-assign');
 var _objectAssign2 = _interopRequireDefault(_objectAssign);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// See mit-license.txt for license info
 
 function create() {
   var origOpts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -225,13 +253,12 @@ function create() {
     };
 
     ngf.configure = function () {
-      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-      var source = _ref.source;
-      var router = _ref.router;
-      var timeout = _ref.timeout;
-      var headers = _ref.headers;
-      var cache = _ref.cache;
+      var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+          source = _ref.source,
+          router = _ref.router,
+          timeout = _ref.timeout,
+          headers = _ref.headers,
+          cache = _ref.cache;
 
       //if(headers === undefined) headers = {};
       ngf._config = arguments[0];
@@ -250,10 +277,9 @@ function create() {
     var _arr = [['get', 'get'], ['getValue', 'getValue'], ['set', 'set'], ['call', 'callModel'], ['invalidate', 'invalidate'], ['withoutDataSource', 'withoutDataSource'], ['getCache', 'getCache']];
 
     var _loop = function _loop() {
-      var _arr$_i = _slicedToArray(_arr[_i], 2);
-
-      var srcName = _arr$_i[0];
-      var destName = _arr$_i[1];
+      var _arr$_i = (0, _slicedToArray3.default)(_arr[_i], 2),
+          srcName = _arr$_i[0],
+          destName = _arr$_i[1];
 
       ngf[destName] = function () {
         var _model;
@@ -357,13 +383,29 @@ function noUndef(path) {
 }
 
 module.exports = { create: create };
-},{"./detach":1,"./increasing-pager":2,"./objectify":4,"./stepping-pager":5,"falcor":44,"falcor-http-datasource":7,"falcor-sync-model":13,"object-assign":166}],4:[function(require,module,exports){
+},{"./detach":1,"./increasing-pager":2,"./objectify":4,"./stepping-pager":5,"babel-runtime/helpers/slicedToArray":14,"falcor":154,"falcor-http-datasource":97,"falcor-sync-model":123,"object-assign":245}],4:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _defineProperty = require("babel-runtime/core-js/object/define-property");
+
+var _defineProperty2 = _interopRequireDefault(_defineProperty);
+
+var _keys = require("babel-runtime/core-js/object/keys");
+
+var _keys2 = _interopRequireDefault(_keys);
+
+var _getIterator2 = require("babel-runtime/core-js/get-iterator");
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
 exports.default = detach;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 // See mit-license.txt for license info
 
 var identity = function identity(x) {
@@ -381,7 +423,7 @@ function detach(model, inTemplate) {
       var prop = _step.value;
 
       var path = inTemplate[prop];
-      Object.defineProperty(outTemplate, prop, {
+      (0, _defineProperty2.default)(outTemplate, prop, {
         enumerable: true,
         get: function get() {
           return model.getValueSync(path);
@@ -392,7 +434,7 @@ function detach(model, inTemplate) {
       });
     };
 
-    for (var _iterator = Object.keys(inTemplate)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+    for (var _iterator = (0, _getIterator3.default)((0, _keys2.default)(inTemplate)), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       _loop();
     }
   } catch (err) {
@@ -412,13 +454,21 @@ function detach(model, inTemplate) {
 
   return outTemplate;
 }
-},{}],5:[function(require,module,exports){
+},{"babel-runtime/core-js/get-iterator":8,"babel-runtime/core-js/object/define-property":10,"babel-runtime/core-js/object/keys":12}],5:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _freeze = require("babel-runtime/core-js/object/freeze");
+
+var _freeze2 = _interopRequireDefault(_freeze);
+
 exports.default = increasingPager;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /*
  * Utility for paging by showing next and prev pages.
  */
@@ -427,7 +477,7 @@ function increasingPager(stepSize) {
   var lowerBound = 0;
   var upperBound = stepSize;
 
-  return Object.freeze({
+  return (0, _freeze2.default)({
     prev: function prev() {
       lowerBound = Math.max(0, lowerBound - stepSize);
       upperBound = lowerBound + stepSize;
@@ -454,189 +504,1864 @@ function increasingPager(stepSize) {
     }
   });
 }
-},{}],6:[function(require,module,exports){
-// shim for using process in browser
-var process = module.exports = {};
+},{"babel-runtime/core-js/object/freeze":11}],6:[function(require,module,exports){
+"use strict";
 
-// cached from whatever global is present so that test runners that stub it
-// don't break things.  But we need to wrap it in a try catch in case it is
-// wrapped in strict mode code which doesn't define any globals.  It's inside a
-// function because try/catches deoptimize in certain engines.
+// rawAsap provides everything we need except exception management.
+var rawAsap = require("./raw");
+// RawTasks are recycled to reduce GC churn.
+var freeTasks = [];
+// We queue errors to ensure they are thrown in right order (FIFO).
+// Array-as-queue is good enough here, since we are just dealing with exceptions.
+var pendingErrors = [];
+var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
 
-var cachedSetTimeout;
-var cachedClearTimeout;
-
-function defaultSetTimout() {
-    throw new Error('setTimeout has not been defined');
+function throwFirstError() {
+    if (pendingErrors.length) {
+        throw pendingErrors.shift();
+    }
 }
-function defaultClearTimeout () {
-    throw new Error('clearTimeout has not been defined');
-}
-(function () {
-    try {
-        if (typeof setTimeout === 'function') {
-            cachedSetTimeout = setTimeout;
-        } else {
-            cachedSetTimeout = defaultSetTimout;
-        }
-    } catch (e) {
-        cachedSetTimeout = defaultSetTimout;
-    }
-    try {
-        if (typeof clearTimeout === 'function') {
-            cachedClearTimeout = clearTimeout;
-        } else {
-            cachedClearTimeout = defaultClearTimeout;
-        }
-    } catch (e) {
-        cachedClearTimeout = defaultClearTimeout;
-    }
-} ())
-function runTimeout(fun) {
-    if (cachedSetTimeout === setTimeout) {
-        //normal enviroments in sane situations
-        return setTimeout(fun, 0);
-    }
-    // if setTimeout wasn't available but was latter defined
-    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
-        cachedSetTimeout = setTimeout;
-        return setTimeout(fun, 0);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedSetTimeout(fun, 0);
-    } catch(e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
-            return cachedSetTimeout.call(null, fun, 0);
-        } catch(e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
-            return cachedSetTimeout.call(this, fun, 0);
-        }
-    }
 
-
-}
-function runClearTimeout(marker) {
-    if (cachedClearTimeout === clearTimeout) {
-        //normal enviroments in sane situations
-        return clearTimeout(marker);
-    }
-    // if clearTimeout wasn't available but was latter defined
-    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
-        cachedClearTimeout = clearTimeout;
-        return clearTimeout(marker);
-    }
-    try {
-        // when when somebody has screwed with setTimeout but no I.E. maddness
-        return cachedClearTimeout(marker);
-    } catch (e){
-        try {
-            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
-            return cachedClearTimeout.call(null, marker);
-        } catch (e){
-            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
-            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
-            return cachedClearTimeout.call(this, marker);
-        }
-    }
-
-
-
-}
-var queue = [];
-var draining = false;
-var currentQueue;
-var queueIndex = -1;
-
-function cleanUpNextTick() {
-    if (!draining || !currentQueue) {
-        return;
-    }
-    draining = false;
-    if (currentQueue.length) {
-        queue = currentQueue.concat(queue);
+/**
+ * Calls a task as soon as possible after returning, in its own event, with priority
+ * over other events like animation, reflow, and repaint. An error thrown from an
+ * event will not interrupt, nor even substantially slow down the processing of
+ * other events, but will be rather postponed to a lower priority event.
+ * @param {{call}} task A callable object, typically a function that takes no
+ * arguments.
+ */
+module.exports = asap;
+function asap(task) {
+    var rawTask;
+    if (freeTasks.length) {
+        rawTask = freeTasks.pop();
     } else {
-        queueIndex = -1;
+        rawTask = new RawTask();
     }
-    if (queue.length) {
-        drainQueue();
-    }
+    rawTask.task = task;
+    rawAsap(rawTask);
 }
 
-function drainQueue() {
-    if (draining) {
-        return;
-    }
-    var timeout = runTimeout(cleanUpNextTick);
-    draining = true;
+// We wrap tasks with recyclable task objects.  A task object implements
+// `call`, just like a function.
+function RawTask() {
+    this.task = null;
+}
 
-    var len = queue.length;
-    while(len) {
-        currentQueue = queue;
-        queue = [];
-        while (++queueIndex < len) {
-            if (currentQueue) {
-                currentQueue[queueIndex].run();
+// The sole purpose of wrapping the task is to catch the exception and recycle
+// the task object after its single use.
+RawTask.prototype.call = function () {
+    try {
+        this.task.call();
+    } catch (error) {
+        if (asap.onerror) {
+            // This hook exists purely for testing purposes.
+            // Its name will be periodically randomized to break any code that
+            // depends on its existence.
+            asap.onerror(error);
+        } else {
+            // In a web browser, exceptions are not fatal. However, to avoid
+            // slowing down the queue of pending tasks, we rethrow the error in a
+            // lower priority turn.
+            pendingErrors.push(error);
+            requestErrorThrow();
+        }
+    } finally {
+        this.task = null;
+        freeTasks[freeTasks.length] = this;
+    }
+};
+
+},{"./raw":7}],7:[function(require,module,exports){
+(function (global){
+"use strict";
+
+// Use the fastest means possible to execute a task in its own turn, with
+// priority over other events including IO, animation, reflow, and redraw
+// events in browsers.
+//
+// An exception thrown by a task will permanently interrupt the processing of
+// subsequent tasks. The higher level `asap` function ensures that if an
+// exception is thrown by a task, that the task queue will continue flushing as
+// soon as possible, but if you use `rawAsap` directly, you are responsible to
+// either ensure that no exceptions are thrown from your task, or to manually
+// call `rawAsap.requestFlush` if an exception is thrown.
+module.exports = rawAsap;
+function rawAsap(task) {
+    if (!queue.length) {
+        requestFlush();
+        flushing = true;
+    }
+    // Equivalent to push, but avoids a function call.
+    queue[queue.length] = task;
+}
+
+var queue = [];
+// Once a flush has been requested, no further calls to `requestFlush` are
+// necessary until the next `flush` completes.
+var flushing = false;
+// `requestFlush` is an implementation-specific method that attempts to kick
+// off a `flush` event as quickly as possible. `flush` will attempt to exhaust
+// the event queue before yielding to the browser's own event loop.
+var requestFlush;
+// The position of the next task to execute in the task queue. This is
+// preserved between calls to `flush` so that it can be resumed if
+// a task throws an exception.
+var index = 0;
+// If a task schedules additional tasks recursively, the task queue can grow
+// unbounded. To prevent memory exhaustion, the task queue will periodically
+// truncate already-completed tasks.
+var capacity = 1024;
+
+// The flush function processes all tasks that have been scheduled with
+// `rawAsap` unless and until one of those tasks throws an exception.
+// If a task throws an exception, `flush` ensures that its state will remain
+// consistent and will resume where it left off when called again.
+// However, `flush` does not make any arrangements to be called again if an
+// exception is thrown.
+function flush() {
+    while (index < queue.length) {
+        var currentIndex = index;
+        // Advance the index before calling the task. This ensures that we will
+        // begin flushing on the next task the task throws an error.
+        index = index + 1;
+        queue[currentIndex].call();
+        // Prevent leaking memory for long chains of recursive calls to `asap`.
+        // If we call `asap` within tasks scheduled by `asap`, the queue will
+        // grow, but to avoid an O(n) walk for every task we execute, we don't
+        // shift tasks off the queue after they have been executed.
+        // Instead, we periodically shift 1024 tasks off the queue.
+        if (index > capacity) {
+            // Manually shift all values starting at the index back to the
+            // beginning of the queue.
+            for (var scan = 0, newLength = queue.length - index; scan < newLength; scan++) {
+                queue[scan] = queue[scan + index];
             }
-        }
-        queueIndex = -1;
-        len = queue.length;
-    }
-    currentQueue = null;
-    draining = false;
-    runClearTimeout(timeout);
-}
-
-process.nextTick = function (fun) {
-    var args = new Array(arguments.length - 1);
-    if (arguments.length > 1) {
-        for (var i = 1; i < arguments.length; i++) {
-            args[i - 1] = arguments[i];
+            queue.length -= index;
+            index = 0;
         }
     }
-    queue.push(new Item(fun, args));
-    if (queue.length === 1 && !draining) {
-        runTimeout(drainQueue);
-    }
-};
-
-// v8 likes predictible objects
-function Item(fun, array) {
-    this.fun = fun;
-    this.array = array;
+    queue.length = 0;
+    index = 0;
+    flushing = false;
 }
-Item.prototype.run = function () {
-    this.fun.apply(null, this.array);
+
+// `requestFlush` is implemented using a strategy based on data collected from
+// every available SauceLabs Selenium web driver worker at time of writing.
+// https://docs.google.com/spreadsheets/d/1mG-5UYGup5qxGdEMWkhP6BWCz053NUb2E1QoUTU16uA/edit#gid=783724593
+
+// Safari 6 and 6.1 for desktop, iPad, and iPhone are the only browsers that
+// have WebKitMutationObserver but not un-prefixed MutationObserver.
+// Must use `global` instead of `window` to work in both frames and web
+// workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
+var BrowserMutationObserver = global.MutationObserver || global.WebKitMutationObserver;
+
+// MutationObservers are desirable because they have high priority and work
+// reliably everywhere they are implemented.
+// They are implemented in all modern browsers.
+//
+// - Android 4-4.3
+// - Chrome 26-34
+// - Firefox 14-29
+// - Internet Explorer 11
+// - iPad Safari 6-7.1
+// - iPhone Safari 7-7.1
+// - Safari 6-7
+if (typeof BrowserMutationObserver === "function") {
+    requestFlush = makeRequestCallFromMutationObserver(flush);
+
+// MessageChannels are desirable because they give direct access to the HTML
+// task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
+// 11-12, and in web workers in many engines.
+// Although message channels yield to any queued rendering and IO tasks, they
+// would be better than imposing the 4ms delay of timers.
+// However, they do not work reliably in Internet Explorer or Safari.
+
+// Internet Explorer 10 is the only browser that has setImmediate but does
+// not have MutationObservers.
+// Although setImmediate yields to the browser's renderer, it would be
+// preferrable to falling back to setTimeout since it does not have
+// the minimum 4ms penalty.
+// Unfortunately there appears to be a bug in Internet Explorer 10 Mobile (and
+// Desktop to a lesser extent) that renders both setImmediate and
+// MessageChannel useless for the purposes of ASAP.
+// https://github.com/kriskowal/q/issues/396
+
+// Timers are implemented universally.
+// We fall back to timers in workers in most engines, and in foreground
+// contexts in the following browsers.
+// However, note that even this simple case requires nuances to operate in a
+// broad spectrum of browsers.
+//
+// - Firefox 3-13
+// - Internet Explorer 6-9
+// - iPad Safari 4.3
+// - Lynx 2.8.7
+} else {
+    requestFlush = makeRequestCallFromTimer(flush);
+}
+
+// `requestFlush` requests that the high priority event queue be flushed as
+// soon as possible.
+// This is useful to prevent an error thrown in a task from stalling the event
+// queue if the exception handled by Node.js’s
+// `process.on("uncaughtException")` or by a domain.
+rawAsap.requestFlush = requestFlush;
+
+// To request a high priority event, we induce a mutation observer by toggling
+// the text of a text node between "1" and "-1".
+function makeRequestCallFromMutationObserver(callback) {
+    var toggle = 1;
+    var observer = new BrowserMutationObserver(callback);
+    var node = document.createTextNode("");
+    observer.observe(node, {characterData: true});
+    return function requestCall() {
+        toggle = -toggle;
+        node.data = toggle;
+    };
+}
+
+// The message channel technique was discovered by Malte Ubl and was the
+// original foundation for this library.
+// http://www.nonblocking.io/2011/06/windownexttick.html
+
+// Safari 6.0.5 (at least) intermittently fails to create message ports on a
+// page's first load. Thankfully, this version of Safari supports
+// MutationObservers, so we don't need to fall back in that case.
+
+// function makeRequestCallFromMessageChannel(callback) {
+//     var channel = new MessageChannel();
+//     channel.port1.onmessage = callback;
+//     return function requestCall() {
+//         channel.port2.postMessage(0);
+//     };
+// }
+
+// For reasons explained above, we are also unable to use `setImmediate`
+// under any circumstances.
+// Even if we were, there is another bug in Internet Explorer 10.
+// It is not sufficient to assign `setImmediate` to `requestFlush` because
+// `setImmediate` must be called *by name* and therefore must be wrapped in a
+// closure.
+// Never forget.
+
+// function makeRequestCallFromSetImmediate(callback) {
+//     return function requestCall() {
+//         setImmediate(callback);
+//     };
+// }
+
+// Safari 6.0 has a problem where timers will get lost while the user is
+// scrolling. This problem does not impact ASAP because Safari 6.0 supports
+// mutation observers, so that implementation is used instead.
+// However, if we ever elect to use timers in Safari, the prevalent work-around
+// is to add a scroll event listener that calls for a flush.
+
+// `setTimeout` does not call the passed callback if the delay is less than
+// approximately 7 in web workers in Firefox 8 through 18, and sometimes not
+// even then.
+
+function makeRequestCallFromTimer(callback) {
+    return function requestCall() {
+        // We dispatch a timeout with a specified delay of 0 for engines that
+        // can reliably accommodate that request. This will usually be snapped
+        // to a 4 milisecond delay, but once we're flushing, there's no delay
+        // between events.
+        var timeoutHandle = setTimeout(handleTimer, 0);
+        // However, since this timer gets frequently dropped in Firefox
+        // workers, we enlist an interval handle that will try to fire
+        // an event 20 times per second until it succeeds.
+        var intervalHandle = setInterval(handleTimer, 50);
+
+        function handleTimer() {
+            // Whichever timer succeeds will cancel both timers and
+            // execute the callback.
+            clearTimeout(timeoutHandle);
+            clearInterval(intervalHandle);
+            callback();
+        }
+    };
+}
+
+// This is for `asap.js` only.
+// Its name will be periodically randomized to break any code that depends on
+// its existence.
+rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
+
+// ASAP was originally a nextTick shim included in Q. This was factored out
+// into this ASAP package. It was later adapted to RSVP which made further
+// amendments. These decisions, particularly to marginalize MessageChannel and
+// to capture the MutationObserver implementation in a closure, were integrated
+// back into ASAP proper.
+// https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
+
+}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
+},{}],8:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/get-iterator"), __esModule: true };
+},{"core-js/library/fn/get-iterator":15}],9:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/is-iterable"), __esModule: true };
+},{"core-js/library/fn/is-iterable":16}],10:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/define-property"), __esModule: true };
+},{"core-js/library/fn/object/define-property":17}],11:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/freeze"), __esModule: true };
+},{"core-js/library/fn/object/freeze":18}],12:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/object/keys"), __esModule: true };
+},{"core-js/library/fn/object/keys":19}],13:[function(require,module,exports){
+module.exports = { "default": require("core-js/library/fn/promise"), __esModule: true };
+},{"core-js/library/fn/promise":20}],14:[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+
+var _isIterable2 = require("../core-js/is-iterable");
+
+var _isIterable3 = _interopRequireDefault(_isIterable2);
+
+var _getIterator2 = require("../core-js/get-iterator");
+
+var _getIterator3 = _interopRequireDefault(_getIterator2);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+exports.default = function () {
+  function sliceIterator(arr, i) {
+    var _arr = [];
+    var _n = true;
+    var _d = false;
+    var _e = undefined;
+
+    try {
+      for (var _i = (0, _getIterator3.default)(arr), _s; !(_n = (_s = _i.next()).done); _n = true) {
+        _arr.push(_s.value);
+
+        if (i && _arr.length === i) break;
+      }
+    } catch (err) {
+      _d = true;
+      _e = err;
+    } finally {
+      try {
+        if (!_n && _i["return"]) _i["return"]();
+      } finally {
+        if (_d) throw _e;
+      }
+    }
+
+    return _arr;
+  }
+
+  return function (arr, i) {
+    if (Array.isArray(arr)) {
+      return arr;
+    } else if ((0, _isIterable3.default)(Object(arr))) {
+      return sliceIterator(arr, i);
+    } else {
+      throw new TypeError("Invalid attempt to destructure non-iterable instance");
+    }
+  };
+}();
+},{"../core-js/get-iterator":8,"../core-js/is-iterable":9}],15:[function(require,module,exports){
+require('../modules/web.dom.iterable');
+require('../modules/es6.string.iterator');
+module.exports = require('../modules/core.get-iterator');
+
+},{"../modules/core.get-iterator":85,"../modules/es6.string.iterator":93,"../modules/web.dom.iterable":96}],16:[function(require,module,exports){
+require('../modules/web.dom.iterable');
+require('../modules/es6.string.iterator');
+module.exports = require('../modules/core.is-iterable');
+
+},{"../modules/core.is-iterable":86,"../modules/es6.string.iterator":93,"../modules/web.dom.iterable":96}],17:[function(require,module,exports){
+require('../../modules/es6.object.define-property');
+var $Object = require('../../modules/_core').Object;
+module.exports = function defineProperty(it, key, desc) {
+  return $Object.defineProperty(it, key, desc);
 };
-process.title = 'browser';
-process.browser = true;
-process.env = {};
-process.argv = [];
-process.version = ''; // empty string to avoid regexp issues
-process.versions = {};
 
-function noop() {}
+},{"../../modules/_core":28,"../../modules/es6.object.define-property":88}],18:[function(require,module,exports){
+require('../../modules/es6.object.freeze');
+module.exports = require('../../modules/_core').Object.freeze;
 
-process.on = noop;
-process.addListener = noop;
-process.once = noop;
-process.off = noop;
-process.removeListener = noop;
-process.removeAllListeners = noop;
-process.emit = noop;
+},{"../../modules/_core":28,"../../modules/es6.object.freeze":89}],19:[function(require,module,exports){
+require('../../modules/es6.object.keys');
+module.exports = require('../../modules/_core').Object.keys;
 
-process.binding = function (name) {
-    throw new Error('process.binding is not supported');
+},{"../../modules/_core":28,"../../modules/es6.object.keys":90}],20:[function(require,module,exports){
+require('../modules/es6.object.to-string');
+require('../modules/es6.string.iterator');
+require('../modules/web.dom.iterable');
+require('../modules/es6.promise');
+require('../modules/es7.promise.finally');
+require('../modules/es7.promise.try');
+module.exports = require('../modules/_core').Promise;
+
+},{"../modules/_core":28,"../modules/es6.object.to-string":91,"../modules/es6.promise":92,"../modules/es6.string.iterator":93,"../modules/es7.promise.finally":94,"../modules/es7.promise.try":95,"../modules/web.dom.iterable":96}],21:[function(require,module,exports){
+module.exports = function (it) {
+  if (typeof it != 'function') throw TypeError(it + ' is not a function!');
+  return it;
 };
 
-process.cwd = function () { return '/' };
-process.chdir = function (dir) {
-    throw new Error('process.chdir is not supported');
-};
-process.umask = function() { return 0; };
+},{}],22:[function(require,module,exports){
+module.exports = function () { /* empty */ };
 
-},{}],7:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
+module.exports = function (it, Constructor, name, forbiddenField) {
+  if (!(it instanceof Constructor) || (forbiddenField !== undefined && forbiddenField in it)) {
+    throw TypeError(name + ': incorrect invocation!');
+  } return it;
+};
+
+},{}],24:[function(require,module,exports){
+var isObject = require('./_is-object');
+module.exports = function (it) {
+  if (!isObject(it)) throw TypeError(it + ' is not an object!');
+  return it;
+};
+
+},{"./_is-object":45}],25:[function(require,module,exports){
+// false -> Array#indexOf
+// true  -> Array#includes
+var toIObject = require('./_to-iobject');
+var toLength = require('./_to-length');
+var toAbsoluteIndex = require('./_to-absolute-index');
+module.exports = function (IS_INCLUDES) {
+  return function ($this, el, fromIndex) {
+    var O = toIObject($this);
+    var length = toLength(O.length);
+    var index = toAbsoluteIndex(fromIndex, length);
+    var value;
+    // Array#includes uses SameValueZero equality algorithm
+    // eslint-disable-next-line no-self-compare
+    if (IS_INCLUDES && el != el) while (length > index) {
+      value = O[index++];
+      // eslint-disable-next-line no-self-compare
+      if (value != value) return true;
+    // Array#indexOf ignores holes, Array#includes - not
+    } else for (;length > index; index++) if (IS_INCLUDES || index in O) {
+      if (O[index] === el) return IS_INCLUDES || index || 0;
+    } return !IS_INCLUDES && -1;
+  };
+};
+
+},{"./_to-absolute-index":75,"./_to-iobject":77,"./_to-length":78}],26:[function(require,module,exports){
+// getting tag from 19.1.3.6 Object.prototype.toString()
+var cof = require('./_cof');
+var TAG = require('./_wks')('toStringTag');
+// ES3 wrong here
+var ARG = cof(function () { return arguments; }()) == 'Arguments';
+
+// fallback for IE11 Script Access Denied error
+var tryGet = function (it, key) {
+  try {
+    return it[key];
+  } catch (e) { /* empty */ }
+};
+
+module.exports = function (it) {
+  var O, T, B;
+  return it === undefined ? 'Undefined' : it === null ? 'Null'
+    // @@toStringTag case
+    : typeof (T = tryGet(O = Object(it), TAG)) == 'string' ? T
+    // builtinTag case
+    : ARG ? cof(O)
+    // ES3 arguments fallback
+    : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
+};
+
+},{"./_cof":27,"./_wks":83}],27:[function(require,module,exports){
+var toString = {}.toString;
+
+module.exports = function (it) {
+  return toString.call(it).slice(8, -1);
+};
+
+},{}],28:[function(require,module,exports){
+var core = module.exports = { version: '2.5.7' };
+if (typeof __e == 'number') __e = core; // eslint-disable-line no-undef
+
+},{}],29:[function(require,module,exports){
+// optional / simple context binding
+var aFunction = require('./_a-function');
+module.exports = function (fn, that, length) {
+  aFunction(fn);
+  if (that === undefined) return fn;
+  switch (length) {
+    case 1: return function (a) {
+      return fn.call(that, a);
+    };
+    case 2: return function (a, b) {
+      return fn.call(that, a, b);
+    };
+    case 3: return function (a, b, c) {
+      return fn.call(that, a, b, c);
+    };
+  }
+  return function (/* ...args */) {
+    return fn.apply(that, arguments);
+  };
+};
+
+},{"./_a-function":21}],30:[function(require,module,exports){
+// 7.2.1 RequireObjectCoercible(argument)
+module.exports = function (it) {
+  if (it == undefined) throw TypeError("Can't call method on  " + it);
+  return it;
+};
+
+},{}],31:[function(require,module,exports){
+// Thank's IE8 for his funny defineProperty
+module.exports = !require('./_fails')(function () {
+  return Object.defineProperty({}, 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_fails":35}],32:[function(require,module,exports){
+var isObject = require('./_is-object');
+var document = require('./_global').document;
+// typeof document.createElement is 'object' in old IE
+var is = isObject(document) && isObject(document.createElement);
+module.exports = function (it) {
+  return is ? document.createElement(it) : {};
+};
+
+},{"./_global":37,"./_is-object":45}],33:[function(require,module,exports){
+// IE 8- don't enum bug keys
+module.exports = (
+  'constructor,hasOwnProperty,isPrototypeOf,propertyIsEnumerable,toLocaleString,toString,valueOf'
+).split(',');
+
+},{}],34:[function(require,module,exports){
+var global = require('./_global');
+var core = require('./_core');
+var ctx = require('./_ctx');
+var hide = require('./_hide');
+var has = require('./_has');
+var PROTOTYPE = 'prototype';
+
+var $export = function (type, name, source) {
+  var IS_FORCED = type & $export.F;
+  var IS_GLOBAL = type & $export.G;
+  var IS_STATIC = type & $export.S;
+  var IS_PROTO = type & $export.P;
+  var IS_BIND = type & $export.B;
+  var IS_WRAP = type & $export.W;
+  var exports = IS_GLOBAL ? core : core[name] || (core[name] = {});
+  var expProto = exports[PROTOTYPE];
+  var target = IS_GLOBAL ? global : IS_STATIC ? global[name] : (global[name] || {})[PROTOTYPE];
+  var key, own, out;
+  if (IS_GLOBAL) source = name;
+  for (key in source) {
+    // contains in native
+    own = !IS_FORCED && target && target[key] !== undefined;
+    if (own && has(exports, key)) continue;
+    // export native or passed
+    out = own ? target[key] : source[key];
+    // prevent global pollution for namespaces
+    exports[key] = IS_GLOBAL && typeof target[key] != 'function' ? source[key]
+    // bind timers to global for call from export context
+    : IS_BIND && own ? ctx(out, global)
+    // wrap global constructors for prevent change them in library
+    : IS_WRAP && target[key] == out ? (function (C) {
+      var F = function (a, b, c) {
+        if (this instanceof C) {
+          switch (arguments.length) {
+            case 0: return new C();
+            case 1: return new C(a);
+            case 2: return new C(a, b);
+          } return new C(a, b, c);
+        } return C.apply(this, arguments);
+      };
+      F[PROTOTYPE] = C[PROTOTYPE];
+      return F;
+    // make static versions for prototype methods
+    })(out) : IS_PROTO && typeof out == 'function' ? ctx(Function.call, out) : out;
+    // export proto methods to core.%CONSTRUCTOR%.methods.%NAME%
+    if (IS_PROTO) {
+      (exports.virtual || (exports.virtual = {}))[key] = out;
+      // export proto methods to core.%CONSTRUCTOR%.prototype.%NAME%
+      if (type & $export.R && expProto && !expProto[key]) hide(expProto, key, out);
+    }
+  }
+};
+// type bitmap
+$export.F = 1;   // forced
+$export.G = 2;   // global
+$export.S = 4;   // static
+$export.P = 8;   // proto
+$export.B = 16;  // bind
+$export.W = 32;  // wrap
+$export.U = 64;  // safe
+$export.R = 128; // real proto method for `library`
+module.exports = $export;
+
+},{"./_core":28,"./_ctx":29,"./_global":37,"./_has":38,"./_hide":39}],35:[function(require,module,exports){
+module.exports = function (exec) {
+  try {
+    return !!exec();
+  } catch (e) {
+    return true;
+  }
+};
+
+},{}],36:[function(require,module,exports){
+var ctx = require('./_ctx');
+var call = require('./_iter-call');
+var isArrayIter = require('./_is-array-iter');
+var anObject = require('./_an-object');
+var toLength = require('./_to-length');
+var getIterFn = require('./core.get-iterator-method');
+var BREAK = {};
+var RETURN = {};
+var exports = module.exports = function (iterable, entries, fn, that, ITERATOR) {
+  var iterFn = ITERATOR ? function () { return iterable; } : getIterFn(iterable);
+  var f = ctx(fn, that, entries ? 2 : 1);
+  var index = 0;
+  var length, step, iterator, result;
+  if (typeof iterFn != 'function') throw TypeError(iterable + ' is not iterable!');
+  // fast case for arrays with default iterator
+  if (isArrayIter(iterFn)) for (length = toLength(iterable.length); length > index; index++) {
+    result = entries ? f(anObject(step = iterable[index])[0], step[1]) : f(iterable[index]);
+    if (result === BREAK || result === RETURN) return result;
+  } else for (iterator = iterFn.call(iterable); !(step = iterator.next()).done;) {
+    result = call(iterator, f, step.value, entries);
+    if (result === BREAK || result === RETURN) return result;
+  }
+};
+exports.BREAK = BREAK;
+exports.RETURN = RETURN;
+
+},{"./_an-object":24,"./_ctx":29,"./_is-array-iter":44,"./_iter-call":46,"./_to-length":78,"./core.get-iterator-method":84}],37:[function(require,module,exports){
+// https://github.com/zloirock/core-js/issues/86#issuecomment-115759028
+var global = module.exports = typeof window != 'undefined' && window.Math == Math
+  ? window : typeof self != 'undefined' && self.Math == Math ? self
+  // eslint-disable-next-line no-new-func
+  : Function('return this')();
+if (typeof __g == 'number') __g = global; // eslint-disable-line no-undef
+
+},{}],38:[function(require,module,exports){
+var hasOwnProperty = {}.hasOwnProperty;
+module.exports = function (it, key) {
+  return hasOwnProperty.call(it, key);
+};
+
+},{}],39:[function(require,module,exports){
+var dP = require('./_object-dp');
+var createDesc = require('./_property-desc');
+module.exports = require('./_descriptors') ? function (object, key, value) {
+  return dP.f(object, key, createDesc(1, value));
+} : function (object, key, value) {
+  object[key] = value;
+  return object;
+};
+
+},{"./_descriptors":31,"./_object-dp":57,"./_property-desc":65}],40:[function(require,module,exports){
+var document = require('./_global').document;
+module.exports = document && document.documentElement;
+
+},{"./_global":37}],41:[function(require,module,exports){
+module.exports = !require('./_descriptors') && !require('./_fails')(function () {
+  return Object.defineProperty(require('./_dom-create')('div'), 'a', { get: function () { return 7; } }).a != 7;
+});
+
+},{"./_descriptors":31,"./_dom-create":32,"./_fails":35}],42:[function(require,module,exports){
+// fast apply, http://jsperf.lnkit.com/fast-apply/5
+module.exports = function (fn, args, that) {
+  var un = that === undefined;
+  switch (args.length) {
+    case 0: return un ? fn()
+                      : fn.call(that);
+    case 1: return un ? fn(args[0])
+                      : fn.call(that, args[0]);
+    case 2: return un ? fn(args[0], args[1])
+                      : fn.call(that, args[0], args[1]);
+    case 3: return un ? fn(args[0], args[1], args[2])
+                      : fn.call(that, args[0], args[1], args[2]);
+    case 4: return un ? fn(args[0], args[1], args[2], args[3])
+                      : fn.call(that, args[0], args[1], args[2], args[3]);
+  } return fn.apply(that, args);
+};
+
+},{}],43:[function(require,module,exports){
+// fallback for non-array-like ES3 and non-enumerable old V8 strings
+var cof = require('./_cof');
+// eslint-disable-next-line no-prototype-builtins
+module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
+  return cof(it) == 'String' ? it.split('') : Object(it);
+};
+
+},{"./_cof":27}],44:[function(require,module,exports){
+// check on default Array iterator
+var Iterators = require('./_iterators');
+var ITERATOR = require('./_wks')('iterator');
+var ArrayProto = Array.prototype;
+
+module.exports = function (it) {
+  return it !== undefined && (Iterators.Array === it || ArrayProto[ITERATOR] === it);
+};
+
+},{"./_iterators":51,"./_wks":83}],45:[function(require,module,exports){
+module.exports = function (it) {
+  return typeof it === 'object' ? it !== null : typeof it === 'function';
+};
+
+},{}],46:[function(require,module,exports){
+// call something on iterator step with safe closing on error
+var anObject = require('./_an-object');
+module.exports = function (iterator, fn, value, entries) {
+  try {
+    return entries ? fn(anObject(value)[0], value[1]) : fn(value);
+  // 7.4.6 IteratorClose(iterator, completion)
+  } catch (e) {
+    var ret = iterator['return'];
+    if (ret !== undefined) anObject(ret.call(iterator));
+    throw e;
+  }
+};
+
+},{"./_an-object":24}],47:[function(require,module,exports){
+'use strict';
+var create = require('./_object-create');
+var descriptor = require('./_property-desc');
+var setToStringTag = require('./_set-to-string-tag');
+var IteratorPrototype = {};
+
+// 25.1.2.1.1 %IteratorPrototype%[@@iterator]()
+require('./_hide')(IteratorPrototype, require('./_wks')('iterator'), function () { return this; });
+
+module.exports = function (Constructor, NAME, next) {
+  Constructor.prototype = create(IteratorPrototype, { next: descriptor(1, next) });
+  setToStringTag(Constructor, NAME + ' Iterator');
+};
+
+},{"./_hide":39,"./_object-create":56,"./_property-desc":65,"./_set-to-string-tag":69,"./_wks":83}],48:[function(require,module,exports){
+'use strict';
+var LIBRARY = require('./_library');
+var $export = require('./_export');
+var redefine = require('./_redefine');
+var hide = require('./_hide');
+var Iterators = require('./_iterators');
+var $iterCreate = require('./_iter-create');
+var setToStringTag = require('./_set-to-string-tag');
+var getPrototypeOf = require('./_object-gpo');
+var ITERATOR = require('./_wks')('iterator');
+var BUGGY = !([].keys && 'next' in [].keys()); // Safari has buggy iterators w/o `next`
+var FF_ITERATOR = '@@iterator';
+var KEYS = 'keys';
+var VALUES = 'values';
+
+var returnThis = function () { return this; };
+
+module.exports = function (Base, NAME, Constructor, next, DEFAULT, IS_SET, FORCED) {
+  $iterCreate(Constructor, NAME, next);
+  var getMethod = function (kind) {
+    if (!BUGGY && kind in proto) return proto[kind];
+    switch (kind) {
+      case KEYS: return function keys() { return new Constructor(this, kind); };
+      case VALUES: return function values() { return new Constructor(this, kind); };
+    } return function entries() { return new Constructor(this, kind); };
+  };
+  var TAG = NAME + ' Iterator';
+  var DEF_VALUES = DEFAULT == VALUES;
+  var VALUES_BUG = false;
+  var proto = Base.prototype;
+  var $native = proto[ITERATOR] || proto[FF_ITERATOR] || DEFAULT && proto[DEFAULT];
+  var $default = $native || getMethod(DEFAULT);
+  var $entries = DEFAULT ? !DEF_VALUES ? $default : getMethod('entries') : undefined;
+  var $anyNative = NAME == 'Array' ? proto.entries || $native : $native;
+  var methods, key, IteratorPrototype;
+  // Fix native
+  if ($anyNative) {
+    IteratorPrototype = getPrototypeOf($anyNative.call(new Base()));
+    if (IteratorPrototype !== Object.prototype && IteratorPrototype.next) {
+      // Set @@toStringTag to native iterators
+      setToStringTag(IteratorPrototype, TAG, true);
+      // fix for some old engines
+      if (!LIBRARY && typeof IteratorPrototype[ITERATOR] != 'function') hide(IteratorPrototype, ITERATOR, returnThis);
+    }
+  }
+  // fix Array#{values, @@iterator}.name in V8 / FF
+  if (DEF_VALUES && $native && $native.name !== VALUES) {
+    VALUES_BUG = true;
+    $default = function values() { return $native.call(this); };
+  }
+  // Define iterator
+  if ((!LIBRARY || FORCED) && (BUGGY || VALUES_BUG || !proto[ITERATOR])) {
+    hide(proto, ITERATOR, $default);
+  }
+  // Plug for library
+  Iterators[NAME] = $default;
+  Iterators[TAG] = returnThis;
+  if (DEFAULT) {
+    methods = {
+      values: DEF_VALUES ? $default : getMethod(VALUES),
+      keys: IS_SET ? $default : getMethod(KEYS),
+      entries: $entries
+    };
+    if (FORCED) for (key in methods) {
+      if (!(key in proto)) redefine(proto, key, methods[key]);
+    } else $export($export.P + $export.F * (BUGGY || VALUES_BUG), NAME, methods);
+  }
+  return methods;
+};
+
+},{"./_export":34,"./_hide":39,"./_iter-create":47,"./_iterators":51,"./_library":52,"./_object-gpo":59,"./_redefine":67,"./_set-to-string-tag":69,"./_wks":83}],49:[function(require,module,exports){
+var ITERATOR = require('./_wks')('iterator');
+var SAFE_CLOSING = false;
+
+try {
+  var riter = [7][ITERATOR]();
+  riter['return'] = function () { SAFE_CLOSING = true; };
+  // eslint-disable-next-line no-throw-literal
+  Array.from(riter, function () { throw 2; });
+} catch (e) { /* empty */ }
+
+module.exports = function (exec, skipClosing) {
+  if (!skipClosing && !SAFE_CLOSING) return false;
+  var safe = false;
+  try {
+    var arr = [7];
+    var iter = arr[ITERATOR]();
+    iter.next = function () { return { done: safe = true }; };
+    arr[ITERATOR] = function () { return iter; };
+    exec(arr);
+  } catch (e) { /* empty */ }
+  return safe;
+};
+
+},{"./_wks":83}],50:[function(require,module,exports){
+module.exports = function (done, value) {
+  return { value: value, done: !!done };
+};
+
+},{}],51:[function(require,module,exports){
+module.exports = {};
+
+},{}],52:[function(require,module,exports){
+module.exports = true;
+
+},{}],53:[function(require,module,exports){
+var META = require('./_uid')('meta');
+var isObject = require('./_is-object');
+var has = require('./_has');
+var setDesc = require('./_object-dp').f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !require('./_fails')(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
+};
+
+},{"./_fails":35,"./_has":38,"./_is-object":45,"./_object-dp":57,"./_uid":81}],54:[function(require,module,exports){
+var global = require('./_global');
+var macrotask = require('./_task').set;
+var Observer = global.MutationObserver || global.WebKitMutationObserver;
+var process = global.process;
+var Promise = global.Promise;
+var isNode = require('./_cof')(process) == 'process';
+
+module.exports = function () {
+  var head, last, notify;
+
+  var flush = function () {
+    var parent, fn;
+    if (isNode && (parent = process.domain)) parent.exit();
+    while (head) {
+      fn = head.fn;
+      head = head.next;
+      try {
+        fn();
+      } catch (e) {
+        if (head) notify();
+        else last = undefined;
+        throw e;
+      }
+    } last = undefined;
+    if (parent) parent.enter();
+  };
+
+  // Node.js
+  if (isNode) {
+    notify = function () {
+      process.nextTick(flush);
+    };
+  // browsers with MutationObserver, except iOS Safari - https://github.com/zloirock/core-js/issues/339
+  } else if (Observer && !(global.navigator && global.navigator.standalone)) {
+    var toggle = true;
+    var node = document.createTextNode('');
+    new Observer(flush).observe(node, { characterData: true }); // eslint-disable-line no-new
+    notify = function () {
+      node.data = toggle = !toggle;
+    };
+  // environments with maybe non-completely correct, but existent Promise
+  } else if (Promise && Promise.resolve) {
+    // Promise.resolve without an argument throws an error in LG WebOS 2
+    var promise = Promise.resolve(undefined);
+    notify = function () {
+      promise.then(flush);
+    };
+  // for other environments - macrotask based on:
+  // - setImmediate
+  // - MessageChannel
+  // - window.postMessag
+  // - onreadystatechange
+  // - setTimeout
+  } else {
+    notify = function () {
+      // strange IE + webpack dev server bug - use .call(global)
+      macrotask.call(global, flush);
+    };
+  }
+
+  return function (fn) {
+    var task = { fn: fn, next: undefined };
+    if (last) last.next = task;
+    if (!head) {
+      head = task;
+      notify();
+    } last = task;
+  };
+};
+
+},{"./_cof":27,"./_global":37,"./_task":74}],55:[function(require,module,exports){
+'use strict';
+// 25.4.1.5 NewPromiseCapability(C)
+var aFunction = require('./_a-function');
+
+function PromiseCapability(C) {
+  var resolve, reject;
+  this.promise = new C(function ($$resolve, $$reject) {
+    if (resolve !== undefined || reject !== undefined) throw TypeError('Bad Promise constructor');
+    resolve = $$resolve;
+    reject = $$reject;
+  });
+  this.resolve = aFunction(resolve);
+  this.reject = aFunction(reject);
+}
+
+module.exports.f = function (C) {
+  return new PromiseCapability(C);
+};
+
+},{"./_a-function":21}],56:[function(require,module,exports){
+// 19.1.2.2 / 15.2.3.5 Object.create(O [, Properties])
+var anObject = require('./_an-object');
+var dPs = require('./_object-dps');
+var enumBugKeys = require('./_enum-bug-keys');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var Empty = function () { /* empty */ };
+var PROTOTYPE = 'prototype';
+
+// Create object with fake `null` prototype: use iframe Object with cleared prototype
+var createDict = function () {
+  // Thrash, waste and sodomy: IE GC bug
+  var iframe = require('./_dom-create')('iframe');
+  var i = enumBugKeys.length;
+  var lt = '<';
+  var gt = '>';
+  var iframeDocument;
+  iframe.style.display = 'none';
+  require('./_html').appendChild(iframe);
+  iframe.src = 'javascript:'; // eslint-disable-line no-script-url
+  // createDict = iframe.contentWindow.Object;
+  // html.removeChild(iframe);
+  iframeDocument = iframe.contentWindow.document;
+  iframeDocument.open();
+  iframeDocument.write(lt + 'script' + gt + 'document.F=Object' + lt + '/script' + gt);
+  iframeDocument.close();
+  createDict = iframeDocument.F;
+  while (i--) delete createDict[PROTOTYPE][enumBugKeys[i]];
+  return createDict();
+};
+
+module.exports = Object.create || function create(O, Properties) {
+  var result;
+  if (O !== null) {
+    Empty[PROTOTYPE] = anObject(O);
+    result = new Empty();
+    Empty[PROTOTYPE] = null;
+    // add "__proto__" for Object.getPrototypeOf polyfill
+    result[IE_PROTO] = O;
+  } else result = createDict();
+  return Properties === undefined ? result : dPs(result, Properties);
+};
+
+},{"./_an-object":24,"./_dom-create":32,"./_enum-bug-keys":33,"./_html":40,"./_object-dps":58,"./_shared-key":70}],57:[function(require,module,exports){
+var anObject = require('./_an-object');
+var IE8_DOM_DEFINE = require('./_ie8-dom-define');
+var toPrimitive = require('./_to-primitive');
+var dP = Object.defineProperty;
+
+exports.f = require('./_descriptors') ? Object.defineProperty : function defineProperty(O, P, Attributes) {
+  anObject(O);
+  P = toPrimitive(P, true);
+  anObject(Attributes);
+  if (IE8_DOM_DEFINE) try {
+    return dP(O, P, Attributes);
+  } catch (e) { /* empty */ }
+  if ('get' in Attributes || 'set' in Attributes) throw TypeError('Accessors not supported!');
+  if ('value' in Attributes) O[P] = Attributes.value;
+  return O;
+};
+
+},{"./_an-object":24,"./_descriptors":31,"./_ie8-dom-define":41,"./_to-primitive":80}],58:[function(require,module,exports){
+var dP = require('./_object-dp');
+var anObject = require('./_an-object');
+var getKeys = require('./_object-keys');
+
+module.exports = require('./_descriptors') ? Object.defineProperties : function defineProperties(O, Properties) {
+  anObject(O);
+  var keys = getKeys(Properties);
+  var length = keys.length;
+  var i = 0;
+  var P;
+  while (length > i) dP.f(O, P = keys[i++], Properties[P]);
+  return O;
+};
+
+},{"./_an-object":24,"./_descriptors":31,"./_object-dp":57,"./_object-keys":61}],59:[function(require,module,exports){
+// 19.1.2.9 / 15.2.3.2 Object.getPrototypeOf(O)
+var has = require('./_has');
+var toObject = require('./_to-object');
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+var ObjectProto = Object.prototype;
+
+module.exports = Object.getPrototypeOf || function (O) {
+  O = toObject(O);
+  if (has(O, IE_PROTO)) return O[IE_PROTO];
+  if (typeof O.constructor == 'function' && O instanceof O.constructor) {
+    return O.constructor.prototype;
+  } return O instanceof Object ? ObjectProto : null;
+};
+
+},{"./_has":38,"./_shared-key":70,"./_to-object":79}],60:[function(require,module,exports){
+var has = require('./_has');
+var toIObject = require('./_to-iobject');
+var arrayIndexOf = require('./_array-includes')(false);
+var IE_PROTO = require('./_shared-key')('IE_PROTO');
+
+module.exports = function (object, names) {
+  var O = toIObject(object);
+  var i = 0;
+  var result = [];
+  var key;
+  for (key in O) if (key != IE_PROTO) has(O, key) && result.push(key);
+  // Don't enum bug & hidden keys
+  while (names.length > i) if (has(O, key = names[i++])) {
+    ~arrayIndexOf(result, key) || result.push(key);
+  }
+  return result;
+};
+
+},{"./_array-includes":25,"./_has":38,"./_shared-key":70,"./_to-iobject":77}],61:[function(require,module,exports){
+// 19.1.2.14 / 15.2.3.14 Object.keys(O)
+var $keys = require('./_object-keys-internal');
+var enumBugKeys = require('./_enum-bug-keys');
+
+module.exports = Object.keys || function keys(O) {
+  return $keys(O, enumBugKeys);
+};
+
+},{"./_enum-bug-keys":33,"./_object-keys-internal":60}],62:[function(require,module,exports){
+// most Object methods by ES6 should accept primitives
+var $export = require('./_export');
+var core = require('./_core');
+var fails = require('./_fails');
+module.exports = function (KEY, exec) {
+  var fn = (core.Object || {})[KEY] || Object[KEY];
+  var exp = {};
+  exp[KEY] = exec(fn);
+  $export($export.S + $export.F * fails(function () { fn(1); }), 'Object', exp);
+};
+
+},{"./_core":28,"./_export":34,"./_fails":35}],63:[function(require,module,exports){
+module.exports = function (exec) {
+  try {
+    return { e: false, v: exec() };
+  } catch (e) {
+    return { e: true, v: e };
+  }
+};
+
+},{}],64:[function(require,module,exports){
+var anObject = require('./_an-object');
+var isObject = require('./_is-object');
+var newPromiseCapability = require('./_new-promise-capability');
+
+module.exports = function (C, x) {
+  anObject(C);
+  if (isObject(x) && x.constructor === C) return x;
+  var promiseCapability = newPromiseCapability.f(C);
+  var resolve = promiseCapability.resolve;
+  resolve(x);
+  return promiseCapability.promise;
+};
+
+},{"./_an-object":24,"./_is-object":45,"./_new-promise-capability":55}],65:[function(require,module,exports){
+module.exports = function (bitmap, value) {
+  return {
+    enumerable: !(bitmap & 1),
+    configurable: !(bitmap & 2),
+    writable: !(bitmap & 4),
+    value: value
+  };
+};
+
+},{}],66:[function(require,module,exports){
+var hide = require('./_hide');
+module.exports = function (target, src, safe) {
+  for (var key in src) {
+    if (safe && target[key]) target[key] = src[key];
+    else hide(target, key, src[key]);
+  } return target;
+};
+
+},{"./_hide":39}],67:[function(require,module,exports){
+module.exports = require('./_hide');
+
+},{"./_hide":39}],68:[function(require,module,exports){
+'use strict';
+var global = require('./_global');
+var core = require('./_core');
+var dP = require('./_object-dp');
+var DESCRIPTORS = require('./_descriptors');
+var SPECIES = require('./_wks')('species');
+
+module.exports = function (KEY) {
+  var C = typeof core[KEY] == 'function' ? core[KEY] : global[KEY];
+  if (DESCRIPTORS && C && !C[SPECIES]) dP.f(C, SPECIES, {
+    configurable: true,
+    get: function () { return this; }
+  });
+};
+
+},{"./_core":28,"./_descriptors":31,"./_global":37,"./_object-dp":57,"./_wks":83}],69:[function(require,module,exports){
+var def = require('./_object-dp').f;
+var has = require('./_has');
+var TAG = require('./_wks')('toStringTag');
+
+module.exports = function (it, tag, stat) {
+  if (it && !has(it = stat ? it : it.prototype, TAG)) def(it, TAG, { configurable: true, value: tag });
+};
+
+},{"./_has":38,"./_object-dp":57,"./_wks":83}],70:[function(require,module,exports){
+var shared = require('./_shared')('keys');
+var uid = require('./_uid');
+module.exports = function (key) {
+  return shared[key] || (shared[key] = uid(key));
+};
+
+},{"./_shared":71,"./_uid":81}],71:[function(require,module,exports){
+var core = require('./_core');
+var global = require('./_global');
+var SHARED = '__core-js_shared__';
+var store = global[SHARED] || (global[SHARED] = {});
+
+(module.exports = function (key, value) {
+  return store[key] || (store[key] = value !== undefined ? value : {});
+})('versions', []).push({
+  version: core.version,
+  mode: require('./_library') ? 'pure' : 'global',
+  copyright: '© 2018 Denis Pushkarev (zloirock.ru)'
+});
+
+},{"./_core":28,"./_global":37,"./_library":52}],72:[function(require,module,exports){
+// 7.3.20 SpeciesConstructor(O, defaultConstructor)
+var anObject = require('./_an-object');
+var aFunction = require('./_a-function');
+var SPECIES = require('./_wks')('species');
+module.exports = function (O, D) {
+  var C = anObject(O).constructor;
+  var S;
+  return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+};
+
+},{"./_a-function":21,"./_an-object":24,"./_wks":83}],73:[function(require,module,exports){
+var toInteger = require('./_to-integer');
+var defined = require('./_defined');
+// true  -> String#at
+// false -> String#codePointAt
+module.exports = function (TO_STRING) {
+  return function (that, pos) {
+    var s = String(defined(that));
+    var i = toInteger(pos);
+    var l = s.length;
+    var a, b;
+    if (i < 0 || i >= l) return TO_STRING ? '' : undefined;
+    a = s.charCodeAt(i);
+    return a < 0xd800 || a > 0xdbff || i + 1 === l || (b = s.charCodeAt(i + 1)) < 0xdc00 || b > 0xdfff
+      ? TO_STRING ? s.charAt(i) : a
+      : TO_STRING ? s.slice(i, i + 2) : (a - 0xd800 << 10) + (b - 0xdc00) + 0x10000;
+  };
+};
+
+},{"./_defined":30,"./_to-integer":76}],74:[function(require,module,exports){
+var ctx = require('./_ctx');
+var invoke = require('./_invoke');
+var html = require('./_html');
+var cel = require('./_dom-create');
+var global = require('./_global');
+var process = global.process;
+var setTask = global.setImmediate;
+var clearTask = global.clearImmediate;
+var MessageChannel = global.MessageChannel;
+var Dispatch = global.Dispatch;
+var counter = 0;
+var queue = {};
+var ONREADYSTATECHANGE = 'onreadystatechange';
+var defer, channel, port;
+var run = function () {
+  var id = +this;
+  // eslint-disable-next-line no-prototype-builtins
+  if (queue.hasOwnProperty(id)) {
+    var fn = queue[id];
+    delete queue[id];
+    fn();
+  }
+};
+var listener = function (event) {
+  run.call(event.data);
+};
+// Node.js 0.9+ & IE10+ has setImmediate, otherwise:
+if (!setTask || !clearTask) {
+  setTask = function setImmediate(fn) {
+    var args = [];
+    var i = 1;
+    while (arguments.length > i) args.push(arguments[i++]);
+    queue[++counter] = function () {
+      // eslint-disable-next-line no-new-func
+      invoke(typeof fn == 'function' ? fn : Function(fn), args);
+    };
+    defer(counter);
+    return counter;
+  };
+  clearTask = function clearImmediate(id) {
+    delete queue[id];
+  };
+  // Node.js 0.8-
+  if (require('./_cof')(process) == 'process') {
+    defer = function (id) {
+      process.nextTick(ctx(run, id, 1));
+    };
+  // Sphere (JS game engine) Dispatch API
+  } else if (Dispatch && Dispatch.now) {
+    defer = function (id) {
+      Dispatch.now(ctx(run, id, 1));
+    };
+  // Browsers with MessageChannel, includes WebWorkers
+  } else if (MessageChannel) {
+    channel = new MessageChannel();
+    port = channel.port2;
+    channel.port1.onmessage = listener;
+    defer = ctx(port.postMessage, port, 1);
+  // Browsers with postMessage, skip WebWorkers
+  // IE8 has postMessage, but it's sync & typeof its postMessage is 'object'
+  } else if (global.addEventListener && typeof postMessage == 'function' && !global.importScripts) {
+    defer = function (id) {
+      global.postMessage(id + '', '*');
+    };
+    global.addEventListener('message', listener, false);
+  // IE8-
+  } else if (ONREADYSTATECHANGE in cel('script')) {
+    defer = function (id) {
+      html.appendChild(cel('script'))[ONREADYSTATECHANGE] = function () {
+        html.removeChild(this);
+        run.call(id);
+      };
+    };
+  // Rest old browsers
+  } else {
+    defer = function (id) {
+      setTimeout(ctx(run, id, 1), 0);
+    };
+  }
+}
+module.exports = {
+  set: setTask,
+  clear: clearTask
+};
+
+},{"./_cof":27,"./_ctx":29,"./_dom-create":32,"./_global":37,"./_html":40,"./_invoke":42}],75:[function(require,module,exports){
+var toInteger = require('./_to-integer');
+var max = Math.max;
+var min = Math.min;
+module.exports = function (index, length) {
+  index = toInteger(index);
+  return index < 0 ? max(index + length, 0) : min(index, length);
+};
+
+},{"./_to-integer":76}],76:[function(require,module,exports){
+// 7.1.4 ToInteger
+var ceil = Math.ceil;
+var floor = Math.floor;
+module.exports = function (it) {
+  return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
+};
+
+},{}],77:[function(require,module,exports){
+// to indexed object, toObject with fallback for non-array-like ES3 strings
+var IObject = require('./_iobject');
+var defined = require('./_defined');
+module.exports = function (it) {
+  return IObject(defined(it));
+};
+
+},{"./_defined":30,"./_iobject":43}],78:[function(require,module,exports){
+// 7.1.15 ToLength
+var toInteger = require('./_to-integer');
+var min = Math.min;
+module.exports = function (it) {
+  return it > 0 ? min(toInteger(it), 0x1fffffffffffff) : 0; // pow(2, 53) - 1 == 9007199254740991
+};
+
+},{"./_to-integer":76}],79:[function(require,module,exports){
+// 7.1.13 ToObject(argument)
+var defined = require('./_defined');
+module.exports = function (it) {
+  return Object(defined(it));
+};
+
+},{"./_defined":30}],80:[function(require,module,exports){
+// 7.1.1 ToPrimitive(input [, PreferredType])
+var isObject = require('./_is-object');
+// instead of the ES6 spec version, we didn't implement @@toPrimitive case
+// and the second argument - flag - preferred type is a string
+module.exports = function (it, S) {
+  if (!isObject(it)) return it;
+  var fn, val;
+  if (S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
+  if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
+  throw TypeError("Can't convert object to primitive value");
+};
+
+},{"./_is-object":45}],81:[function(require,module,exports){
+var id = 0;
+var px = Math.random();
+module.exports = function (key) {
+  return 'Symbol('.concat(key === undefined ? '' : key, ')_', (++id + px).toString(36));
+};
+
+},{}],82:[function(require,module,exports){
+var global = require('./_global');
+var navigator = global.navigator;
+
+module.exports = navigator && navigator.userAgent || '';
+
+},{"./_global":37}],83:[function(require,module,exports){
+var store = require('./_shared')('wks');
+var uid = require('./_uid');
+var Symbol = require('./_global').Symbol;
+var USE_SYMBOL = typeof Symbol == 'function';
+
+var $exports = module.exports = function (name) {
+  return store[name] || (store[name] =
+    USE_SYMBOL && Symbol[name] || (USE_SYMBOL ? Symbol : uid)('Symbol.' + name));
+};
+
+$exports.store = store;
+
+},{"./_global":37,"./_shared":71,"./_uid":81}],84:[function(require,module,exports){
+var classof = require('./_classof');
+var ITERATOR = require('./_wks')('iterator');
+var Iterators = require('./_iterators');
+module.exports = require('./_core').getIteratorMethod = function (it) {
+  if (it != undefined) return it[ITERATOR]
+    || it['@@iterator']
+    || Iterators[classof(it)];
+};
+
+},{"./_classof":26,"./_core":28,"./_iterators":51,"./_wks":83}],85:[function(require,module,exports){
+var anObject = require('./_an-object');
+var get = require('./core.get-iterator-method');
+module.exports = require('./_core').getIterator = function (it) {
+  var iterFn = get(it);
+  if (typeof iterFn != 'function') throw TypeError(it + ' is not iterable!');
+  return anObject(iterFn.call(it));
+};
+
+},{"./_an-object":24,"./_core":28,"./core.get-iterator-method":84}],86:[function(require,module,exports){
+var classof = require('./_classof');
+var ITERATOR = require('./_wks')('iterator');
+var Iterators = require('./_iterators');
+module.exports = require('./_core').isIterable = function (it) {
+  var O = Object(it);
+  return O[ITERATOR] !== undefined
+    || '@@iterator' in O
+    // eslint-disable-next-line no-prototype-builtins
+    || Iterators.hasOwnProperty(classof(O));
+};
+
+},{"./_classof":26,"./_core":28,"./_iterators":51,"./_wks":83}],87:[function(require,module,exports){
+'use strict';
+var addToUnscopables = require('./_add-to-unscopables');
+var step = require('./_iter-step');
+var Iterators = require('./_iterators');
+var toIObject = require('./_to-iobject');
+
+// 22.1.3.4 Array.prototype.entries()
+// 22.1.3.13 Array.prototype.keys()
+// 22.1.3.29 Array.prototype.values()
+// 22.1.3.30 Array.prototype[@@iterator]()
+module.exports = require('./_iter-define')(Array, 'Array', function (iterated, kind) {
+  this._t = toIObject(iterated); // target
+  this._i = 0;                   // next index
+  this._k = kind;                // kind
+// 22.1.5.2.1 %ArrayIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var kind = this._k;
+  var index = this._i++;
+  if (!O || index >= O.length) {
+    this._t = undefined;
+    return step(1);
+  }
+  if (kind == 'keys') return step(0, index);
+  if (kind == 'values') return step(0, O[index]);
+  return step(0, [index, O[index]]);
+}, 'values');
+
+// argumentsList[@@iterator] is %ArrayProto_values% (9.4.4.6, 9.4.4.7)
+Iterators.Arguments = Iterators.Array;
+
+addToUnscopables('keys');
+addToUnscopables('values');
+addToUnscopables('entries');
+
+},{"./_add-to-unscopables":22,"./_iter-define":48,"./_iter-step":50,"./_iterators":51,"./_to-iobject":77}],88:[function(require,module,exports){
+var $export = require('./_export');
+// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
+$export($export.S + $export.F * !require('./_descriptors'), 'Object', { defineProperty: require('./_object-dp').f });
+
+},{"./_descriptors":31,"./_export":34,"./_object-dp":57}],89:[function(require,module,exports){
+// 19.1.2.5 Object.freeze(O)
+var isObject = require('./_is-object');
+var meta = require('./_meta').onFreeze;
+
+require('./_object-sap')('freeze', function ($freeze) {
+  return function freeze(it) {
+    return $freeze && isObject(it) ? $freeze(meta(it)) : it;
+  };
+});
+
+},{"./_is-object":45,"./_meta":53,"./_object-sap":62}],90:[function(require,module,exports){
+// 19.1.2.14 Object.keys(O)
+var toObject = require('./_to-object');
+var $keys = require('./_object-keys');
+
+require('./_object-sap')('keys', function () {
+  return function keys(it) {
+    return $keys(toObject(it));
+  };
+});
+
+},{"./_object-keys":61,"./_object-sap":62,"./_to-object":79}],91:[function(require,module,exports){
+
+},{}],92:[function(require,module,exports){
+'use strict';
+var LIBRARY = require('./_library');
+var global = require('./_global');
+var ctx = require('./_ctx');
+var classof = require('./_classof');
+var $export = require('./_export');
+var isObject = require('./_is-object');
+var aFunction = require('./_a-function');
+var anInstance = require('./_an-instance');
+var forOf = require('./_for-of');
+var speciesConstructor = require('./_species-constructor');
+var task = require('./_task').set;
+var microtask = require('./_microtask')();
+var newPromiseCapabilityModule = require('./_new-promise-capability');
+var perform = require('./_perform');
+var userAgent = require('./_user-agent');
+var promiseResolve = require('./_promise-resolve');
+var PROMISE = 'Promise';
+var TypeError = global.TypeError;
+var process = global.process;
+var versions = process && process.versions;
+var v8 = versions && versions.v8 || '';
+var $Promise = global[PROMISE];
+var isNode = classof(process) == 'process';
+var empty = function () { /* empty */ };
+var Internal, newGenericPromiseCapability, OwnPromiseCapability, Wrapper;
+var newPromiseCapability = newGenericPromiseCapability = newPromiseCapabilityModule.f;
+
+var USE_NATIVE = !!function () {
+  try {
+    // correct subclassing with @@species support
+    var promise = $Promise.resolve(1);
+    var FakePromise = (promise.constructor = {})[require('./_wks')('species')] = function (exec) {
+      exec(empty, empty);
+    };
+    // unhandled rejections tracking support, NodeJS Promise without it fails @@species test
+    return (isNode || typeof PromiseRejectionEvent == 'function')
+      && promise.then(empty) instanceof FakePromise
+      // v8 6.6 (Node 10 and Chrome 66) have a bug with resolving custom thenables
+      // https://bugs.chromium.org/p/chromium/issues/detail?id=830565
+      // we can't detect it synchronously, so just check versions
+      && v8.indexOf('6.6') !== 0
+      && userAgent.indexOf('Chrome/66') === -1;
+  } catch (e) { /* empty */ }
+}();
+
+// helpers
+var isThenable = function (it) {
+  var then;
+  return isObject(it) && typeof (then = it.then) == 'function' ? then : false;
+};
+var notify = function (promise, isReject) {
+  if (promise._n) return;
+  promise._n = true;
+  var chain = promise._c;
+  microtask(function () {
+    var value = promise._v;
+    var ok = promise._s == 1;
+    var i = 0;
+    var run = function (reaction) {
+      var handler = ok ? reaction.ok : reaction.fail;
+      var resolve = reaction.resolve;
+      var reject = reaction.reject;
+      var domain = reaction.domain;
+      var result, then, exited;
+      try {
+        if (handler) {
+          if (!ok) {
+            if (promise._h == 2) onHandleUnhandled(promise);
+            promise._h = 1;
+          }
+          if (handler === true) result = value;
+          else {
+            if (domain) domain.enter();
+            result = handler(value); // may throw
+            if (domain) {
+              domain.exit();
+              exited = true;
+            }
+          }
+          if (result === reaction.promise) {
+            reject(TypeError('Promise-chain cycle'));
+          } else if (then = isThenable(result)) {
+            then.call(result, resolve, reject);
+          } else resolve(result);
+        } else reject(value);
+      } catch (e) {
+        if (domain && !exited) domain.exit();
+        reject(e);
+      }
+    };
+    while (chain.length > i) run(chain[i++]); // variable length - can't use forEach
+    promise._c = [];
+    promise._n = false;
+    if (isReject && !promise._h) onUnhandled(promise);
+  });
+};
+var onUnhandled = function (promise) {
+  task.call(global, function () {
+    var value = promise._v;
+    var unhandled = isUnhandled(promise);
+    var result, handler, console;
+    if (unhandled) {
+      result = perform(function () {
+        if (isNode) {
+          process.emit('unhandledRejection', value, promise);
+        } else if (handler = global.onunhandledrejection) {
+          handler({ promise: promise, reason: value });
+        } else if ((console = global.console) && console.error) {
+          console.error('Unhandled promise rejection', value);
+        }
+      });
+      // Browsers should not trigger `rejectionHandled` event if it was handled here, NodeJS - should
+      promise._h = isNode || isUnhandled(promise) ? 2 : 1;
+    } promise._a = undefined;
+    if (unhandled && result.e) throw result.v;
+  });
+};
+var isUnhandled = function (promise) {
+  return promise._h !== 1 && (promise._a || promise._c).length === 0;
+};
+var onHandleUnhandled = function (promise) {
+  task.call(global, function () {
+    var handler;
+    if (isNode) {
+      process.emit('rejectionHandled', promise);
+    } else if (handler = global.onrejectionhandled) {
+      handler({ promise: promise, reason: promise._v });
+    }
+  });
+};
+var $reject = function (value) {
+  var promise = this;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  promise._v = value;
+  promise._s = 2;
+  if (!promise._a) promise._a = promise._c.slice();
+  notify(promise, true);
+};
+var $resolve = function (value) {
+  var promise = this;
+  var then;
+  if (promise._d) return;
+  promise._d = true;
+  promise = promise._w || promise; // unwrap
+  try {
+    if (promise === value) throw TypeError("Promise can't be resolved itself");
+    if (then = isThenable(value)) {
+      microtask(function () {
+        var wrapper = { _w: promise, _d: false }; // wrap
+        try {
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } catch (e) {
+          $reject.call(wrapper, e);
+        }
+      });
+    } else {
+      promise._v = value;
+      promise._s = 1;
+      notify(promise, false);
+    }
+  } catch (e) {
+    $reject.call({ _w: promise, _d: false }, e); // wrap
+  }
+};
+
+// constructor polyfill
+if (!USE_NATIVE) {
+  // 25.4.3.1 Promise(executor)
+  $Promise = function Promise(executor) {
+    anInstance(this, $Promise, PROMISE, '_h');
+    aFunction(executor);
+    Internal.call(this);
+    try {
+      executor(ctx($resolve, this, 1), ctx($reject, this, 1));
+    } catch (err) {
+      $reject.call(this, err);
+    }
+  };
+  // eslint-disable-next-line no-unused-vars
+  Internal = function Promise(executor) {
+    this._c = [];             // <- awaiting reactions
+    this._a = undefined;      // <- checked in isUnhandled reactions
+    this._s = 0;              // <- state
+    this._d = false;          // <- done
+    this._v = undefined;      // <- value
+    this._h = 0;              // <- rejection state, 0 - default, 1 - handled, 2 - unhandled
+    this._n = false;          // <- notify
+  };
+  Internal.prototype = require('./_redefine-all')($Promise.prototype, {
+    // 25.4.5.3 Promise.prototype.then(onFulfilled, onRejected)
+    then: function then(onFulfilled, onRejected) {
+      var reaction = newPromiseCapability(speciesConstructor(this, $Promise));
+      reaction.ok = typeof onFulfilled == 'function' ? onFulfilled : true;
+      reaction.fail = typeof onRejected == 'function' && onRejected;
+      reaction.domain = isNode ? process.domain : undefined;
+      this._c.push(reaction);
+      if (this._a) this._a.push(reaction);
+      if (this._s) notify(this, false);
+      return reaction.promise;
+    },
+    // 25.4.5.1 Promise.prototype.catch(onRejected)
+    'catch': function (onRejected) {
+      return this.then(undefined, onRejected);
+    }
+  });
+  OwnPromiseCapability = function () {
+    var promise = new Internal();
+    this.promise = promise;
+    this.resolve = ctx($resolve, promise, 1);
+    this.reject = ctx($reject, promise, 1);
+  };
+  newPromiseCapabilityModule.f = newPromiseCapability = function (C) {
+    return C === $Promise || C === Wrapper
+      ? new OwnPromiseCapability(C)
+      : newGenericPromiseCapability(C);
+  };
+}
+
+$export($export.G + $export.W + $export.F * !USE_NATIVE, { Promise: $Promise });
+require('./_set-to-string-tag')($Promise, PROMISE);
+require('./_set-species')(PROMISE);
+Wrapper = require('./_core')[PROMISE];
+
+// statics
+$export($export.S + $export.F * !USE_NATIVE, PROMISE, {
+  // 25.4.4.5 Promise.reject(r)
+  reject: function reject(r) {
+    var capability = newPromiseCapability(this);
+    var $$reject = capability.reject;
+    $$reject(r);
+    return capability.promise;
+  }
+});
+$export($export.S + $export.F * (LIBRARY || !USE_NATIVE), PROMISE, {
+  // 25.4.4.6 Promise.resolve(x)
+  resolve: function resolve(x) {
+    return promiseResolve(LIBRARY && this === Wrapper ? $Promise : this, x);
+  }
+});
+$export($export.S + $export.F * !(USE_NATIVE && require('./_iter-detect')(function (iter) {
+  $Promise.all(iter)['catch'](empty);
+})), PROMISE, {
+  // 25.4.4.1 Promise.all(iterable)
+  all: function all(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var resolve = capability.resolve;
+    var reject = capability.reject;
+    var result = perform(function () {
+      var values = [];
+      var index = 0;
+      var remaining = 1;
+      forOf(iterable, false, function (promise) {
+        var $index = index++;
+        var alreadyCalled = false;
+        values.push(undefined);
+        remaining++;
+        C.resolve(promise).then(function (value) {
+          if (alreadyCalled) return;
+          alreadyCalled = true;
+          values[$index] = value;
+          --remaining || resolve(values);
+        }, reject);
+      });
+      --remaining || resolve(values);
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  },
+  // 25.4.4.4 Promise.race(iterable)
+  race: function race(iterable) {
+    var C = this;
+    var capability = newPromiseCapability(C);
+    var reject = capability.reject;
+    var result = perform(function () {
+      forOf(iterable, false, function (promise) {
+        C.resolve(promise).then(capability.resolve, reject);
+      });
+    });
+    if (result.e) reject(result.v);
+    return capability.promise;
+  }
+});
+
+},{"./_a-function":21,"./_an-instance":23,"./_classof":26,"./_core":28,"./_ctx":29,"./_export":34,"./_for-of":36,"./_global":37,"./_is-object":45,"./_iter-detect":49,"./_library":52,"./_microtask":54,"./_new-promise-capability":55,"./_perform":63,"./_promise-resolve":64,"./_redefine-all":66,"./_set-species":68,"./_set-to-string-tag":69,"./_species-constructor":72,"./_task":74,"./_user-agent":82,"./_wks":83}],93:[function(require,module,exports){
+'use strict';
+var $at = require('./_string-at')(true);
+
+// 21.1.3.27 String.prototype[@@iterator]()
+require('./_iter-define')(String, 'String', function (iterated) {
+  this._t = String(iterated); // target
+  this._i = 0;                // next index
+// 21.1.5.2.1 %StringIteratorPrototype%.next()
+}, function () {
+  var O = this._t;
+  var index = this._i;
+  var point;
+  if (index >= O.length) return { value: undefined, done: true };
+  point = $at(O, index);
+  this._i += point.length;
+  return { value: point, done: false };
+});
+
+},{"./_iter-define":48,"./_string-at":73}],94:[function(require,module,exports){
+// https://github.com/tc39/proposal-promise-finally
+'use strict';
+var $export = require('./_export');
+var core = require('./_core');
+var global = require('./_global');
+var speciesConstructor = require('./_species-constructor');
+var promiseResolve = require('./_promise-resolve');
+
+$export($export.P + $export.R, 'Promise', { 'finally': function (onFinally) {
+  var C = speciesConstructor(this, core.Promise || global.Promise);
+  var isFunction = typeof onFinally == 'function';
+  return this.then(
+    isFunction ? function (x) {
+      return promiseResolve(C, onFinally()).then(function () { return x; });
+    } : onFinally,
+    isFunction ? function (e) {
+      return promiseResolve(C, onFinally()).then(function () { throw e; });
+    } : onFinally
+  );
+} });
+
+},{"./_core":28,"./_export":34,"./_global":37,"./_promise-resolve":64,"./_species-constructor":72}],95:[function(require,module,exports){
+'use strict';
+// https://github.com/tc39/proposal-promise-try
+var $export = require('./_export');
+var newPromiseCapability = require('./_new-promise-capability');
+var perform = require('./_perform');
+
+$export($export.S, 'Promise', { 'try': function (callbackfn) {
+  var promiseCapability = newPromiseCapability.f(this);
+  var result = perform(callbackfn);
+  (result.e ? promiseCapability.reject : promiseCapability.resolve)(result.v);
+  return promiseCapability.promise;
+} });
+
+},{"./_export":34,"./_new-promise-capability":55,"./_perform":63}],96:[function(require,module,exports){
+require('./es6.array.iterator');
+var global = require('./_global');
+var hide = require('./_hide');
+var Iterators = require('./_iterators');
+var TO_STRING_TAG = require('./_wks')('toStringTag');
+
+var DOMIterables = ('CSSRuleList,CSSStyleDeclaration,CSSValueList,ClientRectList,DOMRectList,DOMStringList,' +
+  'DOMTokenList,DataTransferItemList,FileList,HTMLAllCollection,HTMLCollection,HTMLFormElement,HTMLSelectElement,' +
+  'MediaList,MimeTypeArray,NamedNodeMap,NodeList,PaintRequestList,Plugin,PluginArray,SVGLengthList,SVGNumberList,' +
+  'SVGPathSegList,SVGPointList,SVGStringList,SVGTransformList,SourceBufferList,StyleSheetList,TextTrackCueList,' +
+  'TextTrackList,TouchList').split(',');
+
+for (var i = 0; i < DOMIterables.length; i++) {
+  var NAME = DOMIterables[i];
+  var Collection = global[NAME];
+  var proto = Collection && Collection.prototype;
+  if (proto && !proto[TO_STRING_TAG]) hide(proto, TO_STRING_TAG, NAME);
+  Iterators[NAME] = Iterators.Array;
+}
+
+},{"./_global":37,"./_hide":39,"./_iterators":51,"./_wks":83,"./es6.array.iterator":87}],97:[function(require,module,exports){
 'use strict';
 var request = require('./request');
 var buildQueryObject = require('./buildQueryObject');
@@ -737,7 +2462,7 @@ XMLHttpSource['default'] = XMLHttpSource;
 // commonjs
 module.exports = XMLHttpSource;
 
-},{"./buildQueryObject":8,"./request":11}],8:[function(require,module,exports){
+},{"./buildQueryObject":98,"./request":101}],98:[function(require,module,exports){
 'use strict';
 module.exports = function buildQueryObject(url, method, queryData) {
   var qData = [];
@@ -766,7 +2491,7 @@ module.exports = function buildQueryObject(url, method, queryData) {
   return data;
 };
 
-},{}],9:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 (function (global){
 'use strict';
 // Get CORS support even for older IE
@@ -782,7 +2507,7 @@ module.exports = function getCORSRequest() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],10:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 (function (global){
 'use strict';
 module.exports = function getXMLHttpRequest() {
@@ -810,7 +2535,7 @@ module.exports = function getXMLHttpRequest() {
 };
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],11:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 var getXMLHttpRequest = require('./getXMLHttpRequest');
 var getCORSRequest = require('./getCORSRequest');
@@ -1033,7 +2758,1247 @@ function onXhrError(observer, xhr, status, e) {
 
 module.exports = request;
 
-},{"./getCORSRequest":9,"./getXMLHttpRequest":10}],12:[function(require,module,exports){
+},{"./getCORSRequest":99,"./getXMLHttpRequest":100}],102:[function(require,module,exports){
+var pathSyntax = require("falcor-path-syntax");
+
+function sentinel(type, value, props) {
+    var copy = Object.create(null);
+    if (props != null) {
+        for(var key in props) {
+            copy[key] = props[key];
+        }
+        
+        copy["$type"] = type;
+        copy.value = value;
+        return copy;
+    }
+    else {
+        return { $type: type, value: value };
+    }    
+}
+
+module.exports = {
+    ref: function ref(path, props) {
+        return sentinel("ref", pathSyntax.fromPath(path), props);
+    },
+    atom: function atom(value, props) {
+        return sentinel("atom", value, props);        
+    },
+    undefined: function() {
+        return sentinel("atom");
+    },    
+    error: function error(errorValue, props) {
+        return sentinel("error", errorValue, props);        
+    },
+    pathValue: function pathValue(path, value) {
+        return { path: pathSyntax.fromPath(path), value: value };
+    },
+    pathInvalidation: function pathInvalidation(path) {
+        return { path: pathSyntax.fromPath(path), invalidated: true };
+    }    
+};
+
+},{"falcor-path-syntax":106}],103:[function(require,module,exports){
+module.exports = {
+    integers: 'integers',
+    ranges: 'ranges',
+    keys: 'keys'
+};
+
+},{}],104:[function(require,module,exports){
+var TokenTypes = {
+    token: 'token',
+    dotSeparator: '.',
+    commaSeparator: ',',
+    openingBracket: '[',
+    closingBracket: ']',
+    openingBrace: '{',
+    closingBrace: '}',
+    escape: '\\',
+    space: ' ',
+    colon: ':',
+    quote: 'quote',
+    unknown: 'unknown'
+};
+
+module.exports = TokenTypes;
+
+},{}],105:[function(require,module,exports){
+module.exports = {
+    indexer: {
+        nested: 'Indexers cannot be nested.',
+        needQuotes: 'unquoted indexers must be numeric.',
+        empty: 'cannot have empty indexers.',
+        leadingDot: 'Indexers cannot have leading dots.',
+        leadingComma: 'Indexers cannot have leading comma.',
+        requiresComma: 'Indexers require commas between indexer args.',
+        routedTokens: 'Only one token can be used per indexer when specifying routed tokens.'
+    },
+    range: {
+        precedingNaN: 'ranges must be preceded by numbers.',
+        suceedingNaN: 'ranges must be suceeded by numbers.'
+    },
+    routed: {
+        invalid: 'Invalid routed token.  only integers|ranges|keys are supported.'
+    },
+    quote: {
+        empty: 'cannot have empty quoted keys.',
+        illegalEscape: 'Invalid escape character.  Only quotes are escapable.'
+    },
+    unexpectedToken: 'Unexpected token.',
+    invalidIdentifier: 'Invalid Identifier.',
+    invalidPath: 'Please provide a valid path.',
+    throwError: function(err, tokenizer, token) {
+        if (token) {
+            throw err + ' -- ' + tokenizer.parseString + ' with next token: ' + token;
+        }
+        throw err + ' -- ' + tokenizer.parseString;
+    }
+};
+
+
+},{}],106:[function(require,module,exports){
+var Tokenizer = require('./tokenizer');
+var head = require('./parse-tree/head');
+var RoutedTokens = require('./RoutedTokens');
+
+var parser = function parser(string, extendedRules) {
+    return head(new Tokenizer(string, extendedRules));
+};
+
+module.exports = parser;
+
+// Constructs the paths from paths / pathValues that have strings.
+// If it does not have a string, just moves the value into the return
+// results.
+parser.fromPathsOrPathValues = function(paths, ext) {
+    if (!paths) {
+        return [];
+    }
+
+    var out = [];
+    for (var i = 0, len = paths.length; i < len; i++) {
+
+        // Is the path a string
+        if (typeof paths[i] === 'string') {
+            out[i] = parser(paths[i], ext);
+        }
+
+        // is the path a path value with a string value.
+        else if (typeof paths[i].path === 'string') {
+            out[i] = {
+                path: parser(paths[i].path, ext), value: paths[i].value
+            };
+        }
+
+        // just copy it over.
+        else {
+            out[i] = paths[i];
+        }
+    }
+
+    return out;
+};
+
+// If the argument is a string, this with convert, else just return
+// the path provided.
+parser.fromPath = function(path, ext) {
+    if (!path) {
+        return [];
+    }
+
+    if (typeof path === 'string') {
+        return parser(path, ext);
+    }
+
+    return path;
+};
+
+// Potential routed tokens.
+parser.RoutedTokens = RoutedTokens;
+
+},{"./RoutedTokens":103,"./parse-tree/head":107,"./tokenizer":112}],107:[function(require,module,exports){
+var TokenTypes = require('./../TokenTypes');
+var E = require('./../exceptions');
+var indexer = require('./indexer');
+
+/**
+ * The top level of the parse tree.  This returns the generated path
+ * from the tokenizer.
+ */
+module.exports = function head(tokenizer) {
+    var token = tokenizer.next();
+    var state = {};
+    var out = [];
+
+    while (!token.done) {
+
+        switch (token.type) {
+            case TokenTypes.token:
+                var first = +token.token[0];
+                if (!isNaN(first)) {
+                    E.throwError(E.invalidIdentifier, tokenizer);
+                }
+                out[out.length] = token.token;
+                break;
+
+            // dotSeparators at the top level have no meaning
+            case TokenTypes.dotSeparator:
+                if (out.length === 0) {
+                    E.throwError(E.unexpectedToken, tokenizer);
+                }
+                break;
+
+            // Spaces do nothing.
+            case TokenTypes.space:
+                // NOTE: Spaces at the top level are allowed.
+                // titlesById  .summary is a valid path.
+                break;
+
+
+            // Its time to decend the parse tree.
+            case TokenTypes.openingBracket:
+                indexer(tokenizer, token, state, out);
+                break;
+
+            default:
+                E.throwError(E.unexpectedToken, tokenizer);
+                break;
+        }
+
+        // Keep cycling through the tokenizer.
+        token = tokenizer.next();
+    }
+
+    if (out.length === 0) {
+        E.throwError(E.invalidPath, tokenizer);
+    }
+
+    return out;
+};
+
+
+},{"./../TokenTypes":104,"./../exceptions":105,"./indexer":108}],108:[function(require,module,exports){
+var TokenTypes = require('./../TokenTypes');
+var E = require('./../exceptions');
+var idxE = E.indexer;
+var range = require('./range');
+var quote = require('./quote');
+var routed = require('./routed');
+
+/**
+ * The indexer is all the logic that happens in between
+ * the '[', opening bracket, and ']' closing bracket.
+ */
+module.exports = function indexer(tokenizer, openingToken, state, out) {
+    var token = tokenizer.next();
+    var done = false;
+    var allowedMaxLength = 1;
+    var routedIndexer = false;
+
+    // State variables
+    state.indexer = [];
+
+    while (!token.done) {
+
+        switch (token.type) {
+            case TokenTypes.token:
+            case TokenTypes.quote:
+
+                // ensures that token adders are properly delimited.
+                if (state.indexer.length === allowedMaxLength) {
+                    E.throwError(idxE.requiresComma, tokenizer);
+                }
+                break;
+        }
+
+        switch (token.type) {
+            // Extended syntax case
+            case TokenTypes.openingBrace:
+                routedIndexer = true;
+                routed(tokenizer, token, state, out);
+                break;
+
+
+            case TokenTypes.token:
+                var t = +token.token;
+                if (isNaN(t)) {
+                    E.throwError(idxE.needQuotes, tokenizer);
+                }
+                state.indexer[state.indexer.length] = t;
+                break;
+
+            // dotSeparators at the top level have no meaning
+            case TokenTypes.dotSeparator:
+                if (!state.indexer.length) {
+                    E.throwError(idxE.leadingDot, tokenizer);
+                }
+                range(tokenizer, token, state, out);
+                break;
+
+            // Spaces do nothing.
+            case TokenTypes.space:
+                break;
+
+            case TokenTypes.closingBracket:
+                done = true;
+                break;
+
+
+            // The quotes require their own tree due to what can be in it.
+            case TokenTypes.quote:
+                quote(tokenizer, token, state, out);
+                break;
+
+
+            // Its time to decend the parse tree.
+            case TokenTypes.openingBracket:
+                E.throwError(idxE.nested, tokenizer);
+                break;
+
+            case TokenTypes.commaSeparator:
+                ++allowedMaxLength;
+                break;
+
+            default:
+                E.throwError(E.unexpectedToken, tokenizer);
+                break;
+        }
+
+        // If done, leave loop
+        if (done) {
+            break;
+        }
+
+        // Keep cycling through the tokenizer.
+        token = tokenizer.next();
+    }
+
+    if (state.indexer.length === 0) {
+        E.throwError(idxE.empty, tokenizer);
+    }
+
+    if (state.indexer.length > 1 && routedIndexer) {
+        E.throwError(idxE.routedTokens, tokenizer);
+    }
+
+    // Remember, if an array of 1, keySets will be generated.
+    if (state.indexer.length === 1) {
+        state.indexer = state.indexer[0];
+    }
+
+    out[out.length] = state.indexer;
+
+    // Clean state.
+    state.indexer = undefined;
+};
+
+
+},{"./../TokenTypes":104,"./../exceptions":105,"./quote":109,"./range":110,"./routed":111}],109:[function(require,module,exports){
+var TokenTypes = require('./../TokenTypes');
+var E = require('./../exceptions');
+var quoteE = E.quote;
+
+/**
+ * quote is all the parse tree in between quotes.  This includes the only
+ * escaping logic.
+ *
+ * parse-tree:
+ * <opening-quote>(.|(<escape><opening-quote>))*<opening-quote>
+ */
+module.exports = function quote(tokenizer, openingToken, state, out) {
+    var token = tokenizer.next();
+    var innerToken = '';
+    var openingQuote = openingToken.token;
+    var escaping = false;
+    var done = false;
+
+    while (!token.done) {
+
+        switch (token.type) {
+            case TokenTypes.token:
+            case TokenTypes.space:
+
+            case TokenTypes.dotSeparator:
+            case TokenTypes.commaSeparator:
+
+            case TokenTypes.openingBracket:
+            case TokenTypes.closingBracket:
+            case TokenTypes.openingBrace:
+            case TokenTypes.closingBrace:
+                if (escaping) {
+                    E.throwError(quoteE.illegalEscape, tokenizer);
+                }
+
+                innerToken += token.token;
+                break;
+
+
+            case TokenTypes.quote:
+                // the simple case.  We are escaping
+                if (escaping) {
+                    innerToken += token.token;
+                    escaping = false;
+                }
+
+                // its not a quote that is the opening quote
+                else if (token.token !== openingQuote) {
+                    innerToken += token.token;
+                }
+
+                // last thing left.  Its a quote that is the opening quote
+                // therefore we must produce the inner token of the indexer.
+                else {
+                    done = true;
+                }
+
+                break;
+            case TokenTypes.escape:
+                escaping = true;
+                break;
+
+            default:
+                E.throwError(E.unexpectedToken, tokenizer);
+        }
+
+        // If done, leave loop
+        if (done) {
+            break;
+        }
+
+        // Keep cycling through the tokenizer.
+        token = tokenizer.next();
+    }
+
+    if (innerToken.length === 0) {
+        E.throwError(quoteE.empty, tokenizer);
+    }
+
+    state.indexer[state.indexer.length] = innerToken;
+};
+
+
+},{"./../TokenTypes":104,"./../exceptions":105}],110:[function(require,module,exports){
+var Tokenizer = require('./../tokenizer');
+var TokenTypes = require('./../TokenTypes');
+var E = require('./../exceptions');
+
+/**
+ * The indexer is all the logic that happens in between
+ * the '[', opening bracket, and ']' closing bracket.
+ */
+module.exports = function range(tokenizer, openingToken, state, out) {
+    var token = tokenizer.peek();
+    var dotCount = 1;
+    var done = false;
+    var inclusive = true;
+
+    // Grab the last token off the stack.  Must be an integer.
+    var idx = state.indexer.length - 1;
+    var from = Tokenizer.toNumber(state.indexer[idx]);
+    var to;
+
+    if (isNaN(from)) {
+        E.throwError(E.range.precedingNaN, tokenizer);
+    }
+
+    // Why is number checking so difficult in javascript.
+
+    while (!done && !token.done) {
+
+        switch (token.type) {
+
+            // dotSeparators at the top level have no meaning
+            case TokenTypes.dotSeparator:
+                if (dotCount === 3) {
+                    E.throwError(E.unexpectedToken, tokenizer);
+                }
+                ++dotCount;
+
+                if (dotCount === 3) {
+                    inclusive = false;
+                }
+                break;
+
+            case TokenTypes.token:
+                // move the tokenizer forward and save to.
+                to = Tokenizer.toNumber(tokenizer.next().token);
+
+                // throw potential error.
+                if (isNaN(to)) {
+                    E.throwError(E.range.suceedingNaN, tokenizer);
+                }
+
+                done = true;
+                break;
+
+            default:
+                done = true;
+                break;
+        }
+
+        // Keep cycling through the tokenizer.  But ranges have to peek
+        // before they go to the next token since there is no 'terminating'
+        // character.
+        if (!done) {
+            tokenizer.next();
+
+            // go to the next token without consuming.
+            token = tokenizer.peek();
+        }
+
+        // break and remove state information.
+        else {
+            break;
+        }
+    }
+
+    state.indexer[idx] = {from: from, to: inclusive ? to : to - 1};
+};
+
+
+},{"./../TokenTypes":104,"./../exceptions":105,"./../tokenizer":112}],111:[function(require,module,exports){
+var TokenTypes = require('./../TokenTypes');
+var RoutedTokens = require('./../RoutedTokens');
+var E = require('./../exceptions');
+var routedE = E.routed;
+
+/**
+ * The routing logic.
+ *
+ * parse-tree:
+ * <opening-brace><routed-token>(:<token>)<closing-brace>
+ */
+module.exports = function routed(tokenizer, openingToken, state, out) {
+    var routeToken = tokenizer.next();
+    var named = false;
+    var name = '';
+
+    // ensure the routed token is a valid ident.
+    switch (routeToken.token) {
+        case RoutedTokens.integers:
+        case RoutedTokens.ranges:
+        case RoutedTokens.keys:
+            //valid
+            break;
+        default:
+            E.throwError(routedE.invalid, tokenizer);
+            break;
+    }
+
+    // Now its time for colon or ending brace.
+    var next = tokenizer.next();
+
+    // we are parsing a named identifier.
+    if (next.type === TokenTypes.colon) {
+        named = true;
+
+        // Get the token name.
+        next = tokenizer.next();
+        if (next.type !== TokenTypes.token) {
+            E.throwError(routedE.invalid, tokenizer);
+        }
+        name = next.token;
+
+        // move to the closing brace.
+        next = tokenizer.next();
+    }
+
+    // must close with a brace.
+
+    if (next.type === TokenTypes.closingBrace) {
+        var outputToken = {
+            type: routeToken.token,
+            named: named,
+            name: name
+        };
+        state.indexer[state.indexer.length] = outputToken;
+    }
+
+    // closing brace expected
+    else {
+        E.throwError(routedE.invalid, tokenizer);
+    }
+
+};
+
+
+},{"./../RoutedTokens":103,"./../TokenTypes":104,"./../exceptions":105}],112:[function(require,module,exports){
+var TokenTypes = require('./../TokenTypes');
+var DOT_SEPARATOR = '.';
+var COMMA_SEPARATOR = ',';
+var OPENING_BRACKET = '[';
+var CLOSING_BRACKET = ']';
+var OPENING_BRACE = '{';
+var CLOSING_BRACE = '}';
+var COLON = ':';
+var ESCAPE = '\\';
+var DOUBLE_OUOTES = '"';
+var SINGE_OUOTES = "'";
+var SPACE = " ";
+var SPECIAL_CHARACTERS = '\\\'"[]., ';
+var EXT_SPECIAL_CHARACTERS = '\\{}\'"[]., :';
+
+var Tokenizer = module.exports = function(string, ext) {
+    this._string = string;
+    this._idx = -1;
+    this._extended = ext;
+    this.parseString = '';
+};
+
+Tokenizer.prototype = {
+    /**
+     * grabs the next token either from the peek operation or generates the
+     * next token.
+     */
+    next: function() {
+        var nextToken = this._nextToken ?
+            this._nextToken : getNext(this._string, this._idx, this._extended);
+
+        this._idx = nextToken.idx;
+        this._nextToken = false;
+        this.parseString += nextToken.token.token;
+
+        return nextToken.token;
+    },
+
+    /**
+     * will peak but not increment the tokenizer
+     */
+    peek: function() {
+        var nextToken = this._nextToken ?
+            this._nextToken : getNext(this._string, this._idx, this._extended);
+        this._nextToken = nextToken;
+
+        return nextToken.token;
+    }
+};
+
+Tokenizer.toNumber = function toNumber(x) {
+    if (!isNaN(+x)) {
+        return +x;
+    }
+    return NaN;
+};
+
+function toOutput(token, type, done) {
+    return {
+        token: token,
+        done: done,
+        type: type
+    };
+}
+
+function getNext(string, idx, ext) {
+    var output = false;
+    var token = '';
+    var specialChars = ext ?
+        EXT_SPECIAL_CHARACTERS : SPECIAL_CHARACTERS;
+    var done;
+
+    do {
+
+        done = idx + 1 >= string.length;
+        if (done) {
+            break;
+        }
+
+        // we have to peek at the next token
+        var character = string[idx + 1];
+
+        if (character !== undefined &&
+            specialChars.indexOf(character) === -1) {
+
+            token += character;
+            ++idx;
+            continue;
+        }
+
+        // The token to delimiting character transition.
+        else if (token.length) {
+            break;
+        }
+
+        ++idx;
+        var type;
+        switch (character) {
+            case DOT_SEPARATOR:
+                type = TokenTypes.dotSeparator;
+                break;
+            case COMMA_SEPARATOR:
+                type = TokenTypes.commaSeparator;
+                break;
+            case OPENING_BRACKET:
+                type = TokenTypes.openingBracket;
+                break;
+            case CLOSING_BRACKET:
+                type = TokenTypes.closingBracket;
+                break;
+            case OPENING_BRACE:
+                type = TokenTypes.openingBrace;
+                break;
+            case CLOSING_BRACE:
+                type = TokenTypes.closingBrace;
+                break;
+            case SPACE:
+                type = TokenTypes.space;
+                break;
+            case DOUBLE_OUOTES:
+            case SINGE_OUOTES:
+                type = TokenTypes.quote;
+                break;
+            case ESCAPE:
+                type = TokenTypes.escape;
+                break;
+            case COLON:
+                type = TokenTypes.colon;
+                break;
+            default:
+                type = TokenTypes.unknown;
+                break;
+        }
+        output = toOutput(character, type, false);
+        break;
+    } while (!done);
+
+    if (!output && token.length) {
+        output = toOutput(token, TokenTypes.token, false);
+    }
+
+    if (!output) {
+        output = {done: true};
+    }
+
+    return {
+        token: output,
+        idx: idx
+    };
+}
+
+
+
+},{"./../TokenTypes":104}],113:[function(require,module,exports){
+var toPaths = require('./toPaths');
+var toTree = require('./toTree');
+
+module.exports = function collapse(paths) {
+    var collapseMap = paths.
+        reduce(function(acc, path) {
+            var len = path.length;
+            if (!acc[len]) {
+                acc[len] = [];
+            }
+            acc[len].push(path);
+            return acc;
+        }, {});
+
+    Object.
+        keys(collapseMap).
+        forEach(function(collapseKey) {
+            collapseMap[collapseKey] = toTree(collapseMap[collapseKey]);
+        });
+
+    return toPaths(collapseMap);
+};
+
+},{"./toPaths":119,"./toTree":120}],114:[function(require,module,exports){
+var iterateKeySet = require('./iterateKeySet');
+
+/**
+ * Tests to see if the intersection should be stripped from the
+ * total paths.  The only way this happens currently is if the entirety
+ * of the path is contained in the tree.
+ * @private
+ */
+module.exports = function hasIntersection(tree, path, depth) {
+    var current = tree;
+    var intersects = true;
+
+    // Continue iteratively going down a path until a complex key is
+    // encountered, then recurse.
+    for (;intersects && depth < path.length; ++depth) {
+        var key = path[depth];
+        var keyType = typeof key;
+
+        // We have to iterate key set
+        if (key && keyType === 'object') {
+            var note = {};
+            var innerKey = iterateKeySet(key, note);
+            var nextDepth = depth + 1;
+
+            // Loop through the innerKeys setting the intersects flag
+            // to each result.  Break out on false.
+            do {
+                var next = current[innerKey];
+                intersects = next !== undefined;
+
+                if (intersects) {
+                    intersects = hasIntersection(next, path, nextDepth);
+                }
+                innerKey = iterateKeySet(key, note);
+            } while (intersects && !note.done);
+
+            // Since we recursed, we shall not pass any further!
+            break;
+        }
+
+        // Its a simple key, just move forward with the testing.
+        current = current[key];
+        intersects = current !== undefined;
+    }
+
+    return intersects;
+};
+
+},{"./iterateKeySet":116}],115:[function(require,module,exports){
+module.exports = {
+    iterateKeySet: require('./iterateKeySet'),
+    toTree: require('./toTree'),
+    toTreeWithUnion: require('./toTreeWithUnion'),
+    pathsComplementFromTree: require('./pathsComplementFromTree'),
+    pathsComplementFromLengthTree: require('./pathsComplementFromLengthTree'),
+    hasIntersection: require('./hasIntersection'),
+    toPaths: require('./toPaths'),
+    collapse: require('./collapse')
+};
+
+},{"./collapse":113,"./hasIntersection":114,"./iterateKeySet":116,"./pathsComplementFromLengthTree":117,"./pathsComplementFromTree":118,"./toPaths":119,"./toTree":120,"./toTreeWithUnion":121}],116:[function(require,module,exports){
+var isArray = Array.isArray;
+
+/**
+ * Takes in a keySet and a note attempts to iterate over it.
+ * If the value is a primitive, the key will be returned and the note will
+ * be marked done
+ * If the value is an object, then each value of the range will be returned
+ * and when finished the note will be marked done.
+ * If the value is an array, each value will be iterated over, if any of the
+ * inner values are ranges, those will be iterated over.  When fully done,
+ * the note will be marked done.
+ *
+ * @param {Object|Array|String|Number} keySet -
+ * @param {Object} note - The non filled note
+ * @returns {String|Number|undefined} - The current iteration value.
+ * If undefined, then the keySet is empty
+ * @public
+ */
+module.exports = function iterateKeySet(keySet, note) {
+    if (note.isArray === undefined) {
+        initializeNote(keySet, note);
+    }
+
+    // Array iteration
+    if (note.isArray) {
+        var nextValue;
+
+        // Cycle through the array and pluck out the next value.
+        do {
+            if (note.loaded && note.rangeOffset > note.to) {
+                ++note.arrayOffset;
+                note.loaded = false;
+            }
+
+            var idx = note.arrayOffset, length = keySet.length;
+            if (idx >= length) {
+                note.done = true;
+                break;
+            }
+
+            var el = keySet[note.arrayOffset];
+            var type = typeof el;
+
+            // Inner range iteration.
+            if (type === 'object') {
+                if (!note.loaded) {
+                    initializeRange(el, note);
+                }
+
+                // Empty to/from
+                if (note.empty) {
+                    continue;
+                }
+
+                nextValue = note.rangeOffset++;
+            }
+
+            // Primitive iteration in array.
+            else {
+                ++note.arrayOffset;
+                nextValue = el;
+            }
+        } while (nextValue === undefined);
+
+        return nextValue;
+    }
+
+    // Range iteration
+    else if (note.isObject) {
+        if (!note.loaded) {
+            initializeRange(keySet, note);
+        }
+        if (note.rangeOffset > note.to) {
+            note.done = true;
+            return undefined;
+        }
+
+        return note.rangeOffset++;
+    }
+
+    // Primitive value
+    else {
+        note.done = true;
+        return keySet;
+    }
+};
+
+function initializeRange(key, memo) {
+    var from = memo.from = key.from || 0;
+    var to = memo.to = key.to ||
+        (typeof key.length === 'number' &&
+        memo.from + key.length - 1 || 0);
+    memo.rangeOffset = memo.from;
+    memo.loaded = true;
+    if (from > to) {
+        memo.empty = true;
+    }
+}
+
+function initializeNote(key, note) {
+    note.done = false;
+    var isObject = note.isObject = !!(key && typeof key === 'object');
+    note.isArray = isObject && isArray(key);
+    note.arrayOffset = 0;
+}
+
+},{}],117:[function(require,module,exports){
+var hasIntersection = require('./hasIntersection');
+
+/**
+ * Compares the paths passed in with the tree.  Any of the paths that are in
+ * the tree will be stripped from the paths.
+ *
+ * **Does not mutate** the incoming paths object.
+ * **Proper subset** only matching.
+ *
+ * @param {Array} paths - A list of paths (complex or simple) to strip the
+ * intersection
+ * @param {Object} tree -
+ * @public
+ */
+module.exports = function pathsComplementFromLengthTree(paths, tree) {
+    var out = [];
+    var outLength = -1;
+
+    for (var i = 0, len = paths.length; i < len; ++i) {
+        // If this does not intersect then add it to the output.
+        var path = paths[i];
+        if (!hasIntersection(tree[path.length], path, 0)) {
+            out[++outLength] = path;
+        }
+    }
+    return out;
+};
+
+
+},{"./hasIntersection":114}],118:[function(require,module,exports){
+var hasIntersection = require('./hasIntersection');
+
+/**
+ * Compares the paths passed in with the tree.  Any of the paths that are in
+ * the tree will be stripped from the paths.
+ *
+ * **Does not mutate** the incoming paths object.
+ * **Proper subset** only matching.
+ *
+ * @param {Array} paths - A list of paths (complex or simple) to strip the
+ * intersection
+ * @param {Object} tree -
+ * @public
+ */
+module.exports = function pathsComplementFromTree(paths, tree) {
+    var out = [];
+    var outLength = -1;
+
+    for (var i = 0, len = paths.length; i < len; ++i) {
+        // If this does not intersect then add it to the output.
+        if (!hasIntersection(tree, paths[i], 0)) {
+            out[++outLength] = paths[i];
+        }
+    }
+    return out;
+};
+
+
+},{"./hasIntersection":114}],119:[function(require,module,exports){
+var isArray = Array.isArray;
+var typeOfObject = "object";
+
+/* jshint forin: false */
+module.exports = function toPaths(lengths) {
+    var pathmap;
+    var allPaths = [];
+    var allPathsLength = 0;
+    for (var length in lengths) {
+        if (isNumber(length) && isObject(pathmap = lengths[length])) {
+            var paths = collapsePathMap(pathmap, 0, parseInt(length, 10)).sets;
+            var pathsIndex = -1;
+            var pathsCount = paths.length;
+            while (++pathsIndex < pathsCount) {
+                allPaths[allPathsLength++] = collapsePathSetIndexes(paths[pathsIndex]);
+            }
+        }
+    }
+    return allPaths;
+};
+
+function isObject(value) {
+    return value !== null && typeof value === typeOfObject;
+}
+
+function collapsePathMap(pathmap, depth, length) {
+
+    var key;
+    var code = getHashCode(String(depth));
+    var subs = Object.create(null);
+
+    var codes = [];
+    var codesIndex = -1;
+    var codesCount = 0;
+
+    var pathsets = [];
+    var pathsetsCount = 0;
+
+    var subPath, subCode,
+        subKeys, subKeysIndex, subKeysCount,
+        subSets, subSetsIndex, subSetsCount,
+        pathset, pathsetIndex, pathsetCount,
+        firstSubKey, pathsetClone;
+
+    subKeys = [];
+    subKeysIndex = -1;
+
+    if (depth < length - 1) {
+
+        subKeysCount = getSortedKeys(pathmap, subKeys);
+
+        while (++subKeysIndex < subKeysCount) {
+            key = subKeys[subKeysIndex];
+            subPath = collapsePathMap(pathmap[key], depth + 1, length);
+            subCode = subPath.code;
+            if(subs[subCode]) {
+                subPath = subs[subCode];
+            } else {
+                codes[codesCount++] = subCode;
+                subPath = subs[subCode] = {
+                    keys: [],
+                    sets: subPath.sets
+                };
+            }
+            code = getHashCode(code + key + subCode);
+
+            isNumber(key) &&
+                subPath.keys.push(parseInt(key, 10)) ||
+                subPath.keys.push(key);
+        }
+
+        while(++codesIndex < codesCount) {
+
+            key = codes[codesIndex];
+            subPath = subs[key];
+            subKeys = subPath.keys;
+            subKeysCount = subKeys.length;
+
+            if (subKeysCount > 0) {
+
+                subSets = subPath.sets;
+                subSetsIndex = -1;
+                subSetsCount = subSets.length;
+                firstSubKey = subKeys[0];
+
+                while (++subSetsIndex < subSetsCount) {
+
+                    pathset = subSets[subSetsIndex];
+                    pathsetIndex = -1;
+                    pathsetCount = pathset.length;
+                    pathsetClone = new Array(pathsetCount + 1);
+                    pathsetClone[0] = subKeysCount > 1 && subKeys || firstSubKey;
+
+                    while (++pathsetIndex < pathsetCount) {
+                        pathsetClone[pathsetIndex + 1] = pathset[pathsetIndex];
+                    }
+
+                    pathsets[pathsetsCount++] = pathsetClone;
+                }
+            }
+        }
+    } else {
+        subKeysCount = getSortedKeys(pathmap, subKeys);
+        if (subKeysCount > 1) {
+            pathsets[pathsetsCount++] = [subKeys];
+        } else {
+            pathsets[pathsetsCount++] = subKeys;
+        }
+        while (++subKeysIndex < subKeysCount) {
+            code = getHashCode(code + subKeys[subKeysIndex]);
+        }
+    }
+
+    return {
+        code: code,
+        sets: pathsets
+    };
+}
+
+function collapsePathSetIndexes(pathset) {
+
+    var keysetIndex = -1;
+    var keysetCount = pathset.length;
+
+    while (++keysetIndex < keysetCount) {
+        var keyset = pathset[keysetIndex];
+        if (isArray(keyset)) {
+            pathset[keysetIndex] = collapseIndex(keyset);
+        }
+    }
+
+    return pathset;
+}
+
+/**
+ * Collapse range indexers, e.g. when there is a continuous
+ * range in an array, turn it into an object instead:
+ *
+ * [1,2,3,4,5,6] => {"from":1, "to":6}
+ *
+ * @private
+ */
+function collapseIndex(keyset) {
+
+    // Do we need to dedupe an indexer keyset if they're duplicate consecutive integers?
+    // var hash = {};
+    var keyIndex = -1;
+    var keyCount = keyset.length - 1;
+    var isSparseRange = keyCount > 0;
+
+    while (++keyIndex <= keyCount) {
+
+        var key = keyset[keyIndex];
+
+        if (!isNumber(key) /* || hash[key] === true*/ ) {
+            isSparseRange = false;
+            break;
+        }
+        // hash[key] = true;
+        // Cast number indexes to integers.
+        keyset[keyIndex] = parseInt(key, 10);
+    }
+
+    if (isSparseRange === true) {
+
+        keyset.sort(sortListAscending);
+
+        var from = keyset[0];
+        var to = keyset[keyCount];
+
+        // If we re-introduce deduped integer indexers, change this comparson to "===".
+        if (to - from <= keyCount) {
+            return {
+                from: from,
+                to: to
+            };
+        }
+    }
+
+    return keyset;
+}
+
+function sortListAscending(a, b) {
+    return a - b;
+}
+
+/* jshint forin: false */
+function getSortedKeys(map, keys, sort) {
+    var len = 0;
+    for (var key in map) {
+        keys[len++] = key;
+    }
+    if (len > 1) {
+        keys.sort(sort);
+    }
+    return len;
+}
+
+function getHashCode(key) {
+    var code = 5381;
+    var index = -1;
+    var count = key.length;
+    while (++index < count) {
+        code = (code << 5) + code + key.charCodeAt(index);
+    }
+    return String(code);
+}
+
+/**
+ * Return true if argument is a number or can be cast to a number
+ * @private
+ */
+function isNumber(val) {
+    // parseFloat NaNs numeric-cast false positives (null|true|false|"")
+    // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
+    // subtraction forces infinities to NaN
+    // adding 1 corrects loss of precision from parseFloat (#15100)
+    return !isArray(val) && (val - parseFloat(val) + 1) >= 0;
+}
+
+
+},{}],120:[function(require,module,exports){
+var iterateKeySet = require('./../lib/iterateKeySet');
+var isArray = Array.isArray;
+
+/**
+ * @param {Array} paths -
+ * @returns {Object} -
+ */
+module.exports = function toTree(paths) {
+    return paths.reduce(function(acc, path) {
+        innerToTree(acc, path, 0);
+        return acc;
+    }, {});
+};
+
+function innerToTree(seed, path, depth) {
+
+    var keySet = path[depth];
+    var iteratorNote = {};
+    var key;
+    var nextDepth = depth + 1;
+
+    key = iterateKeySet(keySet, iteratorNote);
+
+    do {
+
+        var next = seed[key];
+        if (!next) {
+            if (nextDepth === path.length) {
+                seed[key] = null;
+            } else {
+                next = seed[key] = {};
+            }
+        }
+
+        if (nextDepth < path.length) {
+            innerToTree(next, path, nextDepth);
+        }
+
+        if (!iteratorNote.done) {
+            key = iterateKeySet(keySet, iteratorNote);
+        }
+    } while (!iteratorNote.done);
+}
+
+
+},{"./../lib/iterateKeySet":116}],121:[function(require,module,exports){
+arguments[4][91][0].apply(exports,arguments)
+},{"dup":91}],122:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1072,7 +4037,7 @@ function extractFromCache(obj, path) {
     return extractFromCache(obj[step], path, idx + 1, root);
   }
 }
-},{}],13:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1129,7 +4094,7 @@ var SyncModel = function (_Model) {
 }(_falcor.Model);
 
 module.exports = SyncModel;
-},{"./extract":12,"falcor":44}],14:[function(require,module,exports){
+},{"./extract":122,"falcor":154}],124:[function(require,module,exports){
 var ModelRoot = require("./ModelRoot");
 var ModelDataSourceAdapter = require("./ModelDataSourceAdapter");
 
@@ -1731,7 +4696,7 @@ Model.prototype._setCache = require("./set/setPathMaps");
 Model.prototype._invalidatePathValuesAsJSON = require("./invalidate/invalidatePathSets");
 Model.prototype._invalidatePathMapsAsJSON = require("./invalidate/invalidatePathMaps");
 
-},{"./ModelDataSourceAdapter":15,"./ModelRoot":16,"./deref":17,"./deref/sync":18,"./get":31,"./get/getBoundValue":25,"./get/getCache":26,"./get/getValue":28,"./get/getValueSync":29,"./get/getVersion":30,"./get/sync":36,"./invalidate/invalidatePathMaps":59,"./invalidate/invalidatePathSets":60,"./lru/collect":61,"./request/RequestQueueRx":67,"./response/CallResponse":73,"./response/InvalidateResponse":75,"./response/ModelResponse":76,"./response/SetResponse":77,"./response/get":83,"./response/get/getWithPaths":82,"./response/get/validInput":84,"./schedulers/ASAPScheduler":85,"./schedulers/ImmediateScheduler":86,"./schedulers/TimeoutScheduler":87,"./set/setJSONGraphs":88,"./set/setPathMaps":89,"./set/setPathValues":90,"./set/setValue":91,"./set/sync":92,"./support/array-clone":93,"./support/array-slice":96,"./support/getSize":100,"./support/isFunction":108,"./support/isJSONEnvelope":110,"./support/isJSONGraphEnvelope":111,"./support/isObject":112,"./support/isPrimitive":114,"./support/validateInput":128,"falcor-json-graph":137,"falcor-path-syntax":141}],15:[function(require,module,exports){
+},{"./ModelDataSourceAdapter":125,"./ModelRoot":126,"./deref":127,"./deref/sync":128,"./get":141,"./get/getBoundValue":135,"./get/getCache":136,"./get/getValue":138,"./get/getValueSync":139,"./get/getVersion":140,"./get/sync":146,"./invalidate/invalidatePathMaps":169,"./invalidate/invalidatePathSets":170,"./lru/collect":171,"./request/RequestQueueRx":177,"./response/CallResponse":183,"./response/InvalidateResponse":185,"./response/ModelResponse":186,"./response/SetResponse":187,"./response/get":193,"./response/get/getWithPaths":192,"./response/get/validInput":194,"./schedulers/ASAPScheduler":195,"./schedulers/ImmediateScheduler":196,"./schedulers/TimeoutScheduler":197,"./set/setJSONGraphs":198,"./set/setPathMaps":199,"./set/setPathValues":200,"./set/setValue":201,"./set/sync":202,"./support/array-clone":203,"./support/array-slice":206,"./support/getSize":210,"./support/isFunction":218,"./support/isJSONEnvelope":220,"./support/isJSONGraphEnvelope":221,"./support/isObject":222,"./support/isPrimitive":224,"./support/validateInput":238,"falcor-json-graph":102,"falcor-path-syntax":106}],125:[function(require,module,exports){
 function ModelDataSourceAdapter(model) {
     this._model = model._materialize().treatErrorsAsValues();
 }
@@ -1751,7 +4716,7 @@ ModelDataSourceAdapter.prototype.call = function call(path, args, suffixes, path
 
 module.exports = ModelDataSourceAdapter;
 
-},{}],16:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 var isFunction = require("./support/isFunction");
 var hasOwn = require("./support/hasOwn");
 var ImmediateScheduler = require("./schedulers/ImmediateScheduler");
@@ -1794,7 +4759,7 @@ ModelRoot.prototype.comparator = function comparator(cacheNode, messageNode) {
 
 module.exports = ModelRoot;
 
-},{"./schedulers/ImmediateScheduler":86,"./support/hasOwn":103,"./support/isFunction":108}],17:[function(require,module,exports){
+},{"./schedulers/ImmediateScheduler":196,"./support/hasOwn":213,"./support/isFunction":218}],127:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var pathSyntax = require("falcor-path-syntax");
 
@@ -1892,7 +4857,7 @@ function derefSync(model, boundPath) {
         Rx.Observable.return(value);
 }
 
-},{"falcor-path-syntax":141,"rx/dist/rx":165}],18:[function(require,module,exports){
+},{"falcor-path-syntax":106,"rx/dist/rx":255}],128:[function(require,module,exports){
 var pathSyntax = require("falcor-path-syntax");
 var getBoundValue = require("./../get/getBoundValue");
 var InvalidModelError = require("./../errors/InvalidModelError");
@@ -1926,7 +4891,7 @@ module.exports = function derefSync(boundPathArg) {
     return this._clone({ _path: path });
 };
 
-},{"./../errors/InvalidModelError":20,"./../get/getBoundValue":25,"./../types/atom":130,"falcor-path-syntax":141}],19:[function(require,module,exports){
+},{"./../errors/InvalidModelError":130,"./../get/getBoundValue":135,"./../types/atom":240,"falcor-path-syntax":106}],129:[function(require,module,exports){
 /**
  * When a bound model attempts to retrieve JSONGraph it should throw an
  * error.
@@ -1948,7 +4913,7 @@ BoundJSONGraphModelError.message =
 
 module.exports = BoundJSONGraphModelError;
 
-},{}],20:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 var NAME = "InvalidModelError";
 var MESSAGE = "The boundPath of the model is not valid since a value or error was found before the path end.";
 /**
@@ -1972,7 +4937,7 @@ InvalidModelError.message = MESSAGE;
 
 module.exports = InvalidModelError;
 
-},{}],21:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 var NAME = "InvalidSourceError";
 /**
  * InvalidSourceError happens when a dataSource syncronously throws
@@ -1997,7 +4962,7 @@ InvalidSourceError.is = function(e) {
 
 module.exports = InvalidSourceError;
 
-},{}],22:[function(require,module,exports){
+},{}],132:[function(require,module,exports){
 var NAME = "MaxRetryExceededError";
 /**
  * A request can only be retried up to a specified limit.  Once that
@@ -2020,7 +4985,7 @@ MaxRetryExceededError.is = function(e) {
 
 module.exports = MaxRetryExceededError;
 
-},{}],23:[function(require,module,exports){
+},{}],133:[function(require,module,exports){
 var hardLink = require("./../get/util/hardlink");
 var createHardlink = hardLink.create;
 var onValue = require("./../get/onValue");
@@ -2113,7 +5078,7 @@ function followReference(model, root, nodeArg, referenceContainerArg,
 
 module.exports = followReference;
 
-},{"./../get/onValue":34,"./../get/util/hardlink":38,"./../get/util/isExpired":39,"./../get/util/lru":41,"./../internal/context":45,"./../types/ref":132}],24:[function(require,module,exports){
+},{"./../get/onValue":144,"./../get/util/hardlink":148,"./../get/util/isExpired":149,"./../get/util/lru":151,"./../internal/context":155,"./../types/ref":242}],134:[function(require,module,exports){
 var getCachePosition = require("./../get/getCachePosition");
 var InvalidModelError = require("./../errors/InvalidModelError");
 var BoundJSONGraphModelError = require("./../errors/BoundJSONGraphModelError");
@@ -2175,7 +5140,7 @@ module.exports = function get(walk, isJSONG) {
     };
 };
 
-},{"./../errors/BoundJSONGraphModelError":19,"./../errors/InvalidModelError":20,"./../get/getCachePosition":27}],25:[function(require,module,exports){
+},{"./../errors/BoundJSONGraphModelError":129,"./../errors/InvalidModelError":130,"./../get/getCachePosition":137}],135:[function(require,module,exports){
 var getValueSync = require("./../get/getValueSync");
 var InvalidModelError = require("./../errors/InvalidModelError");
 
@@ -2221,7 +5186,7 @@ module.exports = function getBoundValue(model, pathArg, materialized) {
     };
 };
 
-},{"./../errors/InvalidModelError":20,"./../get/getValueSync":29}],26:[function(require,module,exports){
+},{"./../errors/InvalidModelError":130,"./../get/getValueSync":139}],136:[function(require,module,exports){
 var $modelCreated = require("./../internal/model-created");
 var isInternalKey = require("./../support/isInternalKey");
 
@@ -2295,7 +5260,7 @@ function _copyCache(node, out, fromKey) {
         });
 }
 
-},{"./../internal/model-created":49,"./../support/isInternalKey":109}],27:[function(require,module,exports){
+},{"./../internal/model-created":159,"./../support/isInternalKey":219}],137:[function(require,module,exports){
 /**
  * getCachePosition makes a fast walk to the bound value since all bound
  * paths are the most possible optimized path.
@@ -2321,7 +5286,7 @@ module.exports = function getCachePosition(model, path) {
     return currentCachePosition;
 };
 
-},{}],28:[function(require,module,exports){
+},{}],138:[function(require,module,exports){
 var ModelResponse = require("./../response/ModelResponse");
 var pathSyntax = require("falcor-path-syntax");
 
@@ -2358,7 +5323,7 @@ module.exports = function getValue(path) {
     });
 };
 
-},{"./../response/ModelResponse":76,"falcor-path-syntax":141}],29:[function(require,module,exports){
+},{"./../response/ModelResponse":186,"falcor-path-syntax":106}],139:[function(require,module,exports){
 var followReference = require("./../get/followReference");
 var clone = require("./../get/util/clone");
 var isExpired = require("./../get/util/isExpired");
@@ -2497,7 +5462,7 @@ module.exports = function getValueSync(model, simplePath, noClone) {
     };
 };
 
-},{"./../get/followReference":23,"./../get/util/clone":37,"./../get/util/isExpired":39,"./../get/util/lru":41,"./../types/atom":130,"./../types/error":131,"./../types/ref":132}],30:[function(require,module,exports){
+},{"./../get/followReference":133,"./../get/util/clone":147,"./../get/util/isExpired":149,"./../get/util/lru":151,"./../types/atom":240,"./../types/error":241,"./../types/ref":242}],140:[function(require,module,exports){
 var __version = require("./../internal/version");
 
 module.exports = function _getVersion(model, path) {
@@ -2511,7 +5476,7 @@ module.exports = function _getVersion(model, path) {
     return (version == null) ? -1 : version;
 };
 
-},{"./../internal/version":58}],31:[function(require,module,exports){
+},{"./../internal/version":168}],141:[function(require,module,exports){
 var get = require("./get");
 var walkPath = require("./walkPath");
 
@@ -2525,7 +5490,7 @@ module.exports = {
     getWithPathsAsJSONGraph: getWithPathsAsJSONGraph
 };
 
-},{"./../get/getBoundValue":25,"./../get/getValueSync":29,"./get":24,"./walkPath":43}],32:[function(require,module,exports){
+},{"./../get/getBoundValue":135,"./../get/getValueSync":139,"./get":134,"./walkPath":153}],142:[function(require,module,exports){
 var lru = require("./../get/util/lru");
 var clone = require("./../get/util/clone");
 var promote = lru.promote;
@@ -2547,7 +5512,7 @@ module.exports = function onError(model, node, depth,
     promote(model, node);
 };
 
-},{"./../get/util/clone":37,"./../get/util/lru":41}],33:[function(require,module,exports){
+},{"./../get/util/clone":147,"./../get/util/lru":151}],143:[function(require,module,exports){
 var support = require("./util/support");
 var fastCopy = support.fastCopy;
 
@@ -2583,7 +5548,7 @@ function concatAndInsertMissing(model, remainingPath, depth, requestedPath,
         optimizedPath.slice(0, optimizedLength).concat(remainingPath));
 }
 
-},{"./util/support":42}],34:[function(require,module,exports){
+},{"./util/support":152}],144:[function(require,module,exports){
 var lru = require("./util/lru");
 var clone = require("./util/clone");
 var promote = lru.promote;
@@ -2704,7 +5669,7 @@ module.exports = function onValue(model, node, seed, depth, outerResults,
     }
 };
 
-},{"./../internal/model-created":49,"./../types/atom":130,"./../types/error":131,"./../types/ref":132,"./util/clone":37,"./util/lru":41}],35:[function(require,module,exports){
+},{"./../internal/model-created":159,"./../types/atom":240,"./../types/error":241,"./../types/ref":242,"./util/clone":147,"./util/lru":151}],145:[function(require,module,exports){
 var isExpired = require("./util/isExpired");
 var hardLink = require("./util/hardlink");
 var lru = require("./util/lru");
@@ -2785,7 +5750,7 @@ module.exports = function onValueType(
 };
 
 
-},{"./../internal/invalidated":47,"./../types/error":131,"./onError":32,"./onMissing":33,"./onValue":34,"./util/hardlink":38,"./util/isExpired":39,"./util/isMaterialzed":40,"./util/lru":41}],36:[function(require,module,exports){
+},{"./../internal/invalidated":157,"./../types/error":241,"./onError":142,"./onMissing":143,"./onValue":144,"./util/hardlink":148,"./util/isExpired":149,"./util/isMaterialzed":150,"./util/lru":151}],146:[function(require,module,exports){
 var pathSyntax = require("falcor-path-syntax");
 
 module.exports = function getValueSync(pathArg) {
@@ -2799,7 +5764,7 @@ module.exports = function getValueSync(pathArg) {
     return this._syncCheck("getValueSync") && this._getValueSync(this, path).value;
 };
 
-},{"falcor-path-syntax":141}],37:[function(require,module,exports){
+},{"falcor-path-syntax":106}],147:[function(require,module,exports){
 // Copies the node
 var prefix = require("./../../internal/prefix");
 
@@ -2818,7 +5783,7 @@ module.exports = function clone(node) {
 };
 
 
-},{"./../../internal/prefix":52}],38:[function(require,module,exports){
+},{"./../../internal/prefix":162}],148:[function(require,module,exports){
 var __ref = require("./../../internal/ref");
 var __context = require("./../../internal/context");
 var __refIndex = require("./../../internal/ref-index");
@@ -2858,19 +5823,19 @@ module.exports = {
     remove: removeHardlink
 };
 
-},{"./../../internal/context":45,"./../../internal/ref":55,"./../../internal/ref-index":54,"./../../internal/refs-length":56}],39:[function(require,module,exports){
+},{"./../../internal/context":155,"./../../internal/ref":165,"./../../internal/ref-index":164,"./../../internal/refs-length":166}],149:[function(require,module,exports){
 var now = require("./../../support/now");
 module.exports = function isExpired(node) {
     var $expires = node.$expires === void 0 && -1 || node.$expires;
     return $expires !== -1 && $expires !== 1 && ($expires === 0 || $expires < now());
 };
 
-},{"./../../support/now":118}],40:[function(require,module,exports){
+},{"./../../support/now":228}],150:[function(require,module,exports){
 module.exports = function isMaterialized(model) {
     return model._materialized && !model._source;
 };
 
-},{}],41:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 var __head = require("./../../internal/head");
 var __tail = require("./../../internal/tail");
 var __next = require("./../../internal/next");
@@ -2933,7 +5898,7 @@ module.exports = {
     splice: lruSplice
 };
 
-},{"./../../internal/head":46,"./../../internal/invalidated":47,"./../../internal/next":50,"./../../internal/prev":53,"./../../internal/tail":57}],42:[function(require,module,exports){
+},{"./../../internal/head":156,"./../../internal/invalidated":157,"./../../internal/next":160,"./../../internal/prev":163,"./../../internal/tail":167}],152:[function(require,module,exports){
 function fastCopy(arr, iArg) {
     var a = [], len, j, i;
     for (j = 0, i = iArg || 0, len = arr.length; i < len; j++, i++) {
@@ -2974,7 +5939,7 @@ module.exports = {
     fastCopy: fastCopy
 };
 
-},{}],43:[function(require,module,exports){
+},{}],153:[function(require,module,exports){
 var followReference = require("./followReference");
 var onValueType = require("./onValueType");
 var isExpired = require("./util/isExpired");
@@ -3082,7 +6047,7 @@ module.exports = function walkPath(model, root, curr, path, depth, seed,
     } while (iteratorNote && !iteratorNote.done);
 };
 
-},{"./../types/ref":132,"./followReference":23,"./onValueType":35,"./util/isExpired":39,"./util/lru":41,"falcor-path-utils":150}],44:[function(require,module,exports){
+},{"./../types/ref":242,"./followReference":133,"./onValueType":145,"./util/isExpired":149,"./util/lru":151,"falcor-path-utils":115}],154:[function(require,module,exports){
 "use strict";
 
 function falcor(opts) {
@@ -3099,53 +6064,53 @@ module.exports = falcor;
 
 falcor.Model = require("./Model");
 
-},{"./Model":14,"promise":157}],45:[function(require,module,exports){
+},{"./Model":124,"promise":247}],155:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "context";
 
-},{"./../internal/prefix":52}],46:[function(require,module,exports){
+},{"./../internal/prefix":162}],156:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "head";
 
-},{"./../internal/prefix":52}],47:[function(require,module,exports){
+},{"./../internal/prefix":162}],157:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "invalidated";
 
-},{"./../internal/prefix":52}],48:[function(require,module,exports){
+},{"./../internal/prefix":162}],158:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "key";
 
-},{"./../internal/prefix":52}],49:[function(require,module,exports){
+},{"./../internal/prefix":162}],159:[function(require,module,exports){
 module.exports = "$modelCreated";
 
-},{}],50:[function(require,module,exports){
+},{}],160:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "next";
 
-},{"./../internal/prefix":52}],51:[function(require,module,exports){
+},{"./../internal/prefix":162}],161:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "parent";
 
-},{"./../internal/prefix":52}],52:[function(require,module,exports){
+},{"./../internal/prefix":162}],162:[function(require,module,exports){
 /**
  * http://en.wikipedia.org/wiki/Delimiter#ASCIIDelimitedText
  * record separator character.
  */
 module.exports = String.fromCharCode(30);
 
-},{}],53:[function(require,module,exports){
+},{}],163:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "prev";
 
-},{"./../internal/prefix":52}],54:[function(require,module,exports){
+},{"./../internal/prefix":162}],164:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "ref-index";
 
-},{"./../internal/prefix":52}],55:[function(require,module,exports){
+},{"./../internal/prefix":162}],165:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "ref";
 
-},{"./../internal/prefix":52}],56:[function(require,module,exports){
+},{"./../internal/prefix":162}],166:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "refs-length";
 
-},{"./../internal/prefix":52}],57:[function(require,module,exports){
+},{"./../internal/prefix":162}],167:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "tail";
 
-},{"./../internal/prefix":52}],58:[function(require,module,exports){
+},{"./../internal/prefix":162}],168:[function(require,module,exports){
 module.exports = require("./../internal/prefix") + "version";
 
-},{"./../internal/prefix":52}],59:[function(require,module,exports){
+},{"./../internal/prefix":162}],169:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __ref = require("./../internal/ref");
 var __prefix = require("./../internal/prefix");
@@ -3335,7 +6300,7 @@ function invalidateNode(
     return [node, parent];
 }
 
-},{"./../get/getBoundValue":25,"./../internal/context":45,"./../internal/key":48,"./../internal/parent":51,"./../internal/prefix":52,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56,"./../internal/version":58,"./../lru/promote":62,"./../support/expireNode":98,"./../support/getSize":100,"./../support/hasOwn":103,"./../support/incrementVersion":104,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isObject":112,"./../support/isPrimitive":114,"./../support/removeNodeAndDescendants":121,"./../support/updateNodeAncestors":127,"./../types/ref":132}],60:[function(require,module,exports){
+},{"./../get/getBoundValue":135,"./../internal/context":155,"./../internal/key":158,"./../internal/parent":161,"./../internal/prefix":162,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166,"./../internal/version":168,"./../lru/promote":172,"./../support/expireNode":208,"./../support/getSize":210,"./../support/hasOwn":213,"./../support/incrementVersion":214,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isObject":222,"./../support/isPrimitive":224,"./../support/removeNodeAndDescendants":231,"./../support/updateNodeAncestors":237,"./../types/ref":242}],170:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __ref = require("./../internal/ref");
 var __parent = require("./../internal/parent");
@@ -3521,7 +6486,7 @@ function invalidateNode(
     return [node, parent];
 }
 
-},{"./../get/getBoundValue":25,"./../internal/context":45,"./../internal/key":48,"./../internal/parent":51,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56,"./../internal/version":58,"./../lru/promote":62,"./../support/expireNode":98,"./../support/getSize":100,"./../support/incrementVersion":104,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isPrimitive":114,"./../support/removeNodeAndDescendants":121,"./../support/updateNodeAncestors":127,"./../types/ref":132,"falcor-path-utils":150}],61:[function(require,module,exports){
+},{"./../get/getBoundValue":135,"./../internal/context":155,"./../internal/key":158,"./../internal/parent":161,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166,"./../internal/version":168,"./../lru/promote":172,"./../support/expireNode":208,"./../support/getSize":210,"./../support/incrementVersion":214,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isPrimitive":224,"./../support/removeNodeAndDescendants":231,"./../support/updateNodeAncestors":237,"./../types/ref":242,"falcor-path-utils":115}],171:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __parent = require("./../internal/parent");
 
@@ -3581,7 +6546,7 @@ module.exports = function collect(lru, expired, totalArg, max, ratioArg, version
     }
 };
 
-},{"./../internal/head":46,"./../internal/key":48,"./../internal/next":50,"./../internal/parent":51,"./../internal/prev":53,"./../internal/tail":57,"./../support/removeNode":120,"./../support/updateNodeAncestors":127}],62:[function(require,module,exports){
+},{"./../internal/head":156,"./../internal/key":158,"./../internal/next":160,"./../internal/parent":161,"./../internal/prev":163,"./../internal/tail":167,"./../support/removeNode":230,"./../support/updateNodeAncestors":237}],172:[function(require,module,exports){
 var $expiresNever = require("./../values/expires-never");
 var __head = require("./../internal/head");
 var __tail = require("./../internal/tail");
@@ -3627,7 +6592,7 @@ module.exports = function lruPromote(root, node) {
     return node;
 };
 
-},{"./../internal/head":46,"./../internal/next":50,"./../internal/prev":53,"./../internal/tail":57,"./../support/isObject":112,"./../values/expires-never":133}],63:[function(require,module,exports){
+},{"./../internal/head":156,"./../internal/next":160,"./../internal/prev":163,"./../internal/tail":167,"./../support/isObject":222,"./../values/expires-never":243}],173:[function(require,module,exports){
 var __head = require("./../internal/head");
 var __tail = require("./../internal/tail");
 var __next = require("./../internal/next");
@@ -3660,7 +6625,7 @@ module.exports = function lruSplice(root, node) {
     head = tail = next = prev = void 0;
 };
 
-},{"./../internal/head":46,"./../internal/next":50,"./../internal/prev":53,"./../internal/tail":57}],64:[function(require,module,exports){
+},{"./../internal/head":156,"./../internal/next":160,"./../internal/prev":163,"./../internal/tail":167}],174:[function(require,module,exports){
 var complement = require("./complement");
 var flushGetRequest = require("./flushGetRequest");
 var REQUEST_ID = 0;
@@ -3891,7 +6856,7 @@ function flattenRequestedPaths(requested) {
 
 module.exports = GetRequestV2;
 
-},{"./../set/setJSONGraphs":88,"./../set/setPathValues":90,"./../types/error":131,"./RequestTypes":69,"./complement":71,"./flushGetRequest":72}],65:[function(require,module,exports){
+},{"./../set/setJSONGraphs":198,"./../set/setPathValues":200,"./../types/error":241,"./RequestTypes":179,"./complement":181,"./flushGetRequest":182}],175:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Observer = Rx.Observer;
 var Observable = Rx.Observable;
@@ -4067,7 +7032,7 @@ Request.prototype._subscribe = function _subscribe(observer) {
 
 module.exports = Request;
 
-},{"./../errors/InvalidSourceError":21,"falcor-path-utils":150,"rx/dist/rx":165}],66:[function(require,module,exports){
+},{"./../errors/InvalidSourceError":131,"falcor-path-utils":115,"rx/dist/rx":255}],176:[function(require,module,exports){
 
 var SetRequest = require("./../request/SetRequest");
 
@@ -4202,7 +7167,7 @@ RequestQueue.prototype.mergeJSONGraphs = function mergeJSONGraphs(aggregate, res
 
 module.exports = RequestQueue;
 
-},{"./../internal/prefix":52,"./../request/SetRequest":70,"./../support/getType":102,"./../support/isObject":112,"falcor-path-utils":150}],67:[function(require,module,exports){
+},{"./../internal/prefix":162,"./../request/SetRequest":180,"./../support/getType":212,"./../support/isObject":222,"falcor-path-utils":115}],177:[function(require,module,exports){
 var RequestQueue = require("./RequestQueue");
 var RequestQueueV2 = require("./RequestQueueV2");
 
@@ -4221,7 +7186,7 @@ RequestQueueRx.prototype.call = RequestQueue.prototype.call;
 
 module.exports = RequestQueueRx;
 
-},{"./RequestQueue":66,"./RequestQueueV2":68}],68:[function(require,module,exports){
+},{"./RequestQueue":176,"./RequestQueueV2":178}],178:[function(require,module,exports){
 var RequestTypes = require("./RequestTypes");
 var GetRequest = require("./GetRequestV2");
 
@@ -4360,12 +7325,12 @@ RequestQueueV2.prototype = {
 
 module.exports = RequestQueueV2;
 
-},{"./GetRequestV2":64,"./RequestTypes":69}],69:[function(require,module,exports){
+},{"./GetRequestV2":174,"./RequestTypes":179}],179:[function(require,module,exports){
 module.exports = {
     GetRequest: "GET"
 };
 
-},{}],70:[function(require,module,exports){
+},{}],180:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Observer = Rx.Observer;
 
@@ -4452,7 +7417,7 @@ SetRequest.prototype.getSourceObserver = function getSourceObserver(observer) {
 
 module.exports = SetRequest;
 
-},{"./../request/Request":65,"./../set/setJSONGraphs":88,"./../set/setPathValues":90,"./../support/array-map":95,"rx/dist/rx":165}],71:[function(require,module,exports){
+},{"./../request/Request":175,"./../set/setJSONGraphs":198,"./../set/setPathValues":200,"./../support/array-map":205,"rx/dist/rx":255}],181:[function(require,module,exports){
 var hasIntersection = require("falcor-path-utils").hasIntersection;
 var arraySlice = require("./../support/array-slice");
 
@@ -4504,7 +7469,7 @@ module.exports = function complement(requested, optimized, tree) {
     return [requestedIntersection, optimizedComplement, requestedComplement ];
 };
 
-},{"./../support/array-slice":96,"falcor-path-utils":150}],72:[function(require,module,exports){
+},{"./../support/array-slice":206,"falcor-path-utils":115}],182:[function(require,module,exports){
 var pathUtils = require("falcor-path-utils");
 var toTree = pathUtils.toTree;
 var toPaths = pathUtils.toPaths;
@@ -4585,7 +7550,7 @@ module.exports = function flushGetRequest(request, listOfPaths, callback) {
 };
 
 
-},{"falcor-path-utils":150}],73:[function(require,module,exports){
+},{"falcor-path-utils":115}],183:[function(require,module,exports){
 var Rx = require("rx/dist/rx") && require("rx/dist/rx.aggregates");
 var Observable = Rx.Observable;
 var CompositeDisposable = Rx.CompositeDisposable;
@@ -4836,7 +7801,7 @@ function subscribeToResponse(observer) {
 
 module.exports = CallResponse;
 
-},{"./../errors/InvalidSourceError":21,"./../response/ModelResponse":76,"./../types/ref":132,"falcor-path-syntax":141,"rx/dist/rx":165,"rx/dist/rx.aggregates":164}],74:[function(require,module,exports){
+},{"./../errors/InvalidSourceError":131,"./../response/ModelResponse":186,"./../types/ref":242,"falcor-path-syntax":106,"rx/dist/rx":255,"rx/dist/rx.aggregates":254}],184:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Observable = Rx.Observable;
 
@@ -4944,7 +7909,7 @@ IdempotentResponse.prototype.ensureCollect = function ensureCollect(model) {
 
 module.exports = IdempotentResponse;
 
-},{"./../internal/version":58,"./../lru/collect":61,"./../response/ModelResponse":76,"./../support/array-clone":93,"./../support/getSize":100,"./../support/isJSONEnvelope":110,"./../support/isJSONGraphEnvelope":111,"./../support/isPathValue":113,"falcor-path-syntax":141,"rx/dist/rx":165}],75:[function(require,module,exports){
+},{"./../internal/version":168,"./../lru/collect":171,"./../response/ModelResponse":186,"./../support/array-clone":203,"./../support/getSize":210,"./../support/isJSONEnvelope":220,"./../support/isJSONGraphEnvelope":221,"./../support/isPathValue":223,"falcor-path-syntax":106,"rx/dist/rx":255}],185:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Disposable = Rx.Disposable;
 
@@ -4989,7 +7954,7 @@ function subscribeToInvalidateResponse(observer) {
 
 module.exports = InvalidateResponse;
 
-},{"./../response/IdempotentResponse":74,"rx/dist/rx":165}],76:[function(require,module,exports){
+},{"./../response/IdempotentResponse":184,"rx/dist/rx":255}],186:[function(require,module,exports){
 var falcor = require("./../");
 
 var Rx = require("rx/dist/rx") && require("rx/dist/rx.aggregates");
@@ -5190,7 +8155,7 @@ function subscribeToResponse(observer) {
 
 module.exports = ModelResponse;
 
-},{"./../":44,"./../support/array-slice":96,"./../support/noop":117,"rx/dist/rx":165,"rx/dist/rx.aggregates":164}],77:[function(require,module,exports){
+},{"./../":154,"./../support/array-slice":206,"./../support/noop":227,"rx/dist/rx":255,"rx/dist/rx.aggregates":254}],187:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Observable = Rx.Observable;
 var Disposable = Rx.Disposable;
@@ -5350,7 +8315,7 @@ function pluckEnvelopePaths(jsonGraphEnvelope) {
 
 module.exports = SetResponse;
 
-},{"./../errors/InvalidSourceError":21,"./../response/IdempotentResponse":74,"./../support/array-flat-map":94,"./get/GetResponse":79,"rx/dist/rx":165}],78:[function(require,module,exports){
+},{"./../errors/InvalidSourceError":131,"./../response/IdempotentResponse":184,"./../support/array-flat-map":204,"./get/GetResponse":189,"rx/dist/rx":255}],188:[function(require,module,exports){
 /**
  * Will allow for state tracking of the current disposable.  Also fulfills the
  * disposable interface.
@@ -5390,7 +8355,7 @@ AssignableDisposable.prototype = {
 
 module.exports = AssignableDisposable;
 
-},{}],79:[function(require,module,exports){
+},{}],189:[function(require,module,exports){
 var ModelResponse = require("./../ModelResponse");
 var checkCacheAndReport = require("./checkCacheAndReport");
 var getRequestCycle = require("./getRequestCycle");
@@ -5464,7 +8429,7 @@ GetResponse.prototype._subscribe = function _subscribe(observer) {
                            observer, seed, errors, 1);
 };
 
-},{"./../ModelResponse":76,"./checkCacheAndReport":80,"./getRequestCycle":81,"rx/dist/rx":165}],80:[function(require,module,exports){
+},{"./../ModelResponse":186,"./checkCacheAndReport":190,"./getRequestCycle":191,"rx/dist/rx":255}],190:[function(require,module,exports){
 var gets = require("./../../get");
 var getWithPathsAsJSONGraph = gets.getWithPathsAsJSONGraph;
 var getWithPathsAsPathMap = gets.getWithPathsAsPathMap;
@@ -5547,7 +8512,7 @@ module.exports = function checkCacheAndReport(model, requestedPaths, observer,
     return results;
 };
 
-},{"./../../get":31}],81:[function(require,module,exports){
+},{"./../../get":141}],191:[function(require,module,exports){
 var checkCacheAndReport = require("./checkCacheAndReport");
 var MaxRetryExceededError = require("./../../errors/MaxRetryExceededError");
 var fastCat = require("./../../get/util/support").fastCat;
@@ -5637,7 +8602,7 @@ module.exports = function getRequestCycle(getResponse, model, results, observer,
     return disposable;
 };
 
-},{"./../../errors/MaxRetryExceededError":22,"./../../get/util/support":42,"./../../internal/version":58,"./../../lru/collect":61,"./../../support/getSize":100,"./AssignableDisposable":78,"./checkCacheAndReport":80}],82:[function(require,module,exports){
+},{"./../../errors/MaxRetryExceededError":132,"./../../get/util/support":152,"./../../internal/version":168,"./../../lru/collect":171,"./../../support/getSize":210,"./AssignableDisposable":188,"./checkCacheAndReport":190}],192:[function(require,module,exports){
 var GetResponse = require("./GetResponse");
 
 /**
@@ -5649,7 +8614,7 @@ module.exports = function getWithPaths(paths) {
     return new GetResponse(this, paths);
 };
 
-},{"./GetResponse":79}],83:[function(require,module,exports){
+},{"./GetResponse":189}],193:[function(require,module,exports){
 var pathSyntax = require("falcor-path-syntax");
 var ModelResponse = require("./../ModelResponse");
 var GET_VALID_INPUT = require("./validInput");
@@ -5675,13 +8640,13 @@ module.exports = function get() {
     return new GetResponse(this, paths);
 };
 
-},{"./../../support/validateInput":128,"./../ModelResponse":76,"./GetResponse":79,"./validInput":84,"falcor-path-syntax":141}],84:[function(require,module,exports){
+},{"./../../support/validateInput":238,"./../ModelResponse":186,"./GetResponse":189,"./validInput":194,"falcor-path-syntax":106}],194:[function(require,module,exports){
 module.exports = {
     path: true,
     pathSyntax: true
 };
 
-},{}],85:[function(require,module,exports){
+},{}],195:[function(require,module,exports){
 var asap = require("asap");
 var Rx = require("rx/dist/rx");
 var Disposable = Rx.Disposable;
@@ -5703,7 +8668,7 @@ ASAPScheduler.prototype.scheduleWithState = function scheduleWithState(state, ac
 
 module.exports = ASAPScheduler;
 
-},{"asap":135,"rx/dist/rx":165}],86:[function(require,module,exports){
+},{"asap":6,"rx/dist/rx":255}],196:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Disposable = Rx.Disposable;
 
@@ -5721,7 +8686,7 @@ ImmediateScheduler.prototype.scheduleWithState = function scheduleWithState(stat
 
 module.exports = ImmediateScheduler;
 
-},{"rx/dist/rx":165}],87:[function(require,module,exports){
+},{"rx/dist/rx":255}],197:[function(require,module,exports){
 var Rx = require("rx/dist/rx");
 var Disposable = Rx.Disposable;
 
@@ -5754,7 +8719,7 @@ TimeoutScheduler.prototype.scheduleWithState = function scheduleWithState(state,
 
 module.exports = TimeoutScheduler;
 
-},{"rx/dist/rx":165}],88:[function(require,module,exports){
+},{"rx/dist/rx":255}],198:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __ref = require("./../internal/ref");
 var __context = require("./../internal/context");
@@ -5986,7 +8951,7 @@ function setNode(
     return [node, parent, message, messageParent];
 }
 
-},{"./../internal/context":45,"./../internal/key":48,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56,"./../internal/version":58,"./../lru/promote":62,"./../support/expireNode":98,"./../support/incrementVersion":104,"./../support/isAlreadyExpired":106,"./../support/isFunction":108,"./../support/isPrimitive":114,"./../support/mergeJSONGraphNode":115,"./../types/ref":132,"falcor-path-utils":150}],89:[function(require,module,exports){
+},{"./../internal/context":155,"./../internal/key":158,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166,"./../internal/version":168,"./../lru/promote":172,"./../support/expireNode":208,"./../support/incrementVersion":214,"./../support/isAlreadyExpired":216,"./../support/isFunction":218,"./../support/isPrimitive":224,"./../support/mergeJSONGraphNode":225,"./../types/ref":242,"falcor-path-utils":115}],199:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __ref = require("./../internal/ref");
 var __prefix = require("./../internal/prefix");
@@ -6245,7 +9210,7 @@ function getKeys(pathMap) {
     return void 0;
 }
 
-},{"./../get/getBoundValue":25,"./../internal/context":45,"./../internal/key":48,"./../internal/parent":51,"./../internal/prefix":52,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56,"./../internal/version":58,"./../lru/promote":62,"./../support/expireNode":98,"./../support/hasOwn":103,"./../support/incrementVersion":104,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isObject":112,"./../support/isPrimitive":114,"./../support/mergeValueOrInsertBranch":116,"./../types/ref":132}],90:[function(require,module,exports){
+},{"./../get/getBoundValue":135,"./../internal/context":155,"./../internal/key":158,"./../internal/parent":161,"./../internal/prefix":162,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166,"./../internal/version":168,"./../lru/promote":172,"./../support/expireNode":208,"./../support/hasOwn":213,"./../support/incrementVersion":214,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isObject":222,"./../support/isPrimitive":224,"./../support/mergeValueOrInsertBranch":226,"./../types/ref":242}],200:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __ref = require("./../internal/ref");
 var __parent = require("./../internal/parent");
@@ -6477,7 +9442,7 @@ function setNode(
     return [node, parent];
 }
 
-},{"./../get/getBoundValue":25,"./../internal/context":45,"./../internal/key":48,"./../internal/parent":51,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56,"./../internal/version":58,"./../lru/promote":62,"./../support/expireNode":98,"./../support/incrementVersion":104,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isPrimitive":114,"./../support/mergeValueOrInsertBranch":116,"./../types/ref":132,"falcor-path-utils":150}],91:[function(require,module,exports){
+},{"./../get/getBoundValue":135,"./../internal/context":155,"./../internal/key":158,"./../internal/parent":161,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166,"./../internal/version":168,"./../lru/promote":172,"./../support/expireNode":208,"./../support/incrementVersion":214,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isPrimitive":224,"./../support/mergeValueOrInsertBranch":226,"./../types/ref":242,"falcor-path-utils":115}],201:[function(require,module,exports){
 var jsong = require("falcor-json-graph");
 var ModelResponse = require("./../response/ModelResponse");
 var isPathValue = require("./../support/isPathValue");
@@ -6515,7 +9480,7 @@ module.exports = function setValue(pathArg, valueArg) {
     });
 };
 
-},{"./../response/ModelResponse":76,"./../support/isPathValue":113,"falcor-json-graph":137}],92:[function(require,module,exports){
+},{"./../response/ModelResponse":186,"./../support/isPathValue":223,"falcor-json-graph":102}],202:[function(require,module,exports){
 var pathSyntax = require("falcor-path-syntax");
 var isPathValue = require("./../support/isPathValue");
 var setPathValues = require("./../set/setPathValues");
@@ -6556,7 +9521,7 @@ module.exports = function setValueSync(pathArg, valueArg, errorSelectorArg, comp
     }
 };
 
-},{"./../set/setPathValues":90,"./../support/isPathValue":113,"falcor-path-syntax":141}],93:[function(require,module,exports){
+},{"./../set/setPathValues":200,"./../support/isPathValue":223,"falcor-path-syntax":106}],203:[function(require,module,exports){
 module.exports = function arrayClone(array) {
     if (!array) {
         return array;
@@ -6570,7 +9535,7 @@ module.exports = function arrayClone(array) {
     return array2;
 };
 
-},{}],94:[function(require,module,exports){
+},{}],204:[function(require,module,exports){
 module.exports = function arrayFlatMap(array, selector) {
     var index = -1;
     var i = -1;
@@ -6587,7 +9552,7 @@ module.exports = function arrayFlatMap(array, selector) {
     return array2;
 };
 
-},{}],95:[function(require,module,exports){
+},{}],205:[function(require,module,exports){
 module.exports = function arrayMap(array, selector) {
     var i = -1;
     var n = array.length;
@@ -6598,7 +9563,7 @@ module.exports = function arrayMap(array, selector) {
     return array2;
 };
 
-},{}],96:[function(require,module,exports){
+},{}],206:[function(require,module,exports){
 module.exports = function arraySlice(array, indexArg, endArg) {
     var index = indexArg || 0;
     var i = -1;
@@ -6619,7 +9584,7 @@ module.exports = function arraySlice(array, indexArg, endArg) {
     return array2;
 };
 
-},{}],97:[function(require,module,exports){
+},{}],207:[function(require,module,exports){
 var prefix = require("./../internal/prefix");
 var hasOwn = require("./../support/hasOwn");
 var isArray = Array.isArray;
@@ -6640,7 +9605,7 @@ module.exports = function clone(value) {
     return dest;
 };
 
-},{"./../internal/prefix":52,"./../support/hasOwn":103,"./../support/isObject":112}],98:[function(require,module,exports){
+},{"./../internal/prefix":162,"./../support/hasOwn":213,"./../support/isObject":222}],208:[function(require,module,exports){
 var splice = require("./../lru/splice");
 var __invalidated = require("./../internal/invalidated");
 
@@ -6653,25 +9618,25 @@ module.exports = function expireNode(node, expired, lru) {
     return node;
 };
 
-},{"./../internal/invalidated":47,"./../lru/splice":63}],99:[function(require,module,exports){
+},{"./../internal/invalidated":157,"./../lru/splice":173}],209:[function(require,module,exports){
 var isObject = require("./isObject");
 module.exports = function getSize(node) {
     return isObject(node) && node.$expires || undefined;
 };
 
-},{"./isObject":112}],100:[function(require,module,exports){
+},{"./isObject":222}],210:[function(require,module,exports){
 var isObject = require("./../support/isObject");
 module.exports = function getSize(node) {
     return isObject(node) && node.$size || 0;
 };
 
-},{"./../support/isObject":112}],101:[function(require,module,exports){
+},{"./../support/isObject":222}],211:[function(require,module,exports){
 var isObject = require("./../support/isObject");
 module.exports = function getTimestamp(node) {
     return isObject(node) && node.$timestamp || undefined;
 };
 
-},{"./../support/isObject":112}],102:[function(require,module,exports){
+},{"./../support/isObject":222}],212:[function(require,module,exports){
 var isObject = require("./../support/isObject");
 
 module.exports = function getType(node, anyType) {
@@ -6682,7 +9647,7 @@ module.exports = function getType(node, anyType) {
     return type;
 };
 
-},{"./../support/isObject":112}],103:[function(require,module,exports){
+},{"./../support/isObject":222}],213:[function(require,module,exports){
 var isObject = require("./isObject");
 var hasOwn = Object.prototype.hasOwnProperty;
 
@@ -6690,13 +9655,13 @@ module.exports = function(obj, prop) {
   return isObject(obj) && hasOwn.call(obj, prop);
 };
 
-},{"./isObject":112}],104:[function(require,module,exports){
+},{"./isObject":222}],214:[function(require,module,exports){
 var version = 1;
 module.exports = function incrementVersion() {
     return version++;
 };
 
-},{}],105:[function(require,module,exports){
+},{}],215:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __parent = require("./../internal/parent");
 var __version = require("./../internal/version");
@@ -6709,7 +9674,7 @@ module.exports = function insertNode(node, parent, key, version) {
     return node;
 };
 
-},{"./../internal/key":48,"./../internal/parent":51,"./../internal/version":58}],106:[function(require,module,exports){
+},{"./../internal/key":158,"./../internal/parent":161,"./../internal/version":168}],216:[function(require,module,exports){
 var now = require("./../support/now");
 var $now = require("./../values/expires-now");
 var $never = require("./../values/expires-never");
@@ -6722,7 +9687,7 @@ module.exports = function isAlreadyExpired(node) {
         exp < now());
 };
 
-},{"./../support/now":118,"./../values/expires-never":133,"./../values/expires-now":134}],107:[function(require,module,exports){
+},{"./../support/now":228,"./../values/expires-never":243,"./../values/expires-now":244}],217:[function(require,module,exports){
 var now = require("./../support/now");
 var $now = require("../values/expires-now");
 var $never = require("../values/expires-never");
@@ -6734,14 +9699,14 @@ module.exports = function isExpired(node) {
         exp === $now || exp < now());
 };
 
-},{"../values/expires-never":133,"../values/expires-now":134,"./../support/now":118}],108:[function(require,module,exports){
+},{"../values/expires-never":243,"../values/expires-now":244,"./../support/now":228}],218:[function(require,module,exports){
 var functionTypeof = "function";
 
 module.exports = function isFunction(func) {
     return Boolean(func) && typeof func === functionTypeof;
 };
 
-},{}],109:[function(require,module,exports){
+},{}],219:[function(require,module,exports){
 var prefix = require("./../internal/prefix");
 
 /**
@@ -6755,14 +9720,14 @@ module.exports = function isInternalKey(x) {
     return (x === "$size") || (x && (x.charAt(0) === prefix));
 };
 
-},{"./../internal/prefix":52}],110:[function(require,module,exports){
+},{"./../internal/prefix":162}],220:[function(require,module,exports){
 var isObject = require("./../support/isObject");
 
 module.exports = function isJSONEnvelope(envelope) {
     return isObject(envelope) && ("json" in envelope);
 };
 
-},{"./../support/isObject":112}],111:[function(require,module,exports){
+},{"./../support/isObject":222}],221:[function(require,module,exports){
 var isArray = Array.isArray;
 var isObject = require("./../support/isObject");
 
@@ -6776,13 +9741,13 @@ module.exports = function isJSONGraphEnvelope(envelope) {
     );
 };
 
-},{"./../support/isObject":112}],112:[function(require,module,exports){
+},{"./../support/isObject":222}],222:[function(require,module,exports){
 var objTypeof = "object";
 module.exports = function isObject(value) {
     return value !== null && typeof value === objTypeof;
 };
 
-},{}],113:[function(require,module,exports){
+},{}],223:[function(require,module,exports){
 var isArray = Array.isArray;
 var isObject = require("./../support/isObject");
 
@@ -6793,13 +9758,13 @@ module.exports = function isPathValue(pathValue) {
         ));
 };
 
-},{"./../support/isObject":112}],114:[function(require,module,exports){
+},{"./../support/isObject":222}],224:[function(require,module,exports){
 var objTypeof = "object";
 module.exports = function isPrimitive(value) {
     return value == null || typeof value !== objTypeof;
 };
 
-},{}],115:[function(require,module,exports){
+},{}],225:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __parent = require("./../internal/parent");
 
@@ -7005,7 +9970,7 @@ module.exports = function mergeJSONGraphNode(
     return node;
 };
 
-},{"./../internal/key":48,"./../internal/parent":51,"./../lru/promote":62,"./../support/expireNode":98,"./../support/getSize":100,"./../support/getTimestamp":101,"./../support/insertNode":105,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isObject":112,"./../support/reconstructPath":119,"./../support/replaceNode":122,"./../support/updateNodeAncestors":127,"./../support/wrapNode":129,"./../types/error":131,"./../types/ref":132}],116:[function(require,module,exports){
+},{"./../internal/key":158,"./../internal/parent":161,"./../lru/promote":172,"./../support/expireNode":208,"./../support/getSize":210,"./../support/getTimestamp":211,"./../support/insertNode":215,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isObject":222,"./../support/reconstructPath":229,"./../support/replaceNode":232,"./../support/updateNodeAncestors":237,"./../support/wrapNode":239,"./../types/error":241,"./../types/ref":242}],226:[function(require,module,exports){
 var $ref = require("./../types/ref");
 var $error = require("./../types/error");
 var getType = require("./../support/getType");
@@ -7074,13 +10039,13 @@ module.exports = function mergeValueOrInsertBranch(
     return node;
 };
 
-},{"./../support/expireNode":98,"./../support/getSize":100,"./../support/getTimestamp":101,"./../support/getType":102,"./../support/insertNode":105,"./../support/isExpired":107,"./../support/isFunction":108,"./../support/isPrimitive":114,"./../support/reconstructPath":119,"./../support/replaceNode":122,"./../support/updateBackReferenceVersions":126,"./../support/updateNodeAncestors":127,"./../support/wrapNode":129,"./../types/error":131,"./../types/ref":132}],117:[function(require,module,exports){
+},{"./../support/expireNode":208,"./../support/getSize":210,"./../support/getTimestamp":211,"./../support/getType":212,"./../support/insertNode":215,"./../support/isExpired":217,"./../support/isFunction":218,"./../support/isPrimitive":224,"./../support/reconstructPath":229,"./../support/replaceNode":232,"./../support/updateBackReferenceVersions":236,"./../support/updateNodeAncestors":237,"./../support/wrapNode":239,"./../types/error":241,"./../types/ref":242}],227:[function(require,module,exports){
 module.exports = function noop() {};
 
-},{}],118:[function(require,module,exports){
+},{}],228:[function(require,module,exports){
 module.exports = Date.now;
 
-},{}],119:[function(require,module,exports){
+},{}],229:[function(require,module,exports){
 /**
  * Reconstructs the path for the current key, from currentPath (requestedPath)
  * state maintained during set/merge walk operations.
@@ -7102,7 +10067,7 @@ module.exports = function reconstructPath(currentPath, key) {
     return path;
 };
 
-},{}],120:[function(require,module,exports){
+},{}],230:[function(require,module,exports){
 var $ref = require("./../types/ref");
 var __parent = require("./../internal/parent");
 var splice = require("./../lru/splice");
@@ -7126,7 +10091,7 @@ module.exports = function removeNode(node, parent, key, lru) {
     return false;
 };
 
-},{"./../internal/parent":51,"./../lru/splice":63,"./../support/isObject":112,"./../support/unlinkBackReferences":124,"./../support/unlinkForwardReference":125,"./../types/ref":132}],121:[function(require,module,exports){
+},{"./../internal/parent":161,"./../lru/splice":173,"./../support/isObject":222,"./../support/unlinkBackReferences":234,"./../support/unlinkForwardReference":235,"./../types/ref":242}],231:[function(require,module,exports){
 var hasOwn = require("./../support/hasOwn");
 var prefix = require("./../internal/prefix");
 var removeNode = require("./../support/removeNode");
@@ -7145,7 +10110,7 @@ module.exports = function removeNodeAndDescendants(node, parent, key, lru) {
     return false;
 };
 
-},{"./../internal/prefix":52,"./../support/hasOwn":103,"./../support/removeNode":120}],122:[function(require,module,exports){
+},{"./../internal/prefix":162,"./../support/hasOwn":213,"./../support/removeNode":230}],232:[function(require,module,exports){
 var isObject = require("./../support/isObject");
 var transferBackReferences = require("./../support/transferBackReferences");
 var removeNodeAndDescendants = require("./../support/removeNodeAndDescendants");
@@ -7161,7 +10126,7 @@ module.exports = function replaceNode(node, replacement, parent, key, lru) {
     return replacement;
 };
 
-},{"./../support/isObject":112,"./../support/removeNodeAndDescendants":121,"./../support/transferBackReferences":123}],123:[function(require,module,exports){
+},{"./../support/isObject":222,"./../support/removeNodeAndDescendants":231,"./../support/transferBackReferences":233}],233:[function(require,module,exports){
 var __ref = require("./../internal/ref");
 var __context = require("./../internal/context");
 var __refsLength = require("./../internal/refs-length");
@@ -7183,7 +10148,7 @@ module.exports = function transferBackReferences(fromNode, destNode) {
     return destNode;
 };
 
-},{"./../internal/context":45,"./../internal/ref":55,"./../internal/refs-length":56}],124:[function(require,module,exports){
+},{"./../internal/context":155,"./../internal/ref":165,"./../internal/refs-length":166}],234:[function(require,module,exports){
 var __ref = require("./../internal/ref");
 var __context = require("./../internal/context");
 var __refIndex = require("./../internal/ref-index");
@@ -7201,7 +10166,7 @@ module.exports = function unlinkBackReferences(node) {
     return node;
 };
 
-},{"./../internal/context":45,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56}],125:[function(require,module,exports){
+},{"./../internal/context":155,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166}],235:[function(require,module,exports){
 var __ref = require("./../internal/ref");
 var __context = require("./../internal/context");
 var __refIndex = require("./../internal/ref-index");
@@ -7221,7 +10186,7 @@ module.exports = function unlinkForwardReference(reference) {
     return reference;
 };
 
-},{"./../internal/context":45,"./../internal/ref":55,"./../internal/ref-index":54,"./../internal/refs-length":56}],126:[function(require,module,exports){
+},{"./../internal/context":155,"./../internal/ref":165,"./../internal/ref-index":164,"./../internal/refs-length":166}],236:[function(require,module,exports){
 var __ref = require("./../internal/ref");
 var __parent = require("./../internal/parent");
 var __version = require("./../internal/version");
@@ -7245,7 +10210,7 @@ module.exports = function updateBackReferenceVersions(nodeArg, version) {
     return nodeArg;
 };
 
-},{"./../internal/parent":51,"./../internal/ref":55,"./../internal/refs-length":56,"./../internal/version":58}],127:[function(require,module,exports){
+},{"./../internal/parent":161,"./../internal/ref":165,"./../internal/refs-length":166,"./../internal/version":168}],237:[function(require,module,exports){
 var __key = require("./../internal/key");
 var __version = require("./../internal/version");
 var __parent = require("./../internal/parent");
@@ -7267,7 +10232,7 @@ module.exports = function updateNodeAncestors(nodeArg, offset, lru, version) {
     return nodeArg;
 };
 
-},{"./../internal/key":48,"./../internal/parent":51,"./../internal/version":58,"./../support/removeNode":120,"./../support/updateBackReferenceVersions":126}],128:[function(require,module,exports){
+},{"./../internal/key":158,"./../internal/parent":161,"./../internal/version":168,"./../support/removeNode":230,"./../support/updateBackReferenceVersions":236}],238:[function(require,module,exports){
 var isArray = Array.isArray;
 var isPathValue = require("./../support/isPathValue");
 var isJSONGraphEnvelope = require("./../support/isJSONGraphEnvelope");
@@ -7325,7 +10290,7 @@ module.exports = function validateInput(args, allowedInput, method) {
     return true;
 };
 
-},{"./../support/isJSONEnvelope":110,"./../support/isJSONGraphEnvelope":111,"./../support/isPathValue":113,"falcor-path-syntax":141}],129:[function(require,module,exports){
+},{"./../support/isJSONEnvelope":220,"./../support/isJSONGraphEnvelope":221,"./../support/isPathValue":223,"falcor-path-syntax":106}],239:[function(require,module,exports){
 var jsong = require("falcor-json-graph");
 var $atom = jsong.atom;
 
@@ -7388,1559 +10353,305 @@ module.exports = function wrapNode(nodeArg, typeArg, value) {
     return node;
 };
 
-},{"../values/expires-now":134,"./../internal/model-created":49,"./../support/clone":97,"./../support/getExpires":99,"./../support/getSize":100,"./../support/now":118,"falcor-json-graph":137}],130:[function(require,module,exports){
+},{"../values/expires-now":244,"./../internal/model-created":159,"./../support/clone":207,"./../support/getExpires":209,"./../support/getSize":210,"./../support/now":228,"falcor-json-graph":102}],240:[function(require,module,exports){
 module.exports = "atom";
 
-},{}],131:[function(require,module,exports){
+},{}],241:[function(require,module,exports){
 module.exports = "error";
 
-},{}],132:[function(require,module,exports){
+},{}],242:[function(require,module,exports){
 module.exports = "ref";
 
-},{}],133:[function(require,module,exports){
+},{}],243:[function(require,module,exports){
 module.exports = 1;
 
-},{}],134:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 module.exports = 0;
 
-},{}],135:[function(require,module,exports){
-"use strict";
+},{}],245:[function(require,module,exports){
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
 
-// rawAsap provides everything we need except exception management.
-var rawAsap = require("./raw");
-// RawTasks are recycled to reduce GC churn.
-var freeTasks = [];
-// We queue errors to ensure they are thrown in right order (FIFO).
-// Array-as-queue is good enough here, since we are just dealing with exceptions.
-var pendingErrors = [];
-var requestErrorThrow = rawAsap.makeRequestCallFromTimer(throwFirstError);
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
 
-function throwFirstError() {
-    if (pendingErrors.length) {
-        throw pendingErrors.shift();
-    }
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
 }
 
-/**
- * Calls a task as soon as possible after returning, in its own event, with priority
- * over other events like animation, reflow, and repaint. An error thrown from an
- * event will not interrupt, nor even substantially slow down the processing of
- * other events, but will be rather postponed to a lower priority event.
- * @param {{call}} task A callable object, typically a function that takes no
- * arguments.
- */
-module.exports = asap;
-function asap(task) {
-    var rawTask;
-    if (freeTasks.length) {
-        rawTask = freeTasks.pop();
-    } else {
-        rawTask = new RawTask();
-    }
-    rawTask.task = task;
-    rawAsap(rawTask);
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
 }
 
-// We wrap tasks with recyclable task objects.  A task object implements
-// `call`, just like a function.
-function RawTask() {
-    this.task = null;
-}
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
 
-// The sole purpose of wrapping the task is to catch the exception and recycle
-// the task object after its single use.
-RawTask.prototype.call = function () {
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],246:[function(require,module,exports){
+// shim for using process in browser
+var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
     try {
-        this.task.call();
-    } catch (error) {
-        if (asap.onerror) {
-            // This hook exists purely for testing purposes.
-            // Its name will be periodically randomized to break any code that
-            // depends on its existence.
-            asap.onerror(error);
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
         } else {
-            // In a web browser, exceptions are not fatal. However, to avoid
-            // slowing down the queue of pending tasks, we rethrow the error in a
-            // lower priority turn.
-            pendingErrors.push(error);
-            requestErrorThrow();
+            cachedSetTimeout = defaultSetTimout;
         }
-    } finally {
-        this.task = null;
-        freeTasks[freeTasks.length] = this;
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
     }
-};
-
-},{"./raw":136}],136:[function(require,module,exports){
-(function (global){
-"use strict";
-
-// Use the fastest means possible to execute a task in its own turn, with
-// priority over other events including IO, animation, reflow, and redraw
-// events in browsers.
-//
-// An exception thrown by a task will permanently interrupt the processing of
-// subsequent tasks. The higher level `asap` function ensures that if an
-// exception is thrown by a task, that the task queue will continue flushing as
-// soon as possible, but if you use `rawAsap` directly, you are responsible to
-// either ensure that no exceptions are thrown from your task, or to manually
-// call `rawAsap.requestFlush` if an exception is thrown.
-module.exports = rawAsap;
-function rawAsap(task) {
-    if (!queue.length) {
-        requestFlush();
-        flushing = true;
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
     }
-    // Equivalent to push, but avoids a function call.
-    queue[queue.length] = task;
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
 }
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
 
+
+
+}
 var queue = [];
-// Once a flush has been requested, no further calls to `requestFlush` are
-// necessary until the next `flush` completes.
-var flushing = false;
-// `requestFlush` is an implementation-specific method that attempts to kick
-// off a `flush` event as quickly as possible. `flush` will attempt to exhaust
-// the event queue before yielding to the browser's own event loop.
-var requestFlush;
-// The position of the next task to execute in the task queue. This is
-// preserved between calls to `flush` so that it can be resumed if
-// a task throws an exception.
-var index = 0;
-// If a task schedules additional tasks recursively, the task queue can grow
-// unbounded. To prevent memory exhaustion, the task queue will periodically
-// truncate already-completed tasks.
-var capacity = 1024;
+var draining = false;
+var currentQueue;
+var queueIndex = -1;
 
-// The flush function processes all tasks that have been scheduled with
-// `rawAsap` unless and until one of those tasks throws an exception.
-// If a task throws an exception, `flush` ensures that its state will remain
-// consistent and will resume where it left off when called again.
-// However, `flush` does not make any arrangements to be called again if an
-// exception is thrown.
-function flush() {
-    while (index < queue.length) {
-        var currentIndex = index;
-        // Advance the index before calling the task. This ensures that we will
-        // begin flushing on the next task the task throws an error.
-        index = index + 1;
-        queue[currentIndex].call();
-        // Prevent leaking memory for long chains of recursive calls to `asap`.
-        // If we call `asap` within tasks scheduled by `asap`, the queue will
-        // grow, but to avoid an O(n) walk for every task we execute, we don't
-        // shift tasks off the queue after they have been executed.
-        // Instead, we periodically shift 1024 tasks off the queue.
-        if (index > capacity) {
-            // Manually shift all values starting at the index back to the
-            // beginning of the queue.
-            for (var scan = 0, newLength = queue.length - index; scan < newLength; scan++) {
-                queue[scan] = queue[scan + index];
-            }
-            queue.length -= index;
-            index = 0;
-        }
+function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
     }
-    queue.length = 0;
-    index = 0;
-    flushing = false;
-}
-
-// `requestFlush` is implemented using a strategy based on data collected from
-// every available SauceLabs Selenium web driver worker at time of writing.
-// https://docs.google.com/spreadsheets/d/1mG-5UYGup5qxGdEMWkhP6BWCz053NUb2E1QoUTU16uA/edit#gid=783724593
-
-// Safari 6 and 6.1 for desktop, iPad, and iPhone are the only browsers that
-// have WebKitMutationObserver but not un-prefixed MutationObserver.
-// Must use `global` instead of `window` to work in both frames and web
-// workers. `global` is a provision of Browserify, Mr, Mrs, or Mop.
-var BrowserMutationObserver = global.MutationObserver || global.WebKitMutationObserver;
-
-// MutationObservers are desirable because they have high priority and work
-// reliably everywhere they are implemented.
-// They are implemented in all modern browsers.
-//
-// - Android 4-4.3
-// - Chrome 26-34
-// - Firefox 14-29
-// - Internet Explorer 11
-// - iPad Safari 6-7.1
-// - iPhone Safari 7-7.1
-// - Safari 6-7
-if (typeof BrowserMutationObserver === "function") {
-    requestFlush = makeRequestCallFromMutationObserver(flush);
-
-// MessageChannels are desirable because they give direct access to the HTML
-// task queue, are implemented in Internet Explorer 10, Safari 5.0-1, and Opera
-// 11-12, and in web workers in many engines.
-// Although message channels yield to any queued rendering and IO tasks, they
-// would be better than imposing the 4ms delay of timers.
-// However, they do not work reliably in Internet Explorer or Safari.
-
-// Internet Explorer 10 is the only browser that has setImmediate but does
-// not have MutationObservers.
-// Although setImmediate yields to the browser's renderer, it would be
-// preferrable to falling back to setTimeout since it does not have
-// the minimum 4ms penalty.
-// Unfortunately there appears to be a bug in Internet Explorer 10 Mobile (and
-// Desktop to a lesser extent) that renders both setImmediate and
-// MessageChannel useless for the purposes of ASAP.
-// https://github.com/kriskowal/q/issues/396
-
-// Timers are implemented universally.
-// We fall back to timers in workers in most engines, and in foreground
-// contexts in the following browsers.
-// However, note that even this simple case requires nuances to operate in a
-// broad spectrum of browsers.
-//
-// - Firefox 3-13
-// - Internet Explorer 6-9
-// - iPad Safari 4.3
-// - Lynx 2.8.7
-} else {
-    requestFlush = makeRequestCallFromTimer(flush);
-}
-
-// `requestFlush` requests that the high priority event queue be flushed as
-// soon as possible.
-// This is useful to prevent an error thrown in a task from stalling the event
-// queue if the exception handled by Node.js’s
-// `process.on("uncaughtException")` or by a domain.
-rawAsap.requestFlush = requestFlush;
-
-// To request a high priority event, we induce a mutation observer by toggling
-// the text of a text node between "1" and "-1".
-function makeRequestCallFromMutationObserver(callback) {
-    var toggle = 1;
-    var observer = new BrowserMutationObserver(callback);
-    var node = document.createTextNode("");
-    observer.observe(node, {characterData: true});
-    return function requestCall() {
-        toggle = -toggle;
-        node.data = toggle;
-    };
-}
-
-// The message channel technique was discovered by Malte Ubl and was the
-// original foundation for this library.
-// http://www.nonblocking.io/2011/06/windownexttick.html
-
-// Safari 6.0.5 (at least) intermittently fails to create message ports on a
-// page's first load. Thankfully, this version of Safari supports
-// MutationObservers, so we don't need to fall back in that case.
-
-// function makeRequestCallFromMessageChannel(callback) {
-//     var channel = new MessageChannel();
-//     channel.port1.onmessage = callback;
-//     return function requestCall() {
-//         channel.port2.postMessage(0);
-//     };
-// }
-
-// For reasons explained above, we are also unable to use `setImmediate`
-// under any circumstances.
-// Even if we were, there is another bug in Internet Explorer 10.
-// It is not sufficient to assign `setImmediate` to `requestFlush` because
-// `setImmediate` must be called *by name* and therefore must be wrapped in a
-// closure.
-// Never forget.
-
-// function makeRequestCallFromSetImmediate(callback) {
-//     return function requestCall() {
-//         setImmediate(callback);
-//     };
-// }
-
-// Safari 6.0 has a problem where timers will get lost while the user is
-// scrolling. This problem does not impact ASAP because Safari 6.0 supports
-// mutation observers, so that implementation is used instead.
-// However, if we ever elect to use timers in Safari, the prevalent work-around
-// is to add a scroll event listener that calls for a flush.
-
-// `setTimeout` does not call the passed callback if the delay is less than
-// approximately 7 in web workers in Firefox 8 through 18, and sometimes not
-// even then.
-
-function makeRequestCallFromTimer(callback) {
-    return function requestCall() {
-        // We dispatch a timeout with a specified delay of 0 for engines that
-        // can reliably accommodate that request. This will usually be snapped
-        // to a 4 milisecond delay, but once we're flushing, there's no delay
-        // between events.
-        var timeoutHandle = setTimeout(handleTimer, 0);
-        // However, since this timer gets frequently dropped in Firefox
-        // workers, we enlist an interval handle that will try to fire
-        // an event 20 times per second until it succeeds.
-        var intervalHandle = setInterval(handleTimer, 50);
-
-        function handleTimer() {
-            // Whichever timer succeeds will cancel both timers and
-            // execute the callback.
-            clearTimeout(timeoutHandle);
-            clearInterval(intervalHandle);
-            callback();
-        }
-    };
-}
-
-// This is for `asap.js` only.
-// Its name will be periodically randomized to break any code that depends on
-// its existence.
-rawAsap.makeRequestCallFromTimer = makeRequestCallFromTimer;
-
-// ASAP was originally a nextTick shim included in Q. This was factored out
-// into this ASAP package. It was later adapted to RSVP which made further
-// amendments. These decisions, particularly to marginalize MessageChannel and
-// to capture the MutationObserver implementation in a closure, were integrated
-// back into ASAP proper.
-// https://github.com/tildeio/rsvp.js/blob/cddf7232546a9cf858524b75cde6f9edf72620a7/lib/rsvp/asap.js
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],137:[function(require,module,exports){
-var pathSyntax = require("falcor-path-syntax");
-
-function sentinel(type, value, props) {
-    var copy = Object.create(null);
-    if (props != null) {
-        for(var key in props) {
-            copy[key] = props[key];
-        }
-        
-        copy["$type"] = type;
-        copy.value = value;
-        return copy;
-    }
-    else {
-        return { $type: type, value: value };
-    }    
-}
-
-module.exports = {
-    ref: function ref(path, props) {
-        return sentinel("ref", pathSyntax.fromPath(path), props);
-    },
-    atom: function atom(value, props) {
-        return sentinel("atom", value, props);        
-    },
-    undefined: function() {
-        return sentinel("atom");
-    },    
-    error: function error(errorValue, props) {
-        return sentinel("error", errorValue, props);        
-    },
-    pathValue: function pathValue(path, value) {
-        return { path: pathSyntax.fromPath(path), value: value };
-    },
-    pathInvalidation: function pathInvalidation(path) {
-        return { path: pathSyntax.fromPath(path), invalidated: true };
-    }    
-};
-
-},{"falcor-path-syntax":141}],138:[function(require,module,exports){
-module.exports = {
-    integers: 'integers',
-    ranges: 'ranges',
-    keys: 'keys'
-};
-
-},{}],139:[function(require,module,exports){
-var TokenTypes = {
-    token: 'token',
-    dotSeparator: '.',
-    commaSeparator: ',',
-    openingBracket: '[',
-    closingBracket: ']',
-    openingBrace: '{',
-    closingBrace: '}',
-    escape: '\\',
-    space: ' ',
-    colon: ':',
-    quote: 'quote',
-    unknown: 'unknown'
-};
-
-module.exports = TokenTypes;
-
-},{}],140:[function(require,module,exports){
-module.exports = {
-    indexer: {
-        nested: 'Indexers cannot be nested.',
-        needQuotes: 'unquoted indexers must be numeric.',
-        empty: 'cannot have empty indexers.',
-        leadingDot: 'Indexers cannot have leading dots.',
-        leadingComma: 'Indexers cannot have leading comma.',
-        requiresComma: 'Indexers require commas between indexer args.',
-        routedTokens: 'Only one token can be used per indexer when specifying routed tokens.'
-    },
-    range: {
-        precedingNaN: 'ranges must be preceded by numbers.',
-        suceedingNaN: 'ranges must be suceeded by numbers.'
-    },
-    routed: {
-        invalid: 'Invalid routed token.  only integers|ranges|keys are supported.'
-    },
-    quote: {
-        empty: 'cannot have empty quoted keys.',
-        illegalEscape: 'Invalid escape character.  Only quotes are escapable.'
-    },
-    unexpectedToken: 'Unexpected token.',
-    invalidIdentifier: 'Invalid Identifier.',
-    invalidPath: 'Please provide a valid path.',
-    throwError: function(err, tokenizer, token) {
-        if (token) {
-            throw err + ' -- ' + tokenizer.parseString + ' with next token: ' + token;
-        }
-        throw err + ' -- ' + tokenizer.parseString;
-    }
-};
-
-
-},{}],141:[function(require,module,exports){
-var Tokenizer = require('./tokenizer');
-var head = require('./parse-tree/head');
-var RoutedTokens = require('./RoutedTokens');
-
-var parser = function parser(string, extendedRules) {
-    return head(new Tokenizer(string, extendedRules));
-};
-
-module.exports = parser;
-
-// Constructs the paths from paths / pathValues that have strings.
-// If it does not have a string, just moves the value into the return
-// results.
-parser.fromPathsOrPathValues = function(paths, ext) {
-    if (!paths) {
-        return [];
-    }
-
-    var out = [];
-    for (var i = 0, len = paths.length; i < len; i++) {
-
-        // Is the path a string
-        if (typeof paths[i] === 'string') {
-            out[i] = parser(paths[i], ext);
-        }
-
-        // is the path a path value with a string value.
-        else if (typeof paths[i].path === 'string') {
-            out[i] = {
-                path: parser(paths[i].path, ext), value: paths[i].value
-            };
-        }
-
-        // just copy it over.
-        else {
-            out[i] = paths[i];
-        }
-    }
-
-    return out;
-};
-
-// If the argument is a string, this with convert, else just return
-// the path provided.
-parser.fromPath = function(path, ext) {
-    if (!path) {
-        return [];
-    }
-
-    if (typeof path === 'string') {
-        return parser(path, ext);
-    }
-
-    return path;
-};
-
-// Potential routed tokens.
-parser.RoutedTokens = RoutedTokens;
-
-},{"./RoutedTokens":138,"./parse-tree/head":142,"./tokenizer":147}],142:[function(require,module,exports){
-var TokenTypes = require('./../TokenTypes');
-var E = require('./../exceptions');
-var indexer = require('./indexer');
-
-/**
- * The top level of the parse tree.  This returns the generated path
- * from the tokenizer.
- */
-module.exports = function head(tokenizer) {
-    var token = tokenizer.next();
-    var state = {};
-    var out = [];
-
-    while (!token.done) {
-
-        switch (token.type) {
-            case TokenTypes.token:
-                var first = +token.token[0];
-                if (!isNaN(first)) {
-                    E.throwError(E.invalidIdentifier, tokenizer);
-                }
-                out[out.length] = token.token;
-                break;
-
-            // dotSeparators at the top level have no meaning
-            case TokenTypes.dotSeparator:
-                if (out.length === 0) {
-                    E.throwError(E.unexpectedToken, tokenizer);
-                }
-                break;
-
-            // Spaces do nothing.
-            case TokenTypes.space:
-                // NOTE: Spaces at the top level are allowed.
-                // titlesById  .summary is a valid path.
-                break;
-
-
-            // Its time to decend the parse tree.
-            case TokenTypes.openingBracket:
-                indexer(tokenizer, token, state, out);
-                break;
-
-            default:
-                E.throwError(E.unexpectedToken, tokenizer);
-                break;
-        }
-
-        // Keep cycling through the tokenizer.
-        token = tokenizer.next();
-    }
-
-    if (out.length === 0) {
-        E.throwError(E.invalidPath, tokenizer);
-    }
-
-    return out;
-};
-
-
-},{"./../TokenTypes":139,"./../exceptions":140,"./indexer":143}],143:[function(require,module,exports){
-var TokenTypes = require('./../TokenTypes');
-var E = require('./../exceptions');
-var idxE = E.indexer;
-var range = require('./range');
-var quote = require('./quote');
-var routed = require('./routed');
-
-/**
- * The indexer is all the logic that happens in between
- * the '[', opening bracket, and ']' closing bracket.
- */
-module.exports = function indexer(tokenizer, openingToken, state, out) {
-    var token = tokenizer.next();
-    var done = false;
-    var allowedMaxLength = 1;
-    var routedIndexer = false;
-
-    // State variables
-    state.indexer = [];
-
-    while (!token.done) {
-
-        switch (token.type) {
-            case TokenTypes.token:
-            case TokenTypes.quote:
-
-                // ensures that token adders are properly delimited.
-                if (state.indexer.length === allowedMaxLength) {
-                    E.throwError(idxE.requiresComma, tokenizer);
-                }
-                break;
-        }
-
-        switch (token.type) {
-            // Extended syntax case
-            case TokenTypes.openingBrace:
-                routedIndexer = true;
-                routed(tokenizer, token, state, out);
-                break;
-
-
-            case TokenTypes.token:
-                var t = +token.token;
-                if (isNaN(t)) {
-                    E.throwError(idxE.needQuotes, tokenizer);
-                }
-                state.indexer[state.indexer.length] = t;
-                break;
-
-            // dotSeparators at the top level have no meaning
-            case TokenTypes.dotSeparator:
-                if (!state.indexer.length) {
-                    E.throwError(idxE.leadingDot, tokenizer);
-                }
-                range(tokenizer, token, state, out);
-                break;
-
-            // Spaces do nothing.
-            case TokenTypes.space:
-                break;
-
-            case TokenTypes.closingBracket:
-                done = true;
-                break;
-
-
-            // The quotes require their own tree due to what can be in it.
-            case TokenTypes.quote:
-                quote(tokenizer, token, state, out);
-                break;
-
-
-            // Its time to decend the parse tree.
-            case TokenTypes.openingBracket:
-                E.throwError(idxE.nested, tokenizer);
-                break;
-
-            case TokenTypes.commaSeparator:
-                ++allowedMaxLength;
-                break;
-
-            default:
-                E.throwError(E.unexpectedToken, tokenizer);
-                break;
-        }
-
-        // If done, leave loop
-        if (done) {
-            break;
-        }
-
-        // Keep cycling through the tokenizer.
-        token = tokenizer.next();
-    }
-
-    if (state.indexer.length === 0) {
-        E.throwError(idxE.empty, tokenizer);
-    }
-
-    if (state.indexer.length > 1 && routedIndexer) {
-        E.throwError(idxE.routedTokens, tokenizer);
-    }
-
-    // Remember, if an array of 1, keySets will be generated.
-    if (state.indexer.length === 1) {
-        state.indexer = state.indexer[0];
-    }
-
-    out[out.length] = state.indexer;
-
-    // Clean state.
-    state.indexer = undefined;
-};
-
-
-},{"./../TokenTypes":139,"./../exceptions":140,"./quote":144,"./range":145,"./routed":146}],144:[function(require,module,exports){
-var TokenTypes = require('./../TokenTypes');
-var E = require('./../exceptions');
-var quoteE = E.quote;
-
-/**
- * quote is all the parse tree in between quotes.  This includes the only
- * escaping logic.
- *
- * parse-tree:
- * <opening-quote>(.|(<escape><opening-quote>))*<opening-quote>
- */
-module.exports = function quote(tokenizer, openingToken, state, out) {
-    var token = tokenizer.next();
-    var innerToken = '';
-    var openingQuote = openingToken.token;
-    var escaping = false;
-    var done = false;
-
-    while (!token.done) {
-
-        switch (token.type) {
-            case TokenTypes.token:
-            case TokenTypes.space:
-
-            case TokenTypes.dotSeparator:
-            case TokenTypes.commaSeparator:
-
-            case TokenTypes.openingBracket:
-            case TokenTypes.closingBracket:
-            case TokenTypes.openingBrace:
-            case TokenTypes.closingBrace:
-                if (escaping) {
-                    E.throwError(quoteE.illegalEscape, tokenizer);
-                }
-
-                innerToken += token.token;
-                break;
-
-
-            case TokenTypes.quote:
-                // the simple case.  We are escaping
-                if (escaping) {
-                    innerToken += token.token;
-                    escaping = false;
-                }
-
-                // its not a quote that is the opening quote
-                else if (token.token !== openingQuote) {
-                    innerToken += token.token;
-                }
-
-                // last thing left.  Its a quote that is the opening quote
-                // therefore we must produce the inner token of the indexer.
-                else {
-                    done = true;
-                }
-
-                break;
-            case TokenTypes.escape:
-                escaping = true;
-                break;
-
-            default:
-                E.throwError(E.unexpectedToken, tokenizer);
-        }
-
-        // If done, leave loop
-        if (done) {
-            break;
-        }
-
-        // Keep cycling through the tokenizer.
-        token = tokenizer.next();
-    }
-
-    if (innerToken.length === 0) {
-        E.throwError(quoteE.empty, tokenizer);
-    }
-
-    state.indexer[state.indexer.length] = innerToken;
-};
-
-
-},{"./../TokenTypes":139,"./../exceptions":140}],145:[function(require,module,exports){
-var Tokenizer = require('./../tokenizer');
-var TokenTypes = require('./../TokenTypes');
-var E = require('./../exceptions');
-
-/**
- * The indexer is all the logic that happens in between
- * the '[', opening bracket, and ']' closing bracket.
- */
-module.exports = function range(tokenizer, openingToken, state, out) {
-    var token = tokenizer.peek();
-    var dotCount = 1;
-    var done = false;
-    var inclusive = true;
-
-    // Grab the last token off the stack.  Must be an integer.
-    var idx = state.indexer.length - 1;
-    var from = Tokenizer.toNumber(state.indexer[idx]);
-    var to;
-
-    if (isNaN(from)) {
-        E.throwError(E.range.precedingNaN, tokenizer);
-    }
-
-    // Why is number checking so difficult in javascript.
-
-    while (!done && !token.done) {
-
-        switch (token.type) {
-
-            // dotSeparators at the top level have no meaning
-            case TokenTypes.dotSeparator:
-                if (dotCount === 3) {
-                    E.throwError(E.unexpectedToken, tokenizer);
-                }
-                ++dotCount;
-
-                if (dotCount === 3) {
-                    inclusive = false;
-                }
-                break;
-
-            case TokenTypes.token:
-                // move the tokenizer forward and save to.
-                to = Tokenizer.toNumber(tokenizer.next().token);
-
-                // throw potential error.
-                if (isNaN(to)) {
-                    E.throwError(E.range.suceedingNaN, tokenizer);
-                }
-
-                done = true;
-                break;
-
-            default:
-                done = true;
-                break;
-        }
-
-        // Keep cycling through the tokenizer.  But ranges have to peek
-        // before they go to the next token since there is no 'terminating'
-        // character.
-        if (!done) {
-            tokenizer.next();
-
-            // go to the next token without consuming.
-            token = tokenizer.peek();
-        }
-
-        // break and remove state information.
-        else {
-            break;
-        }
-    }
-
-    state.indexer[idx] = {from: from, to: inclusive ? to : to - 1};
-};
-
-
-},{"./../TokenTypes":139,"./../exceptions":140,"./../tokenizer":147}],146:[function(require,module,exports){
-var TokenTypes = require('./../TokenTypes');
-var RoutedTokens = require('./../RoutedTokens');
-var E = require('./../exceptions');
-var routedE = E.routed;
-
-/**
- * The routing logic.
- *
- * parse-tree:
- * <opening-brace><routed-token>(:<token>)<closing-brace>
- */
-module.exports = function routed(tokenizer, openingToken, state, out) {
-    var routeToken = tokenizer.next();
-    var named = false;
-    var name = '';
-
-    // ensure the routed token is a valid ident.
-    switch (routeToken.token) {
-        case RoutedTokens.integers:
-        case RoutedTokens.ranges:
-        case RoutedTokens.keys:
-            //valid
-            break;
-        default:
-            E.throwError(routedE.invalid, tokenizer);
-            break;
-    }
-
-    // Now its time for colon or ending brace.
-    var next = tokenizer.next();
-
-    // we are parsing a named identifier.
-    if (next.type === TokenTypes.colon) {
-        named = true;
-
-        // Get the token name.
-        next = tokenizer.next();
-        if (next.type !== TokenTypes.token) {
-            E.throwError(routedE.invalid, tokenizer);
-        }
-        name = next.token;
-
-        // move to the closing brace.
-        next = tokenizer.next();
-    }
-
-    // must close with a brace.
-
-    if (next.type === TokenTypes.closingBrace) {
-        var outputToken = {
-            type: routeToken.token,
-            named: named,
-            name: name
-        };
-        state.indexer[state.indexer.length] = outputToken;
-    }
-
-    // closing brace expected
-    else {
-        E.throwError(routedE.invalid, tokenizer);
-    }
-
-};
-
-
-},{"./../RoutedTokens":138,"./../TokenTypes":139,"./../exceptions":140}],147:[function(require,module,exports){
-var TokenTypes = require('./../TokenTypes');
-var DOT_SEPARATOR = '.';
-var COMMA_SEPARATOR = ',';
-var OPENING_BRACKET = '[';
-var CLOSING_BRACKET = ']';
-var OPENING_BRACE = '{';
-var CLOSING_BRACE = '}';
-var COLON = ':';
-var ESCAPE = '\\';
-var DOUBLE_OUOTES = '"';
-var SINGE_OUOTES = "'";
-var SPACE = " ";
-var SPECIAL_CHARACTERS = '\\\'"[]., ';
-var EXT_SPECIAL_CHARACTERS = '\\{}\'"[]., :';
-
-var Tokenizer = module.exports = function(string, ext) {
-    this._string = string;
-    this._idx = -1;
-    this._extended = ext;
-    this.parseString = '';
-};
-
-Tokenizer.prototype = {
-    /**
-     * grabs the next token either from the peek operation or generates the
-     * next token.
-     */
-    next: function() {
-        var nextToken = this._nextToken ?
-            this._nextToken : getNext(this._string, this._idx, this._extended);
-
-        this._idx = nextToken.idx;
-        this._nextToken = false;
-        this.parseString += nextToken.token.token;
-
-        return nextToken.token;
-    },
-
-    /**
-     * will peak but not increment the tokenizer
-     */
-    peek: function() {
-        var nextToken = this._nextToken ?
-            this._nextToken : getNext(this._string, this._idx, this._extended);
-        this._nextToken = nextToken;
-
-        return nextToken.token;
-    }
-};
-
-Tokenizer.toNumber = function toNumber(x) {
-    if (!isNaN(+x)) {
-        return +x;
-    }
-    return NaN;
-};
-
-function toOutput(token, type, done) {
-    return {
-        token: token,
-        done: done,
-        type: type
-    };
-}
-
-function getNext(string, idx, ext) {
-    var output = false;
-    var token = '';
-    var specialChars = ext ?
-        EXT_SPECIAL_CHARACTERS : SPECIAL_CHARACTERS;
-    var done;
-
-    do {
-
-        done = idx + 1 >= string.length;
-        if (done) {
-            break;
-        }
-
-        // we have to peek at the next token
-        var character = string[idx + 1];
-
-        if (character !== undefined &&
-            specialChars.indexOf(character) === -1) {
-
-            token += character;
-            ++idx;
-            continue;
-        }
-
-        // The token to delimiting character transition.
-        else if (token.length) {
-            break;
-        }
-
-        ++idx;
-        var type;
-        switch (character) {
-            case DOT_SEPARATOR:
-                type = TokenTypes.dotSeparator;
-                break;
-            case COMMA_SEPARATOR:
-                type = TokenTypes.commaSeparator;
-                break;
-            case OPENING_BRACKET:
-                type = TokenTypes.openingBracket;
-                break;
-            case CLOSING_BRACKET:
-                type = TokenTypes.closingBracket;
-                break;
-            case OPENING_BRACE:
-                type = TokenTypes.openingBrace;
-                break;
-            case CLOSING_BRACE:
-                type = TokenTypes.closingBrace;
-                break;
-            case SPACE:
-                type = TokenTypes.space;
-                break;
-            case DOUBLE_OUOTES:
-            case SINGE_OUOTES:
-                type = TokenTypes.quote;
-                break;
-            case ESCAPE:
-                type = TokenTypes.escape;
-                break;
-            case COLON:
-                type = TokenTypes.colon;
-                break;
-            default:
-                type = TokenTypes.unknown;
-                break;
-        }
-        output = toOutput(character, type, false);
-        break;
-    } while (!done);
-
-    if (!output && token.length) {
-        output = toOutput(token, TokenTypes.token, false);
-    }
-
-    if (!output) {
-        output = {done: true};
-    }
-
-    return {
-        token: output,
-        idx: idx
-    };
-}
-
-
-
-},{"./../TokenTypes":139}],148:[function(require,module,exports){
-var toPaths = require('./toPaths');
-var toTree = require('./toTree');
-
-module.exports = function collapse(paths) {
-    var collapseMap = paths.
-        reduce(function(acc, path) {
-            var len = path.length;
-            if (!acc[len]) {
-                acc[len] = [];
-            }
-            acc[len].push(path);
-            return acc;
-        }, {});
-
-    Object.
-        keys(collapseMap).
-        forEach(function(collapseKey) {
-            collapseMap[collapseKey] = toTree(collapseMap[collapseKey]);
-        });
-
-    return toPaths(collapseMap);
-};
-
-},{"./toPaths":154,"./toTree":155}],149:[function(require,module,exports){
-var iterateKeySet = require('./iterateKeySet');
-
-/**
- * Tests to see if the intersection should be stripped from the
- * total paths.  The only way this happens currently is if the entirety
- * of the path is contained in the tree.
- * @private
- */
-module.exports = function hasIntersection(tree, path, depth) {
-    var current = tree;
-    var intersects = true;
-
-    // Continue iteratively going down a path until a complex key is
-    // encountered, then recurse.
-    for (;intersects && depth < path.length; ++depth) {
-        var key = path[depth];
-        var keyType = typeof key;
-
-        // We have to iterate key set
-        if (key && keyType === 'object') {
-            var note = {};
-            var innerKey = iterateKeySet(key, note);
-            var nextDepth = depth + 1;
-
-            // Loop through the innerKeys setting the intersects flag
-            // to each result.  Break out on false.
-            do {
-                var next = current[innerKey];
-                intersects = next !== undefined;
-
-                if (intersects) {
-                    intersects = hasIntersection(next, path, nextDepth);
-                }
-                innerKey = iterateKeySet(key, note);
-            } while (intersects && !note.done);
-
-            // Since we recursed, we shall not pass any further!
-            break;
-        }
-
-        // Its a simple key, just move forward with the testing.
-        current = current[key];
-        intersects = current !== undefined;
-    }
-
-    return intersects;
-};
-
-},{"./iterateKeySet":151}],150:[function(require,module,exports){
-module.exports = {
-    iterateKeySet: require('./iterateKeySet'),
-    toTree: require('./toTree'),
-    toTreeWithUnion: require('./toTreeWithUnion'),
-    pathsComplementFromTree: require('./pathsComplementFromTree'),
-    pathsComplementFromLengthTree: require('./pathsComplementFromLengthTree'),
-    hasIntersection: require('./hasIntersection'),
-    toPaths: require('./toPaths'),
-    collapse: require('./collapse')
-};
-
-},{"./collapse":148,"./hasIntersection":149,"./iterateKeySet":151,"./pathsComplementFromLengthTree":152,"./pathsComplementFromTree":153,"./toPaths":154,"./toTree":155,"./toTreeWithUnion":156}],151:[function(require,module,exports){
-var isArray = Array.isArray;
-
-/**
- * Takes in a keySet and a note attempts to iterate over it.
- * If the value is a primitive, the key will be returned and the note will
- * be marked done
- * If the value is an object, then each value of the range will be returned
- * and when finished the note will be marked done.
- * If the value is an array, each value will be iterated over, if any of the
- * inner values are ranges, those will be iterated over.  When fully done,
- * the note will be marked done.
- *
- * @param {Object|Array|String|Number} keySet -
- * @param {Object} note - The non filled note
- * @returns {String|Number|undefined} - The current iteration value.
- * If undefined, then the keySet is empty
- * @public
- */
-module.exports = function iterateKeySet(keySet, note) {
-    if (note.isArray === undefined) {
-        initializeNote(keySet, note);
-    }
-
-    // Array iteration
-    if (note.isArray) {
-        var nextValue;
-
-        // Cycle through the array and pluck out the next value.
-        do {
-            if (note.loaded && note.rangeOffset > note.to) {
-                ++note.arrayOffset;
-                note.loaded = false;
-            }
-
-            var idx = note.arrayOffset, length = keySet.length;
-            if (idx >= length) {
-                note.done = true;
-                break;
-            }
-
-            var el = keySet[note.arrayOffset];
-            var type = typeof el;
-
-            // Inner range iteration.
-            if (type === 'object') {
-                if (!note.loaded) {
-                    initializeRange(el, note);
-                }
-
-                // Empty to/from
-                if (note.empty) {
-                    continue;
-                }
-
-                nextValue = note.rangeOffset++;
-            }
-
-            // Primitive iteration in array.
-            else {
-                ++note.arrayOffset;
-                nextValue = el;
-            }
-        } while (nextValue === undefined);
-
-        return nextValue;
-    }
-
-    // Range iteration
-    else if (note.isObject) {
-        if (!note.loaded) {
-            initializeRange(keySet, note);
-        }
-        if (note.rangeOffset > note.to) {
-            note.done = true;
-            return undefined;
-        }
-
-        return note.rangeOffset++;
-    }
-
-    // Primitive value
-    else {
-        note.done = true;
-        return keySet;
-    }
-};
-
-function initializeRange(key, memo) {
-    var from = memo.from = key.from || 0;
-    var to = memo.to = key.to ||
-        (typeof key.length === 'number' &&
-        memo.from + key.length - 1 || 0);
-    memo.rangeOffset = memo.from;
-    memo.loaded = true;
-    if (from > to) {
-        memo.empty = true;
-    }
-}
-
-function initializeNote(key, note) {
-    note.done = false;
-    var isObject = note.isObject = !!(key && typeof key === 'object');
-    note.isArray = isObject && isArray(key);
-    note.arrayOffset = 0;
-}
-
-},{}],152:[function(require,module,exports){
-var hasIntersection = require('./hasIntersection');
-
-/**
- * Compares the paths passed in with the tree.  Any of the paths that are in
- * the tree will be stripped from the paths.
- *
- * **Does not mutate** the incoming paths object.
- * **Proper subset** only matching.
- *
- * @param {Array} paths - A list of paths (complex or simple) to strip the
- * intersection
- * @param {Object} tree -
- * @public
- */
-module.exports = function pathsComplementFromLengthTree(paths, tree) {
-    var out = [];
-    var outLength = -1;
-
-    for (var i = 0, len = paths.length; i < len; ++i) {
-        // If this does not intersect then add it to the output.
-        var path = paths[i];
-        if (!hasIntersection(tree[path.length], path, 0)) {
-            out[++outLength] = path;
-        }
-    }
-    return out;
-};
-
-
-},{"./hasIntersection":149}],153:[function(require,module,exports){
-var hasIntersection = require('./hasIntersection');
-
-/**
- * Compares the paths passed in with the tree.  Any of the paths that are in
- * the tree will be stripped from the paths.
- *
- * **Does not mutate** the incoming paths object.
- * **Proper subset** only matching.
- *
- * @param {Array} paths - A list of paths (complex or simple) to strip the
- * intersection
- * @param {Object} tree -
- * @public
- */
-module.exports = function pathsComplementFromTree(paths, tree) {
-    var out = [];
-    var outLength = -1;
-
-    for (var i = 0, len = paths.length; i < len; ++i) {
-        // If this does not intersect then add it to the output.
-        if (!hasIntersection(tree, paths[i], 0)) {
-            out[++outLength] = paths[i];
-        }
-    }
-    return out;
-};
-
-
-},{"./hasIntersection":149}],154:[function(require,module,exports){
-var isArray = Array.isArray;
-var typeOfObject = "object";
-
-/* jshint forin: false */
-module.exports = function toPaths(lengths) {
-    var pathmap;
-    var allPaths = [];
-    var allPathsLength = 0;
-    for (var length in lengths) {
-        if (isNumber(length) && isObject(pathmap = lengths[length])) {
-            var paths = collapsePathMap(pathmap, 0, parseInt(length, 10)).sets;
-            var pathsIndex = -1;
-            var pathsCount = paths.length;
-            while (++pathsIndex < pathsCount) {
-                allPaths[allPathsLength++] = collapsePathSetIndexes(paths[pathsIndex]);
-            }
-        }
-    }
-    return allPaths;
-};
-
-function isObject(value) {
-    return value !== null && typeof value === typeOfObject;
-}
-
-function collapsePathMap(pathmap, depth, length) {
-
-    var key;
-    var code = getHashCode(String(depth));
-    var subs = Object.create(null);
-
-    var codes = [];
-    var codesIndex = -1;
-    var codesCount = 0;
-
-    var pathsets = [];
-    var pathsetsCount = 0;
-
-    var subPath, subCode,
-        subKeys, subKeysIndex, subKeysCount,
-        subSets, subSetsIndex, subSetsCount,
-        pathset, pathsetIndex, pathsetCount,
-        firstSubKey, pathsetClone;
-
-    subKeys = [];
-    subKeysIndex = -1;
-
-    if (depth < length - 1) {
-
-        subKeysCount = getSortedKeys(pathmap, subKeys);
-
-        while (++subKeysIndex < subKeysCount) {
-            key = subKeys[subKeysIndex];
-            subPath = collapsePathMap(pathmap[key], depth + 1, length);
-            subCode = subPath.code;
-            if(subs[subCode]) {
-                subPath = subs[subCode];
-            } else {
-                codes[codesCount++] = subCode;
-                subPath = subs[subCode] = {
-                    keys: [],
-                    sets: subPath.sets
-                };
-            }
-            code = getHashCode(code + key + subCode);
-
-            isNumber(key) &&
-                subPath.keys.push(parseInt(key, 10)) ||
-                subPath.keys.push(key);
-        }
-
-        while(++codesIndex < codesCount) {
-
-            key = codes[codesIndex];
-            subPath = subs[key];
-            subKeys = subPath.keys;
-            subKeysCount = subKeys.length;
-
-            if (subKeysCount > 0) {
-
-                subSets = subPath.sets;
-                subSetsIndex = -1;
-                subSetsCount = subSets.length;
-                firstSubKey = subKeys[0];
-
-                while (++subSetsIndex < subSetsCount) {
-
-                    pathset = subSets[subSetsIndex];
-                    pathsetIndex = -1;
-                    pathsetCount = pathset.length;
-                    pathsetClone = new Array(pathsetCount + 1);
-                    pathsetClone[0] = subKeysCount > 1 && subKeys || firstSubKey;
-
-                    while (++pathsetIndex < pathsetCount) {
-                        pathsetClone[pathsetIndex + 1] = pathset[pathsetIndex];
-                    }
-
-                    pathsets[pathsetsCount++] = pathsetClone;
-                }
-            }
-        }
+    draining = false;
+    if (currentQueue.length) {
+        queue = currentQueue.concat(queue);
     } else {
-        subKeysCount = getSortedKeys(pathmap, subKeys);
-        if (subKeysCount > 1) {
-            pathsets[pathsetsCount++] = [subKeys];
-        } else {
-            pathsets[pathsetsCount++] = subKeys;
-        }
-        while (++subKeysIndex < subKeysCount) {
-            code = getHashCode(code + subKeys[subKeysIndex]);
-        }
+        queueIndex = -1;
     }
-
-    return {
-        code: code,
-        sets: pathsets
-    };
+    if (queue.length) {
+        drainQueue();
+    }
 }
 
-function collapsePathSetIndexes(pathset) {
-
-    var keysetIndex = -1;
-    var keysetCount = pathset.length;
-
-    while (++keysetIndex < keysetCount) {
-        var keyset = pathset[keysetIndex];
-        if (isArray(keyset)) {
-            pathset[keysetIndex] = collapseIndex(keyset);
-        }
+function drainQueue() {
+    if (draining) {
+        return;
     }
+    var timeout = runTimeout(cleanUpNextTick);
+    draining = true;
 
-    return pathset;
-}
-
-/**
- * Collapse range indexers, e.g. when there is a continuous
- * range in an array, turn it into an object instead:
- *
- * [1,2,3,4,5,6] => {"from":1, "to":6}
- *
- * @private
- */
-function collapseIndex(keyset) {
-
-    // Do we need to dedupe an indexer keyset if they're duplicate consecutive integers?
-    // var hash = {};
-    var keyIndex = -1;
-    var keyCount = keyset.length - 1;
-    var isSparseRange = keyCount > 0;
-
-    while (++keyIndex <= keyCount) {
-
-        var key = keyset[keyIndex];
-
-        if (!isNumber(key) /* || hash[key] === true*/ ) {
-            isSparseRange = false;
-            break;
-        }
-        // hash[key] = true;
-        // Cast number indexes to integers.
-        keyset[keyIndex] = parseInt(key, 10);
-    }
-
-    if (isSparseRange === true) {
-
-        keyset.sort(sortListAscending);
-
-        var from = keyset[0];
-        var to = keyset[keyCount];
-
-        // If we re-introduce deduped integer indexers, change this comparson to "===".
-        if (to - from <= keyCount) {
-            return {
-                from: from,
-                to: to
-            };
-        }
-    }
-
-    return keyset;
-}
-
-function sortListAscending(a, b) {
-    return a - b;
-}
-
-/* jshint forin: false */
-function getSortedKeys(map, keys, sort) {
-    var len = 0;
-    for (var key in map) {
-        keys[len++] = key;
-    }
-    if (len > 1) {
-        keys.sort(sort);
-    }
-    return len;
-}
-
-function getHashCode(key) {
-    var code = 5381;
-    var index = -1;
-    var count = key.length;
-    while (++index < count) {
-        code = (code << 5) + code + key.charCodeAt(index);
-    }
-    return String(code);
-}
-
-/**
- * Return true if argument is a number or can be cast to a number
- * @private
- */
-function isNumber(val) {
-    // parseFloat NaNs numeric-cast false positives (null|true|false|"")
-    // ...but misinterprets leading-number strings, particularly hex literals ("0x...")
-    // subtraction forces infinities to NaN
-    // adding 1 corrects loss of precision from parseFloat (#15100)
-    return !isArray(val) && (val - parseFloat(val) + 1) >= 0;
-}
-
-
-},{}],155:[function(require,module,exports){
-var iterateKeySet = require('./../lib/iterateKeySet');
-var isArray = Array.isArray;
-
-/**
- * @param {Array} paths -
- * @returns {Object} -
- */
-module.exports = function toTree(paths) {
-    return paths.reduce(function(acc, path) {
-        innerToTree(acc, path, 0);
-        return acc;
-    }, {});
-};
-
-function innerToTree(seed, path, depth) {
-
-    var keySet = path[depth];
-    var iteratorNote = {};
-    var key;
-    var nextDepth = depth + 1;
-
-    key = iterateKeySet(keySet, iteratorNote);
-
-    do {
-
-        var next = seed[key];
-        if (!next) {
-            if (nextDepth === path.length) {
-                seed[key] = null;
-            } else {
-                next = seed[key] = {};
+    var len = queue.length;
+    while(len) {
+        currentQueue = queue;
+        queue = [];
+        while (++queueIndex < len) {
+            if (currentQueue) {
+                currentQueue[queueIndex].run();
             }
         }
-
-        if (nextDepth < path.length) {
-            innerToTree(next, path, nextDepth);
-        }
-
-        if (!iteratorNote.done) {
-            key = iterateKeySet(keySet, iteratorNote);
-        }
-    } while (!iteratorNote.done);
+        queueIndex = -1;
+        len = queue.length;
+    }
+    currentQueue = null;
+    draining = false;
+    runClearTimeout(timeout);
 }
 
+process.nextTick = function (fun) {
+    var args = new Array(arguments.length - 1);
+    if (arguments.length > 1) {
+        for (var i = 1; i < arguments.length; i++) {
+            args[i - 1] = arguments[i];
+        }
+    }
+    queue.push(new Item(fun, args));
+    if (queue.length === 1 && !draining) {
+        runTimeout(drainQueue);
+    }
+};
 
-},{"./../lib/iterateKeySet":151}],156:[function(require,module,exports){
+// v8 likes predictible objects
+function Item(fun, array) {
+    this.fun = fun;
+    this.array = array;
+}
+Item.prototype.run = function () {
+    this.fun.apply(null, this.array);
+};
+process.title = 'browser';
+process.browser = true;
+process.env = {};
+process.argv = [];
+process.version = ''; // empty string to avoid regexp issues
+process.versions = {};
 
-},{}],157:[function(require,module,exports){
+function noop() {}
+
+process.on = noop;
+process.addListener = noop;
+process.once = noop;
+process.off = noop;
+process.removeListener = noop;
+process.removeAllListeners = noop;
+process.emit = noop;
+process.prependListener = noop;
+process.prependOnceListener = noop;
+
+process.listeners = function (name) { return [] }
+
+process.binding = function (name) {
+    throw new Error('process.binding is not supported');
+};
+
+process.cwd = function () { return '/' };
+process.chdir = function (dir) {
+    throw new Error('process.chdir is not supported');
+};
+process.umask = function() { return 0; };
+
+},{}],247:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib')
 
-},{"./lib":162}],158:[function(require,module,exports){
+},{"./lib":252}],248:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap/raw');
@@ -9126,7 +10837,7 @@ function doResolve(fn, promise) {
   }
 }
 
-},{"asap/raw":136}],159:[function(require,module,exports){
+},{"asap/raw":7}],249:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -9141,7 +10852,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
   });
 };
 
-},{"./core.js":158}],160:[function(require,module,exports){
+},{"./core.js":248}],250:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -9250,7 +10961,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 };
 
-},{"./core.js":158}],161:[function(require,module,exports){
+},{"./core.js":248}],251:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js');
@@ -9268,7 +10979,7 @@ Promise.prototype['finally'] = function (f) {
   });
 };
 
-},{"./core.js":158}],162:[function(require,module,exports){
+},{"./core.js":248}],252:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./core.js');
@@ -9277,7 +10988,7 @@ require('./finally.js');
 require('./es6-extensions.js');
 require('./node-extensions.js');
 
-},{"./core.js":158,"./done.js":159,"./es6-extensions.js":160,"./finally.js":161,"./node-extensions.js":163}],163:[function(require,module,exports){
+},{"./core.js":248,"./done.js":249,"./es6-extensions.js":250,"./finally.js":251,"./node-extensions.js":253}],253:[function(require,module,exports){
 'use strict';
 
 // This file contains then/promise specific extensions that are only useful
@@ -9350,7 +11061,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   });
 }
 
-},{"./core.js":158,"asap":135}],164:[function(require,module,exports){
+},{"./core.js":248,"asap":6}],254:[function(require,module,exports){
 (function (global){
 // Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
@@ -10192,7 +11903,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
 }));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"./rx":165}],165:[function(require,module,exports){
+},{"./rx":255}],255:[function(require,module,exports){
 (function (process,global){
 // Copyright (c) Microsoft Open Technologies, Inc. All rights reserved. See License.txt in the project root for license information.
 
@@ -15783,90 +17494,5 @@ Promise.prototype.nodeify = function (callback, ctx) {
 }.call(this));
 
 }).call(this,require('_process'),typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"_process":6}],166:[function(require,module,exports){
-'use strict';
-/* eslint-disable no-unused-vars */
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (e) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (Object.getOwnPropertySymbols) {
-			symbols = Object.getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}]},{},[3])(3)
+},{"_process":246}]},{},[3])(3)
 });
